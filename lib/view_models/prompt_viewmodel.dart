@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:wilfredemail/utils/api_status.dart';
+import '../utils/api_status.dart';
 import '../controllers/api_communicator.dart';
 import '../models/prompts_model.dart';
 import 'package:http/http.dart' as http;
@@ -15,16 +15,26 @@ class PromptController extends GetxController{
   var promptsLoading=false.obs;
   var noPromptsFound=false.obs;
 
-  Future<bool> getPrompts() async{
+  var promptsBox;
 
-    final dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-    var promptsBox = await Hive.openBox("promptsBox");
+
+  PromptController(){
+
+    Future.wait([
+      Future(()async{
+        final dir = await getApplicationDocumentsDirectory();
+        Hive.init(dir.path);
+        promptsBox = (await Hive.openBox("promptsBox")).obs;
+      })
+    ]);
+  }
+
+  Future<bool> getPrompts() async{
 
     try {
       promptsLoading.value = true;
 
-      promptsList = RxList<PromptModel>([...promptsBox.toMap().values.toList()]);
+      promptsList = RxList<PromptModel>([...promptsBox.value.toMap().values.toList()]);
 
       const url = "/prompt/getAllPrompts";
 
@@ -40,11 +50,11 @@ class PromptController extends GetxController{
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PromptModel.fromJson(body['payload'][i]);
-            await promptsBox.put(i,a);
+            await promptsBox.value.put(i,a);
             // promptsList.add(a);
           }
 
-          promptsList = RxList<PromptModel>([...promptsBox.toMap().values.toList()]);
+          promptsList = RxList<PromptModel>([...promptsBox.value.toMap().values.toList()]);
 
           promptsLoading.value = false;
         }
@@ -55,7 +65,7 @@ class PromptController extends GetxController{
       }
       else if(result is Failure){
         promptsLoading.value = false;
-        noPromptsFound.value=true;
+        // noPromptsFound.value=true;
       }
 
       return true;
@@ -69,8 +79,8 @@ class PromptController extends GetxController{
   }
 
   PromptModel getPromptById(String id){
-    var prs = promptsList.where((e) => e.id==id);
-    return prs.first;
+      var prs = promptsList.where((e) => e.id == id);
+      return prs.first;
   }
 
 }

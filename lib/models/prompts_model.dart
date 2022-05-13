@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-part '../generated/prompts_model.g.dart';
+part 'prompts_model.g.dart';
 
 PromptModel promptModelFromJson(String str) => PromptModel.fromJson(json.decode(str));
 

@@ -20,10 +20,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final pastEmailsController = Get.put(PastEmailsController());
 
   @override
-  void initState(){
-    promptController.getPrompts();
-
-    pastEmailsController.getPastEmails();
+  void initState() {
+    Future.wait([
+      promptController.getPrompts(),
+      pastEmailsController.getPastEmails(),
+    ]);
 
     super.initState();
   }
@@ -42,12 +43,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           elevation: 0,
         ),
         body: RefreshIndicator(
-          onRefresh: ()async{
-
+          onRefresh: () async {
             promptController.getPrompts();
 
             pastEmailsController.getPastEmails();
-
           },
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
           backgroundColor: const Color.fromRGBO(37, 232, 138, 1),
@@ -70,7 +69,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                   //Generate Emails Listview
                   Obx(() {
-
                     if (promptController.promptsLoading.value == true) {
                       return const CircularProgressIndicator();
                     }
@@ -109,8 +107,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
 
                   //Generate Emails ListView
-                  Obx((){
-
+                  Obx(() {
                     if (pastEmailsController.pastEmailsLoading.value == true) {
                       return const CircularProgressIndicator();
                     }
@@ -127,10 +124,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       height: 250,
                       child: ListView.builder(
                         itemBuilder: (ctx, index) {
-
                           // print(pastEmailsController.pastEmailsList[index]);
 
-                          return PastEmailWidget(pastEmail: pastEmailsController.pastEmailsList[index],);
+                          return PastEmailWidget(
+                            pastEmail:
+                                pastEmailsController.pastEmailsList[index],
+                          );
                         },
                         itemCount: pastEmailsController.pastEmailsList.length,
                         scrollDirection: Axis.horizontal,

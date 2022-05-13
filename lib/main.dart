@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wilfredemail/models/past_emails_model.dart';
 import './models/prompts_model.dart';
 
 import 'views/screens/dashboard.dart';
@@ -13,6 +14,7 @@ void main() async{
   await Hive.initFlutter();
 
   Hive.registerAdapter(PromptModelAdapter());
+  Hive.registerAdapter(PastEmailsModelAdapter());
 
   runApp(const MyApp());
 }

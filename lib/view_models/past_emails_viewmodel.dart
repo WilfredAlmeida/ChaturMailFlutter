@@ -16,6 +16,10 @@ class PastEmailsController extends GetxController{
   var pastEmailsLoading=false.obs;
   var noPastEmailsFound=false.obs;
 
+  PastEmailsController(){
+
+  }
+
   Future<bool> getPastEmails() async{
 
     pastEmailsLoading.value=true;
