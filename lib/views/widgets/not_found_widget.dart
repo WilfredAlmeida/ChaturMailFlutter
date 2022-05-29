@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../utils/utils_controller.dart';
 
 class NotFoundWidget extends StatelessWidget {
   final heading;
@@ -35,7 +38,9 @@ class NotFoundWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const ImageIcon(NetworkImage(iconUrl), size: 80),
+                Get.find<UtilsController>().isInternetConnected.value? const ImageIcon(NetworkImage(iconUrl), size: 80):const ImageIcon(
+                    AssetImage("assets/images/dizzy_face_icon.png"),
+                    size: 80),
                 Text(
                   heading,
                   style: const TextStyle(

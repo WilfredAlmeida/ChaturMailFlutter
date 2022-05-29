@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:wilfredemail/models/past_emails_model.dart';
+import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 import './models/prompts_model.dart';
 
+import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
 import 'views/screens/display_email_screen.dart';
 import 'views/screens/generate_email_screen.dart';
+
 
 void main() async{
 
@@ -15,6 +20,22 @@ void main() async{
 
   Hive.registerAdapter(PromptModelAdapter());
   Hive.registerAdapter(PastEmailsModelAdapter());
+
+  final promptController = Get.put(PromptController());
+
+  final pastEmailsController = Get.put(PastEmailsController());
+
+  final utilsController = Get.put(UtilsController());
+
+  final dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+
+  utilsController.initializeUtils();
+
+  promptController.promptsBox = (await Hive.openBox("promptsBox"));
+
+  pastEmailsController.pastEmailsBox = (await Hive.openBox("pastEmailsBox"));
+
 
   runApp(const MyApp());
 }

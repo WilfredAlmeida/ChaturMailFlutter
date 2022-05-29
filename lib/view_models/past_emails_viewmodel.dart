@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/utils/api_status.dart';
@@ -16,9 +17,7 @@ class PastEmailsController extends GetxController{
   var pastEmailsLoading=false.obs;
   var noPastEmailsFound=false.obs;
 
-  PastEmailsController(){
-
-  }
+  late Box<dynamic> pastEmailsBox;
 
   Future<bool> getPastEmails() async{
 
@@ -38,32 +37,44 @@ class PastEmailsController extends GetxController{
 
         if (body['status'] == 1) {
 
-          pastEmailsList.clear();
+          // pastEmailsList.clear();
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PastEmailsModel.fromJson(body['payload'][i]);
-            pastEmailsList.add(a);
+            await pastEmailsBox.put(i, a);
+            // pastEmailsList.add(a);
+
           }
+
+          // pastEmailsList = RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
 
           pastEmailsLoading.value = false;
         }
         else {
-          noPastEmailsFound.value = true;
+          // noPastEmailsFound.value = true;
           pastEmailsLoading.value = false;
         }
       }
       else if(result is Failure){
+
+        print(result.errorResponse);
+
         pastEmailsLoading.value = false;
-        noPastEmailsFound.value=true;
+        // noPastEmailsFound.value=true;
       }
 
+      pastEmailsList = RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
+
+      noPastEmailsFound.value = pastEmailsList.isEmpty;
+
       return true;
-    } catch(e){
+    } catch(e,s){
       print("IN PAST_EMAILS_CONTROLLER");
       print(e);
+      print(s);
       pastEmailsLoading.value = false;
-      noPastEmailsFound.value=true;
-      return true;
+      // noPastEmailsFound.value=true;
+      return false;
     }
 
   }

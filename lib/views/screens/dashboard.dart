@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 import 'package:wilfredemail/views/widgets/not_found_widget.dart';
@@ -15,9 +16,13 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final promptController = Get.put(PromptController());
+  // final promptController = Get.put(PromptController());
 
-  final pastEmailsController = Get.put(PastEmailsController());
+  final promptController = Get.find<PromptController>();
+
+  // final pastEmailsController = Get.put(PastEmailsController());
+
+  final pastEmailsController = Get.find<PastEmailsController>();
 
   @override
   void initState() {
@@ -44,6 +49,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
+
+            Get.find<UtilsController>().initializeUtils();
+
             promptController.getPrompts();
 
             pastEmailsController.getPastEmails();

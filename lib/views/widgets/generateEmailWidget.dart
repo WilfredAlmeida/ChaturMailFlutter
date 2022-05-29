@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/views/screens/generate_email_screen.dart';
 
 import '../../models/prompts_model.dart';
 
 class GenerateEmailWidget extends StatelessWidget {
-
   final PromptModel promptModel;
 
-  const GenerateEmailWidget({Key? key, required this.promptModel}) : super(key: key);
+  GenerateEmailWidget({Key? key, required this.promptModel}) : super(key: key);
+
+  final utilsController = Get.find<UtilsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class GenerateEmailWidget extends StatelessWidget {
         fit: StackFit.passthrough,
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.to(GenerateEmailScreen(promptModel: promptModel));
             },
             child: Container(
@@ -35,7 +37,11 @@ class GenerateEmailWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ImageIcon(NetworkImage(promptModel.iconUrl), size: 80),
+                  utilsController.isInternetConnected.value
+                      ? ImageIcon(NetworkImage(promptModel.iconUrl), size: 80)
+                      : const ImageIcon(
+                          AssetImage("assets/images/dizzy_face_icon.png"),
+                          size: 80),
                   Text(
                     promptModel.title,
                     style: const TextStyle(

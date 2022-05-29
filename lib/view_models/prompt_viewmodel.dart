@@ -15,26 +15,12 @@ class PromptController extends GetxController{
   var promptsLoading=false.obs;
   var noPromptsFound=false.obs;
 
-  var promptsBox;
-
-
-  PromptController(){
-
-    Future.wait([
-      Future(()async{
-        final dir = await getApplicationDocumentsDirectory();
-        Hive.init(dir.path);
-        promptsBox = (await Hive.openBox("promptsBox")).obs;
-      })
-    ]);
-  }
+  late Box<dynamic> promptsBox;
 
   Future<bool> getPrompts() async{
 
     try {
       promptsLoading.value = true;
-
-      promptsList = RxList<PromptModel>([...promptsBox.value.toMap().values.toList()]);
 
       const url = "/prompt/getAllPrompts";
 
@@ -50,16 +36,16 @@ class PromptController extends GetxController{
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PromptModel.fromJson(body['payload'][i]);
-            await promptsBox.value.put(i,a);
+            await promptsBox.put(i,a);
             // promptsList.add(a);
           }
 
-          promptsList = RxList<PromptModel>([...promptsBox.value.toMap().values.toList()]);
+          // promptsList = RxList<PromptModel>([...promptsBox.toMap().values.toList()]);
 
           promptsLoading.value = false;
         }
         else {
-          noPromptsFound.value = true;
+          // noPromptsFound.value = true;
           promptsLoading.value = false;
         }
       }
@@ -68,10 +54,15 @@ class PromptController extends GetxController{
         // noPromptsFound.value=true;
       }
 
+      promptsList = RxList<PromptModel>([...promptsBox.toMap().values.toList()]);
+
+      noPromptsFound.value = promptsList.isEmpty;
+
       return true;
-    } catch(e){
+    } catch(e,s){
       print("IN PROMPTS_CONTROLLER");
       print(e);
+      print(s);
       promptsLoading.value = false;
       // noPromptsFound.value=true;
       return false;

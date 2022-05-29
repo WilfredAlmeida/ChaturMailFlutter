@@ -43,6 +43,7 @@ dependencies:
   hive_generator: ^1.1.2
   build_runner: ^2.1.10
   path_provider: ^2.0.10
+  connectivity_plus: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,9 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  assets:
+    - assets/images/dizzy_face_icon.png
+
   fonts:
     - family: Poppins
       fonts:
