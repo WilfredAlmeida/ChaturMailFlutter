@@ -15,14 +15,14 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
 
   print(url);
 
-  if(body==""){
+  if (body == "") {
     body = jsonEncode({});
-  }else{
-    body=jsonEncode(body);
+  } else {
+    body = jsonEncode(body);
   }
 
   print(body);
-  
+
   try {
     var response = await http.post(
       uri,
@@ -31,24 +31,21 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    
+
     if (response.statusCode == SUCCESS) {
       return Success(response: response, code: SUCCESS);
     }
     return Failure(
         code: USER_INVALID_RESPONSE, errorResponse: 'Invalid Response');
   } on HttpException {
-    return Failure(
-        code: NO_INTERNET, errorResponse: 'No Internet Connection');
+    return Failure(code: NO_INTERNET, errorResponse: 'No Internet Connection');
   } on SocketException {
-    return Failure(
-        code: NO_INTERNET, errorResponse: 'No Internet Connection');
+    return Failure(code: NO_INTERNET, errorResponse: 'No Internet Connection');
   } on FormatException {
     return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
   } catch (e) {
     return Failure(code: UNKNOWN_ERROR, errorResponse: 'Unknown Error');
   }
-  
 
   // final receivePort = ReceivePort();
   //
@@ -60,30 +57,26 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
   //   ]);
   //
   //   return receivePort.first;
-
 }
 
 void _postRequest(List<Object?> arguments) async {
-
   var body;
 
-  if(arguments[2]==""){
+  if (arguments[2] == "") {
     body = jsonEncode({});
-  }else{
-    body=jsonEncode(arguments[2]);
+  } else {
+    body = jsonEncode(arguments[2]);
   }
-
-
 
   print(body);
 
-    var response = await http.post(
-      arguments[1] as Uri,
-      body: body,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
+  var response = await http.post(
+    arguments[1] as Uri,
+    body: body,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
 
   SendPort sendPort = arguments[0] as SendPort;
 

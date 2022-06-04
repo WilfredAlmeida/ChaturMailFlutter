@@ -8,9 +8,11 @@ import 'dart:convert';
 
 part 'past_emails_model.g.dart';
 
-PastEmailsModel pastEmailsModelFromJson(String str) => PastEmailsModel.fromJson(json.decode(str));
+PastEmailsModel pastEmailsModelFromJson(String str) =>
+    PastEmailsModel.fromJson(json.decode(str));
 
-String pastEmailsModelToJson(PastEmailsModel data) => json.encode(data.toJson());
+String pastEmailsModelToJson(PastEmailsModel data) =>
+    json.encode(data.toJson());
 
 @HiveType(typeId: 2)
 class PastEmailsModel {
@@ -57,29 +59,30 @@ class PastEmailsModel {
   @HiveField(9)
   int v;
 
-  factory PastEmailsModel.fromJson(Map<String, dynamic> json) => PastEmailsModel(
-    id: json["_id"],
-    userId: json["userId"],
-    promptId: json["promptId"],
-    subject: json["subject"],
-    keywords: json["keywords"],
-    generatedEmail: json["generatedEmail"],
-    toEmailId: json["toEmailId"],
-    tokens: json["tokens"],
-    createdOn: json["createdOn"],
-    v: json["__v"],
-  );
+  factory PastEmailsModel.fromJson(Map<String, dynamic> json) =>
+      PastEmailsModel(
+        id: json["_id"],
+        userId: json["userId"],
+        promptId: json["promptId"],
+        subject: json["subject"],
+        keywords: json["keywords"],
+        generatedEmail: json["generatedEmail"],
+        toEmailId: json["toEmailId"],
+        tokens: json["tokens"],
+        createdOn: json["createdOn"],
+        v: json["__v"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "_id": id,
-    "userId": userId,
-    "promptId": promptId,
-    "subject": subject,
-    "keywords": keywords,
-    "generatedEmail": generatedEmail,
-    "toEmailId": toEmailId,
-    "tokens": tokens,
-    "createdOn": createdOn,
-    "__v": v,
-  };
+        "_id": id,
+        "userId": userId,
+        "promptId": promptId,
+        "subject": subject,
+        "keywords": keywords,
+        "generatedEmail": generatedEmail,
+        "toEmailId": toEmailId,
+        "tokens": tokens,
+        "createdOn": createdOn,
+        "__v": v,
+      };
 }

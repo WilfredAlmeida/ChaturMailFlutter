@@ -49,7 +49,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-
             Get.find<UtilsController>().initializeUtils();
 
             promptController.getPrompts();

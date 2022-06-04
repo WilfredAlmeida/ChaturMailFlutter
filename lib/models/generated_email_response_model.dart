@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-GeneratedEmailResponseModel generatedEmailResponseModelFromJson(String str) => GeneratedEmailResponseModel.fromJson(json.decode(str));
+GeneratedEmailResponseModel generatedEmailResponseModelFromJson(String str) =>
+    GeneratedEmailResponseModel.fromJson(json.decode(str));
 
-String generatedEmailResponseModelToJson(GeneratedEmailResponseModel data) => json.encode(data.toJson());
+String generatedEmailResponseModelToJson(GeneratedEmailResponseModel data) =>
+    json.encode(data.toJson());
 
 class GeneratedEmailResponseModel {
   GeneratedEmailResponseModel({
@@ -19,17 +21,19 @@ class GeneratedEmailResponseModel {
   String message;
   List<Payload> payload;
 
-  factory GeneratedEmailResponseModel.fromJson(Map<String, dynamic> json) => GeneratedEmailResponseModel(
-    status: json["status"],
-    message: json["message"],
-    payload: List<Payload>.from(json["payload"].map((x) => Payload.fromJson(x))),
-  );
+  factory GeneratedEmailResponseModel.fromJson(Map<String, dynamic> json) =>
+      GeneratedEmailResponseModel(
+        status: json["status"],
+        message: json["message"],
+        payload:
+            List<Payload>.from(json["payload"].map((x) => Payload.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
-    "payload": List<dynamic>.from(payload.map((x) => x.toJson())),
-  };
+        "status": status,
+        "message": message,
+        "payload": List<dynamic>.from(payload.map((x) => x.toJson())),
+      };
 }
 
 class Payload {
@@ -54,24 +58,24 @@ class Payload {
   int createdOn;
 
   factory Payload.fromJson(Map<String, dynamic> json) => Payload(
-    id: json["id"],
-    userId: json["userId"],
-    promptId: json["promptId"],
-    subject: json["subject"],
-    keywords: json["keywords"],
-    generatedEmail: json["generatedEmail"],
-    toEmailId: json["toEmailId"],
-    createdOn: json["createdOn"],
-  );
+        id: json["id"],
+        userId: json["userId"],
+        promptId: json["promptId"],
+        subject: json["subject"],
+        keywords: json["keywords"],
+        generatedEmail: json["generatedEmail"],
+        toEmailId: json["toEmailId"],
+        createdOn: json["createdOn"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "userId": userId,
-    "promptId": promptId,
-    "subject": subject,
-    "keywords": keywords,
-    "generatedEmail": generatedEmail,
-    "toEmailId": toEmailId,
-    "createdOn": createdOn,
-  };
+        "id": id,
+        "userId": userId,
+        "promptId": promptId,
+        "subject": subject,
+        "keywords": keywords,
+        "generatedEmail": generatedEmail,
+        "toEmailId": toEmailId,
+        "createdOn": createdOn,
+      };
 }

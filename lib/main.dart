@@ -14,9 +14,7 @@ import 'views/screens/dashboard.dart';
 import 'views/screens/display_email_screen.dart';
 import 'views/screens/generate_email_screen.dart';
 
-
-void main() async{
-
+void main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(PromptModelAdapter());
@@ -37,14 +35,13 @@ void main() async{
 
   pastEmailsController.pastEmailsBox = (await Hive.openBox("pastEmailsBox"));
 
-
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const mainColor=Color.fromRGBO(37, 64, 71, 1);
+  static const mainColor = Color.fromRGBO(37, 64, 71, 1);
 
   // This widget is the root of your application.
   @override
@@ -52,17 +49,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: "/",
       getPages: [
-        GetPage(name: "/",page: ()=>const MyApp()),
-        GetPage(name: "/dashboardScreen",page: ()=>const DashboardScreen()),
+        GetPage(name: "/", page: () => const MyApp()),
+        GetPage(name: "/dashboardScreen", page: () => const DashboardScreen()),
       ],
       title: 'Wilfred Email',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromRGBO(37, 64, 71, 1),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: mainColor,
-        ),
-        fontFamily: "Poppins"
-      ),
+          scaffoldBackgroundColor: const Color.fromRGBO(37, 64, 71, 1),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: mainColor,
+          ),
+          fontFamily: "Poppins"),
       home: const LoginScreen(),
     );
   }

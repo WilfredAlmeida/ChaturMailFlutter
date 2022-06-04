@@ -3,10 +3,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 
 class DisplayEmailScreen extends StatelessWidget {
-
   final Payload generatedEmail;
 
-  const DisplayEmailScreen({Key? key, required this.generatedEmail}) : super(key: key);
+  const DisplayEmailScreen({Key? key, required this.generatedEmail})
+      : super(key: key);
 
   static const _headingStyle = TextStyle(
     fontSize: 16,
@@ -47,7 +47,6 @@ class DisplayEmailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 //To Email Heading
                 const Text("To:", style: _headingStyle),
 
@@ -68,7 +67,7 @@ class DisplayEmailScreen extends StatelessWidget {
                 const Text("Subject:", style: _headingStyle),
 
                 //Subject Content
-                Text(generatedEmail.subject,style: _contentStyle),
+                Text(generatedEmail.subject, style: _contentStyle),
 
                 const SizedBox(height: 15),
 

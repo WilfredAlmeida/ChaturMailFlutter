@@ -5,9 +5,11 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-GenerateEmailRequestModel generateEmailRequestModelFromJson(String str) => GenerateEmailRequestModel.fromJson(json.decode(str));
+GenerateEmailRequestModel generateEmailRequestModelFromJson(String str) =>
+    GenerateEmailRequestModel.fromJson(json.decode(str));
 
-String generateEmailRequestModelToJson(GenerateEmailRequestModel data) => json.encode(data.toJson());
+String generateEmailRequestModelToJson(GenerateEmailRequestModel data) =>
+    json.encode(data.toJson());
 
 class GenerateEmailRequestModel {
   GenerateEmailRequestModel({
@@ -22,17 +24,18 @@ class GenerateEmailRequestModel {
   String promptId;
   String toEmail;
 
-  factory GenerateEmailRequestModel.fromJson(Map<String, dynamic> json) => GenerateEmailRequestModel(
-    subject: json["subject"],
-    keywords: json["keywords"],
-    promptId: json["promptId"],
-    toEmail: json["toEmail"],
-  );
+  factory GenerateEmailRequestModel.fromJson(Map<String, dynamic> json) =>
+      GenerateEmailRequestModel(
+        subject: json["subject"],
+        keywords: json["keywords"],
+        promptId: json["promptId"],
+        toEmail: json["toEmail"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "subject": subject,
-    "keywords": keywords,
-    "promptId": promptId,
-    "toEmail": toEmail,
-  };
+        "subject": subject,
+        "keywords": keywords,
+        "promptId": promptId,
+        "toEmail": toEmail,
+      };
 }

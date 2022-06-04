@@ -8,7 +8,8 @@ import 'dart:convert';
 
 part 'prompts_model.g.dart';
 
-PromptModel promptModelFromJson(String str) => PromptModel.fromJson(json.decode(str));
+PromptModel promptModelFromJson(String str) =>
+    PromptModel.fromJson(json.decode(str));
 
 String promptModelToJson(PromptModel data) => json.encode(data.toJson());
 
@@ -50,24 +51,24 @@ class PromptModel {
   int updatedOn;
 
   factory PromptModel.fromJson(Map<String, dynamic> json) => PromptModel(
-    id: json["id"],
-    title: json["title"],
-    slug: json["slug"],
-    maxTokens: json["maxTokens"],
-    shortDescription: json["shortDescription"],
-    iconUrl: json["iconUrl"],
-    description: json["description"],
-    updatedOn: json["updatedOn"],
-  );
+        id: json["id"],
+        title: json["title"],
+        slug: json["slug"],
+        maxTokens: json["maxTokens"],
+        shortDescription: json["shortDescription"],
+        iconUrl: json["iconUrl"],
+        description: json["description"],
+        updatedOn: json["updatedOn"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "slug": slug,
-    "maxTokens": maxTokens,
-    "shortDescription": shortDescription,
-    "iconUrl": iconUrl,
-    "description": description,
-    "updatedOn": updatedOn,
-  };
+        "id": id,
+        "title": title,
+        "slug": slug,
+        "maxTokens": maxTokens,
+        "shortDescription": shortDescription,
+        "iconUrl": iconUrl,
+        "description": description,
+        "updatedOn": updatedOn,
+      };
 }

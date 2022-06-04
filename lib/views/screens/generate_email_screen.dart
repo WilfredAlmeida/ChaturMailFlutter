@@ -16,7 +16,9 @@ class GenerateEmailScreen extends StatefulWidget {
 
   final PastEmailsModel? pastEmail;
 
-  const GenerateEmailScreen({Key? key, required this.promptModel,this.pastEmail}) : super(key: key);
+  const GenerateEmailScreen(
+      {Key? key, required this.promptModel, this.pastEmail})
+      : super(key: key);
 }
 
 class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
@@ -40,11 +42,10 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
   @override
   void initState() {
-
-    if(widget.pastEmail!=null){
-      _toEmailInput.text=widget.pastEmail!.toEmailId;
-      _subjectInput.text=widget.pastEmail!.subject;
-      _keywordsInput.text=widget.pastEmail!.keywords;
+    if (widget.pastEmail != null) {
+      _toEmailInput.text = widget.pastEmail!.toEmailId;
+      _subjectInput.text = widget.pastEmail!.subject;
+      _keywordsInput.text = widget.pastEmail!.keywords;
     }
 
     super.initState();
@@ -188,7 +189,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                         onPressed: () async {
                           _toEmailValid = _validateEmail(_toEmailInput.text);
                           // _fromEmailValid =
-                              // _validateEmail(_fromEmailInput.text);
+                          // _validateEmail(_fromEmailInput.text);
                           _keywordsValid = _keywordsInput.text.isNotEmpty;
                           _subjectValid = _subjectInput.text.isNotEmpty;
 
@@ -307,6 +308,6 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
     final generatedEmail = responseModel.payload[0];
 
-    Get.to(()=>DisplayEmailScreen(generatedEmail: generatedEmail));
+    Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
   }
 }

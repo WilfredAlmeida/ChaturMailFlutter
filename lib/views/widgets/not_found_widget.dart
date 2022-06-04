@@ -8,7 +8,8 @@ class NotFoundWidget extends StatelessWidget {
   final message;
   final tooltip;
 
-  const NotFoundWidget({Key? key,
+  const NotFoundWidget({
+    Key? key,
     required this.heading,
     required this.message,
     required this.tooltip,
@@ -38,9 +39,11 @@ class NotFoundWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Get.find<UtilsController>().isInternetConnected.value? const ImageIcon(NetworkImage(iconUrl), size: 80):const ImageIcon(
-                    AssetImage("assets/images/dizzy_face_icon.png"),
-                    size: 80),
+                Get.find<UtilsController>().isInternetConnected.value
+                    ? const ImageIcon(NetworkImage(iconUrl), size: 80)
+                    : const ImageIcon(
+                        AssetImage("assets/images/dizzy_face_icon.png"),
+                        size: 80),
                 Text(
                   heading,
                   style: const TextStyle(

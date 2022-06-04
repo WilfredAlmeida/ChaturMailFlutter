@@ -97,7 +97,7 @@ flutter:
   #         weight: 700
   #
   assets:
-    - assets/images/dizzy_face_icon.png
+    - assets/images/
 
   fonts:
     - family: Poppins

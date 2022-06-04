@@ -1,4 +1,4 @@
-const API_URL="http://192.168.0.208:4545";
+const API_URL = "http://192.168.0.208:4545";
 
 // Success
 const SUCCESS = 200;

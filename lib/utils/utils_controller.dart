@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 
-class UtilsController extends GetxController{
+class UtilsController extends GetxController {
   var isInternetConnected = false.obs;
 
   Future<void> initializeUtils() async {
-
     isInternetConnected.value = await hasNetwork();
-
   }
 
   Future<bool> hasNetwork() async {
@@ -19,5 +17,4 @@ class UtilsController extends GetxController{
       return false;
     }
   }
-
 }

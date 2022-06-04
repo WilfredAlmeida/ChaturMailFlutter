@@ -10,18 +10,16 @@ import 'package:wilfredemail/utils/api_status.dart';
 import '../controllers/api_communicator.dart';
 import '../utils/constants.dart';
 
-class PastEmailsController extends GetxController{
-
+class PastEmailsController extends GetxController {
   var pastEmailsList = [].obs;
 
-  var pastEmailsLoading=false.obs;
-  var noPastEmailsFound=false.obs;
+  var pastEmailsLoading = false.obs;
+  var noPastEmailsFound = false.obs;
 
   late Box<dynamic> pastEmailsBox;
 
-  Future<bool> getPastEmails() async{
-
-    pastEmailsLoading.value=true;
+  Future<bool> getPastEmails() async {
+    pastEmailsLoading.value = true;
 
     try {
       pastEmailsLoading.value = true;
@@ -32,11 +30,10 @@ class PastEmailsController extends GetxController{
       // print(result.response.body);
 
       if (result is Success) {
-        final response=result.response as http.Response;
+        final response = result.response as http.Response;
         var body = json.decode(response.body);
 
         if (body['status'] == 1) {
-
           // pastEmailsList.clear();
 
           for (var i = 0; i < body['payload'].length; i++) {
@@ -49,26 +46,24 @@ class PastEmailsController extends GetxController{
           // pastEmailsList = RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
 
           pastEmailsLoading.value = false;
-        }
-        else {
+        } else {
           // noPastEmailsFound.value = true;
           pastEmailsLoading.value = false;
         }
-      }
-      else if(result is Failure){
-
+      } else if (result is Failure) {
         print(result.errorResponse);
 
         pastEmailsLoading.value = false;
         // noPastEmailsFound.value=true;
       }
 
-      pastEmailsList = RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
+      pastEmailsList =
+          RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
 
       noPastEmailsFound.value = pastEmailsList.isEmpty;
 
       return true;
-    } catch(e,s){
+    } catch (e, s) {
       print("IN PAST_EMAILS_CONTROLLER");
       print(e);
       print(s);
@@ -76,8 +71,5 @@ class PastEmailsController extends GetxController{
       // noPastEmailsFound.value=true;
       return false;
     }
-
   }
-
-
 }

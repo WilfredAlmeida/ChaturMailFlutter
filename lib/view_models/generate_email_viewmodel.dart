@@ -6,7 +6,6 @@ import 'package:wilfredemail/models/generated_email_response_model.dart';
 import '../models/generate_email_request_model.dart';
 
 class GenerateEmailController extends GetxController {
-
   // static GenerateEmailController get to => Get.find();
 
   var generateEmailRequest = Object().obs;
