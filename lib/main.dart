@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:wilfredemail/models/past_emails_model.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
-import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
+import './models/past_emails_model.dart';
+import './utils/utils_controller.dart';
+import './view_models/prompt_viewmodel.dart';
+import './views/screens/login_screen.dart';
 import './models/prompts_model.dart';
 
 import 'view_models/past_emails_viewmodel.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: "Poppins"
       ),
-      home: const DashboardScreen(),
+      home: const LoginScreen(),
     );
   }
 }
