@@ -40,7 +40,7 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
   } on HttpException {
     return Failure(code: NO_INTERNET, errorResponse: 'No Internet Connection');
   } on SocketException {
-    return Failure(code: NO_INTERNET, errorResponse: 'No Internet Connection');
+    return Failure(code: API_NOT_REACHABLE, errorResponse: 'API Not Reachable');
   } on FormatException {
     return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
   } catch (e) {

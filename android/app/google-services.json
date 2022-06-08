@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "860589620350",
+    "project_id": "email-generator-5305c",
+    "storage_bucket": "email-generator-5305c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860589620350:android:a1464615ef1ad354dfac2f",
+        "android_client_info": {
+          "package_name": "com.wilfredalmeida.emailgenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860589620350-921vna720nnkl673argrnmps8plrtep5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wilfredalmeida.emailgenerator",
+            "certificate_hash": "f5065cda71d9cb54af891fa75d970cade29ee14f"
+          }
+        },
+        {
+          "client_id": "860589620350-jdp3mvb439ovij5dgfcu10g37n0fnfnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJSoq6r0-2EeeFr_ECxjvwobNzb1-wLHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860589620350-jdp3mvb439ovij5dgfcu10g37n0fnfnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

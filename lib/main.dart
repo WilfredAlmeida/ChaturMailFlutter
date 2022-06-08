@@ -1,6 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import './models/past_emails_model.dart';
@@ -9,12 +9,15 @@ import './view_models/prompt_viewmodel.dart';
 import './views/screens/login_screen.dart';
 import './models/prompts_model.dart';
 
+import 'controllers/google_login.dart';
+import 'controllers/login_checker.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
-import 'views/screens/display_email_screen.dart';
-import 'views/screens/generate_email_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(PromptModelAdapter());
@@ -25,6 +28,8 @@ void main() async {
   final pastEmailsController = Get.put(PastEmailsController());
 
   final utilsController = Get.put(UtilsController());
+
+  Get.put(GoogleLoginController());
 
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
@@ -38,10 +43,25 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   static const mainColor = Color.fromRGBO(37, 64, 71, 1);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final Future? userLoggedInFuture;
+
+  @override
+  void initState() {
+
+    userLoggedInFuture = isUserLoggedIn();
+
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
@@ -56,10 +76,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: const Color.fromRGBO(37, 64, 71, 1),
           appBarTheme: const AppBarTheme(
-            backgroundColor: mainColor,
+            backgroundColor: MyApp.mainColor,
           ),
           fontFamily: "Poppins"),
-      home: const LoginScreen(),
+      home: FutureBuilder(
+        future: userLoggedInFuture,
+        builder: (c, r) {
+
+          bool isLoggedIn = r.data == null ? false : r.data as bool;
+
+          if (isLoggedIn) {
+            return const DashboardScreen();
+          }
+          return const LoginScreen();
+        },
+      ),
     );
   }
 }

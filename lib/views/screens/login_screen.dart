@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/google_login.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,7 +34,16 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async{
+                          final googleLoginController = Get.find<GoogleLoginController>();
+
+                          var loginSuccessful = await googleLoginController.googleLogin();
+
+                          if(loginSuccessful){
+                            Get.toNamed("/dashboardScreen");
+                          }
+
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

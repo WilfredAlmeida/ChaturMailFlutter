@@ -1,4 +1,4 @@
-package com.example.wilfredemail;
+package com.wilfredalmeida.emailgenerator;
 
 import io.flutter.embedding.android.FlutterActivity;
 

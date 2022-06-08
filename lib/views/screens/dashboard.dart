@@ -6,6 +6,7 @@ import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 import 'package:wilfredemail/views/widgets/not_found_widget.dart';
 import 'package:wilfredemail/views/widgets/past_email_widget.dart';
 
+import '../../controllers/google_login.dart';
 import '../widgets/generateEmailWidget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -39,10 +40,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          actions: const [
+          actions: [
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.verified_user),
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () async{
+                  var lo = await Get.find<GoogleLoginController>().googleLogout();
+
+                  print("LOGGED OUT");
+                  print(lo);
+                },
+                child: const Icon(Icons.verified_user),
+              ),
             )
           ],
           elevation: 0,
