@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wilfredemail/controllers/storage_controller.dart';
+import 'package:wilfredemail/controllers/user_controller.dart';
 import './models/past_emails_model.dart';
 import './utils/utils_controller.dart';
 import './view_models/prompt_viewmodel.dart';
@@ -11,12 +13,14 @@ import './models/prompts_model.dart';
 
 import 'controllers/google_login.dart';
 import 'controllers/login_checker.dart';
+import 'firebase_options.dart';
+import 'utils/constants.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
 
   await Hive.initFlutter();
 
@@ -29,10 +33,15 @@ void main() async {
 
   final utilsController = Get.put(UtilsController());
 
-  Get.put(GoogleLoginController());
+  final sharedPreferencesController = Get.put(SharedPreferencesController());
 
-  final dir = await getApplicationDocumentsDirectory();
-  Hive.init(dir.path);
+  sharedPreferencesController.initializeSharedPreference();
+
+  Get.put(GoogleLoginController());
+  Get.put(UserController());
+
+  // final dir = await getApplicationDocumentsDirectory();
+  // Hive.init(dir.path);
 
   utilsController.initializeUtils();
 
@@ -45,8 +54,6 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  static const mainColor = Color.fromRGBO(37, 64, 71, 1);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -74,9 +81,9 @@ class _MyAppState extends State<MyApp> {
       ],
       title: 'Wilfred Email',
       theme: ThemeData(
-          scaffoldBackgroundColor: const Color.fromRGBO(37, 64, 71, 1),
+          scaffoldBackgroundColor: mainColor,
           appBarTheme: const AppBarTheme(
-            backgroundColor: MyApp.mainColor,
+            backgroundColor: mainColor,
           ),
           fontFamily: "Poppins"),
       home: FutureBuilder(

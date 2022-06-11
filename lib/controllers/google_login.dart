@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'storage_controller.dart';
 
 
 class GoogleLoginController extends GetxController{
@@ -19,6 +23,22 @@ class GoogleLoginController extends GetxController{
 
     if(googleUser!=null){
       user = googleUser.obs;
+
+      final sharedPreferencesController = Get.find<SharedPreferencesController>();
+
+      var prefs = sharedPreferencesController.sharedPreferences.value;
+
+
+      prefs.clear();
+
+      prefs.setString("user", jsonEncode({
+        "displayName":googleUser.displayName,
+        "email":googleUser.email,
+        "id":googleUser.id,
+        "photoUrl":googleUser.photoUrl,
+        "serverAuthCode":googleUser.serverAuthCode
+      }));
+
       return true;
     }
 

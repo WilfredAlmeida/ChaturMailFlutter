@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/google_login.dart';
+import '../../utils/constants.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,14 +19,14 @@ class LoginScreen extends StatelessWidget {
               child: ClipPath(
                 clipper: MyClipper1(),
                 child: Container(
-                  color: const Color.fromRGBO(213, 255, 218, 1),
+                  color: greenMainColor,
                 ),
               ),
             ),
             Expanded(
               flex: 2,
               child: Container(
-                color: const Color.fromRGBO(37, 64, 71, 1),
+                color: mainColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,14 +51,14 @@ class LoginScreen extends StatelessWidget {
                           children: const [
                             ImageIcon(
                               AssetImage("assets/images/google_icon.png"),
-                              color: Color.fromRGBO(37, 64, 71, 1),
+                              color: mainColor,
                               size: 30,
                             ),
                             SizedBox(width: 4),
                             Text(
                               "Login with Google",
                               style: TextStyle(
-                                color: Color.fromRGBO(37, 64, 71, 1),
+                                color: mainColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                               ),
@@ -66,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(213, 255, 218, 1),
+                              greenMainColor,
                             ),
                             padding: MaterialStateProperty.all(
                               const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -90,14 +91,14 @@ class LoginScreen extends StatelessWidget {
                           children: const [
                             ImageIcon(
                               AssetImage("assets/images/apple_icon.png"),
-                              color: Color.fromRGBO(37, 64, 71, 1),
+                              color: mainColor,
                               size: 30,
                             ),
                             SizedBox(width: 4),
                             Text(
                               "Login with Apple",
                               style: TextStyle(
-                                color: Color.fromRGBO(37, 64, 71, 1),
+                                color: mainColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                               ),
@@ -106,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(213, 255, 218, 1),
+                              greenMainColor,
                             ),
                             padding: MaterialStateProperty.all(
                               const EdgeInsets.fromLTRB(0, 10, 0, 10),

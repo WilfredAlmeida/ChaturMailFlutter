@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 
+import '../../utils/constants.dart';
+
 class DisplayEmailScreen extends StatelessWidget {
   final Payload generatedEmail;
 
@@ -11,7 +13,7 @@ class DisplayEmailScreen extends StatelessWidget {
   static const _headingStyle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: Color.fromRGBO(37, 232, 138, 1),
+    color: greenMainColor2,
   );
 
   static const _contentStyle = TextStyle(
@@ -37,7 +39,7 @@ class DisplayEmailScreen extends StatelessWidget {
               generatedEmail.generatedEmail,
             );
           },
-          backgroundColor: const Color.fromRGBO(37, 232, 138, 1),
+          backgroundColor: greenMainColor2,
           child: const Icon(Icons.email_rounded, color: Colors.black, size: 35),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

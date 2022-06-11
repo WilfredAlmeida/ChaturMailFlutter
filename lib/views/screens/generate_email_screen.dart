@@ -5,6 +5,7 @@ import 'package:wilfredemail/models/generated_email_response_model.dart';
 import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/models/prompts_model.dart';
 
+import '../../utils/constants.dart';
 import '../../view_models/generate_email_viewmodel.dart';
 import 'display_email_screen.dart';
 
@@ -58,7 +59,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
         appBar: AppBar(
           title: Text(
             "${widget.promptModel.title} Email",
-            style: const TextStyle(color: Color.fromRGBO(37, 232, 138, 1)),
+            style: const TextStyle(color: greenMainColor2),
           ),
           elevation: 0,
         ),
@@ -171,7 +172,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                     child: Text(
                       "Tokens: ${widget.promptModel.maxTokens}",
                       style: const TextStyle(
-                        color: Color.fromRGBO(37, 232, 138, 1),
+                        color: greenMainColor2,
                       ),
                     ),
                   ),
@@ -244,7 +245,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                           "Generate",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            color: Color.fromRGBO(37, 64, 71, 1),
+                            color: mainColor,
                             fontSize: 16,
                           ),
                         ),
@@ -293,8 +294,8 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
         title: "Error Occurred",
         middleText: generatedEmailResponse.message,
         textConfirm: "Ok",
-        buttonColor: const Color.fromRGBO(37, 64, 71, 1),
-        confirmTextColor: const Color.fromRGBO(37, 232, 138, 1),
+        buttonColor: mainColor,
+        confirmTextColor: greenMainColor2,
         onConfirm: () {
           Get.back();
         },

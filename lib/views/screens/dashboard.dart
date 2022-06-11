@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:wilfredemail/controllers/user_controller.dart';
 import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
@@ -7,6 +8,8 @@ import 'package:wilfredemail/views/widgets/not_found_widget.dart';
 import 'package:wilfredemail/views/widgets/past_email_widget.dart';
 
 import '../../controllers/google_login.dart';
+import '../../utils/constants.dart';
+import '../widgets/dashboard_drawer.dart';
 import '../widgets/generateEmailWidget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -17,13 +20,13 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  // final promptController = Get.put(PromptController());
-
   final promptController = Get.find<PromptController>();
 
-  // final pastEmailsController = Get.put(PastEmailsController());
-
   final pastEmailsController = Get.find<PastEmailsController>();
+
+  final userController = Get.find<UserController>();
+
+  late final user;
 
   @override
   void initState() {
@@ -32,6 +35,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       pastEmailsController.getPastEmails(),
     ]);
 
+    user = userController.getLoggedInUser();
+
     super.initState();
   }
 
@@ -39,18 +44,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const DashboardDrawer(),
         appBar: AppBar(
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: () async{
-                  var lo = await Get.find<GoogleLoginController>().googleLogout();
-
-                  print("LOGGED OUT");
-                  print(lo);
-                },
-                child: const Icon(Icons.verified_user),
+                child: CircleAvatar(backgroundImage: NetworkImage(user['photoUrl']),),
+                // child: const Icon(Icons.verified_user),
               ),
             )
           ],
@@ -65,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             pastEmailsController.getPastEmails();
           },
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
-          backgroundColor: const Color.fromRGBO(37, 232, 138, 1),
+          backgroundColor: greenMainColor2,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Padding(
@@ -118,7 +119,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     "Past Emails",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(37, 232, 138, 1),
+                        color: greenMainColor2,
                         fontSize: 16),
                   ),
 

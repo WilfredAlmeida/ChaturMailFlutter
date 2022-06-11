@@ -19,6 +19,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <meta name="google-signin-client_id" content="860589620350-jdp3mvb439ovij5dgfcu10g37n0fnfnb.apps.googleusercontent.com" />
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +37,33 @@
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCuAJ1YXLgyJLDauqEHfQSCP_Xjcw2AIyE",
+    authDomain: "email-generator-5305c.firebaseapp.com",
+    projectId: "email-generator-5305c",
+    storageBucket: "email-generator-5305c.appspot.com",
+    messagingSenderId: "860589620350",
+    appId: "1:860589620350:web:4acd7c2ded3e7cd3dfac2f",
+    measurementId: "G-RYV0HBQCVM"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
+
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;

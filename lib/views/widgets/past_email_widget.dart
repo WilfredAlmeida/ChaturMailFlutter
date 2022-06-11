@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wilfredemail/views/screens/display_email_screen.dart';
 import 'package:wilfredemail/views/screens/generate_email_screen.dart';
 import '../../models/past_emails_model.dart';
+import '../../utils/constants.dart';
 import '../../view_models/prompt_viewmodel.dart';
 import '../../models/generated_email_response_model.dart';
 
@@ -40,7 +41,7 @@ class PastEmailWidget extends StatelessWidget {
               width: 200,
               height: 250,
               decoration: const BoxDecoration(
-                color: Color.fromRGBO(213, 255, 218, 1),
+                color: greenMainColor,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(100),
                     topLeft: Radius.circular(22),
@@ -110,7 +111,7 @@ class PastEmailWidget extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: const BoxDecoration(
-                    color: Color.fromRGBO(37, 232, 138, 1),
+                    color: greenMainColor2,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(30),
                         topLeft: Radius.circular(100),

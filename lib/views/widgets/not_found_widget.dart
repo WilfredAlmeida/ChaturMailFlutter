@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 
 class NotFoundWidget extends StatelessWidget {
@@ -29,7 +30,7 @@ class NotFoundWidget extends StatelessWidget {
             width: 200,
             height: 250,
             decoration: const BoxDecoration(
-              color: Color.fromRGBO(213, 255, 218, 1),
+              color: greenMainColor,
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(100),
                   topLeft: Radius.circular(22),
@@ -77,7 +78,7 @@ class NotFoundWidget extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: const BoxDecoration(
-                  color: Color.fromRGBO(37, 232, 138, 1),
+                  color: greenMainColor2,
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30),
                       topLeft: Radius.circular(100),
