@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import 'constants.dart';
 
 class UtilsController extends GetxController {
   var isInternetConnected = false.obs;
@@ -16,5 +19,20 @@ class UtilsController extends GetxController {
     } on SocketException catch (_) {
       return false;
     }
+  }
+
+  void showErrorDialog(
+      {required title, required content, required Function()? onConfirm}) {
+    Get.defaultDialog(
+      title: title,
+      content: Text(content),
+      textConfirm: "Ok",
+      buttonColor: mainColor,
+      confirmTextColor: greenMainColor2,
+      onConfirm: onConfirm ??
+          () {
+            Get.back();
+          },
+    );
   }
 }

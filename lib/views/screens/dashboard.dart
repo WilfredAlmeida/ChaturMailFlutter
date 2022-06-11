@@ -50,7 +50,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                child: CircleAvatar(backgroundImage: NetworkImage(user['photoUrl']),),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(user['photoUrl']),
+                ),
                 // child: const Icon(Icons.verified_user),
               ),
             )

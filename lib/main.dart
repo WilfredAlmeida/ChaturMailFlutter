@@ -12,6 +12,7 @@ import './views/screens/login_screen.dart';
 import './models/prompts_model.dart';
 
 import 'controllers/google_login.dart';
+import 'controllers/jwt_token_obtainer.dart';
 import 'controllers/login_checker.dart';
 import 'firebase_options.dart';
 import 'utils/constants.dart';
@@ -20,7 +21,9 @@ import 'views/screens/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   await Hive.initFlutter();
 
@@ -39,6 +42,7 @@ void main() async {
 
   Get.put(GoogleLoginController());
   Get.put(UserController());
+  Get.put(JWTController());
 
   // final dir = await getApplicationDocumentsDirectory();
   // Hive.init(dir.path);
@@ -64,7 +68,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-
     userLoggedInFuture = isUserLoggedIn();
 
     super.initState();
@@ -89,7 +92,6 @@ class _MyAppState extends State<MyApp> {
       home: FutureBuilder(
         future: userLoggedInFuture,
         builder: (c, r) {
-
           bool isLoggedIn = r.data == null ? false : r.data as bool;
 
           if (isLoggedIn) {

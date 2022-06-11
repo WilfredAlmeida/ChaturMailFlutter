@@ -70,8 +70,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '860589620350',
     projectId: 'email-generator-5305c',
     storageBucket: 'email-generator-5305c.appspot.com',
-    androidClientId: '860589620350-921vna720nnkl673argrnmps8plrtep5.apps.googleusercontent.com',
-    iosClientId: '860589620350-k3elqtmpmo5vf2fv7ag3d6cg8h7pfil1.apps.googleusercontent.com',
+    androidClientId:
+        '860589620350-921vna720nnkl673argrnmps8plrtep5.apps.googleusercontent.com',
+    iosClientId:
+        '860589620350-k3elqtmpmo5vf2fv7ag3d6cg8h7pfil1.apps.googleusercontent.com',
     iosBundleId: 'com.wilfredalmeida.emailgenerator',
   );
 }

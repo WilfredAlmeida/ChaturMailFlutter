@@ -29,9 +29,10 @@ class PromptController extends GetxController {
         final response = result.response as http.Response;
         var body = json.decode(response.body);
 
-        if (body['status'] == 1) {
-          // promptsList.clear();
+        promptsList.clear();
+        await promptsBox.clear();
 
+        if (body['status'] == 1) {
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PromptModel.fromJson(body['payload'][i]);
             await promptsBox.put(i, a);

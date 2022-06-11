@@ -35,15 +35,16 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: ElevatedButton(
-                        onPressed: () async{
-                          final googleLoginController = Get.find<GoogleLoginController>();
+                        onPressed: () async {
+                          final googleLoginController =
+                              Get.find<GoogleLoginController>();
 
-                          var loginSuccessful = await googleLoginController.googleLogin();
+                          var loginSuccessful =
+                              await googleLoginController.googleLogin();
 
-                          if(loginSuccessful){
+                          if (loginSuccessful) {
                             Get.toNamed("/dashboardScreen");
                           }
-
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -18,6 +18,7 @@ class GenerateEmailController extends GetxController {
       body: generateEmailRequest.toJson(),
     );
 
+    print("GENERATED EMAILS");
     print(response.body);
 
     generatedEmailResponse.value = GeneratedEmailResponseModel.fromJson(

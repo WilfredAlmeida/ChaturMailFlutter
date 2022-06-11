@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:wilfredemail/controllers/storage_controller.dart';
 import '../utils/api_status.dart';
 import '../utils/constants.dart';
 
@@ -10,6 +12,14 @@ import '../utils/constants.dart';
 
 Future<dynamic> postRequest({required String url, Object body = ""}) async {
   // print(body);
+
+  final token = Get.find<SharedPreferencesController>()
+      .sharedPreferences
+      .value
+      .getString("jwtToken");
+
+  print("TOKEN");
+  print(token);
 
   final uri = Uri.parse(API_URL + url);
 
@@ -29,6 +39,7 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
       body: body,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
       },
     );
 

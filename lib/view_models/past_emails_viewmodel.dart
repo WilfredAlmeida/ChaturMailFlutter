@@ -32,10 +32,13 @@ class PastEmailsController extends GetxController {
       if (result is Success) {
         final response = result.response as http.Response;
         var body = json.decode(response.body);
+        print("BODY");
+        print(body);
+
+        pastEmailsList.clear();
+        await pastEmailsBox.clear();
 
         if (body['status'] == 1) {
-          // pastEmailsList.clear();
-
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PastEmailsModel.fromJson(body['payload'][i]);
             await pastEmailsBox.put(i, a);

@@ -31,9 +31,8 @@ class DashboardDrawer extends StatelessWidget {
                   cancelTextColor: mainColor,
                   onConfirm: () async {
                     await Get.find<GoogleLoginController>().googleLogout();
-                    Get.offAll(()=>const LoginScreen());
+                    Get.offAll(() => const LoginScreen());
                   });
-
             },
             tileColor: greenMainColor,
             leading: const Icon(
