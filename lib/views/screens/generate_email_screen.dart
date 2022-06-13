@@ -6,6 +6,7 @@ import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/models/prompts_model.dart';
 
 import '../../utils/constants.dart';
+import '../../utils/utils_controller.dart';
 import '../../view_models/generate_email_viewmodel.dart';
 import 'display_email_screen.dart';
 
@@ -39,7 +40,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   var _subjectValid = true;
   var _keywordsValid = true;
 
-  final generateEmailController = Get.put(GenerateEmailController());
+  final generateEmailController = Get.find<GenerateEmailController>();
 
   @override
   void initState() {
@@ -261,7 +262,11 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+
+                  Obx(()=>generateEmailController.generatingEmail.value?const CircularProgressIndicator():const SizedBox()),
+
+
                 ],
               ),
             ),
@@ -286,26 +291,25 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   }
 
   void processResponse() {
+
+    if(generateEmailController.generatingEmailFailed.value){
+      Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
+
+      return;
+    }
+
+
     GeneratedEmailResponseModel generatedEmailResponse = generateEmailController
-        .generatedEmailResponse.value as GeneratedEmailResponseModel;
+        .generatedEmailResponse.value;
 
     if (generatedEmailResponse.status != 1) {
-      Get.defaultDialog(
-        title: "Error Occurred",
-        middleText: generatedEmailResponse.message,
-        textConfirm: "Ok",
-        buttonColor: mainColor,
-        confirmTextColor: greenMainColor2,
-        onConfirm: () {
-          Get.back();
-        },
-      );
+      Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
 
       return;
     }
 
     GeneratedEmailResponseModel responseModel = generateEmailController
-        .generatedEmailResponse.value as GeneratedEmailResponseModel;
+        .generatedEmailResponse.value;
 
     final generatedEmail = responseModel.payload[0];
 

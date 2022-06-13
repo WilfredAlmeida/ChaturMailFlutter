@@ -16,6 +16,7 @@ import 'controllers/jwt_token_obtainer.dart';
 import 'controllers/login_checker.dart';
 import 'firebase_options.dart';
 import 'utils/constants.dart';
+import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
 
@@ -43,6 +44,7 @@ void main() async {
   Get.put(GoogleLoginController());
   Get.put(UserController());
   Get.put(JWTController());
+  Get.put(GenerateEmailController());
 
   // final dir = await getApplicationDocumentsDirectory();
   // Hive.init(dir.path);

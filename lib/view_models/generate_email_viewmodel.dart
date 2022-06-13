@@ -3,27 +3,49 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wilfredemail/controllers/api_communicator.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:wilfredemail/utils/utils_controller.dart';
 import '../models/generate_email_request_model.dart';
+import '../utils/api_status.dart';
 
 class GenerateEmailController extends GetxController {
   // static GenerateEmailController get to => Get.find();
 
   var generateEmailRequest = Object().obs;
 
-  var generatedEmailResponse = Object().obs;
+  late Rx<GeneratedEmailResponseModel> generatedEmailResponse;
+
+  var generatingEmail = false.obs;
+  var generatingEmailFailed = false.obs;
 
   Future<bool> generateEmail() async {
-    final response = await postRequest(
+
+    generatingEmail.value = true;
+
+    final result = await postRequest(
       url: "/email/generateEmail",
       body: generateEmailRequest.toJson(),
     );
 
-    print("GENERATED EMAILS");
-    print(response.body);
+    if(result is Success) {
+      final response = result.response as http.Response;
+      var body = json.decode(response.body);
 
-    generatedEmailResponse.value = GeneratedEmailResponseModel.fromJson(
-      jsonDecode(response.body),
-    );
+      print("GENERATED EMAILS");
+      print(body['payload']);
+
+      generatingEmail.value = false;
+
+      var a = GeneratedEmailResponseModel.fromJson(
+        body,
+      );
+      generatedEmailResponse =a.obs;
+    }
+    else if(result is Failure){
+      generatingEmail.value = false;
+      generatingEmailFailed.value = true;
+      // Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
+    }
 
     return true;
   }
