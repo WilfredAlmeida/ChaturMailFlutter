@@ -125,7 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         fontSize: 16),
                   ),
 
-                  //Generate Emails ListView
+                  //Past Emails ListView
                   Obx(() {
                     if (pastEmailsController.pastEmailsLoading.value == true) {
                       return const CircularProgressIndicator();

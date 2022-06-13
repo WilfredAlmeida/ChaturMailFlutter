@@ -4,6 +4,7 @@ import 'package:wilfredemail/models/generate_email_request_model.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/models/prompts_model.dart';
+import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
@@ -312,6 +313,8 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
         .generatedEmailResponse.value;
 
     final generatedEmail = responseModel.payload[0];
+
+    Get.find<PastEmailsController>().getPastEmails();
 
     Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
   }

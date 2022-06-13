@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/views/screens/display_email_screen.dart';
 import 'package:wilfredemail/views/screens/generate_email_screen.dart';
 import '../../models/past_emails_model.dart';
@@ -126,6 +127,33 @@ class PastEmailWidget extends StatelessWidget {
                   child: Icon(Icons.cached, size: 30),
                 ),
               ),
+            ),
+          ),
+
+          //Delete Button
+          Positioned(
+            top: -5,
+            right: -2,
+            child: IconButton(
+              icon: const Icon(Icons.cancel_rounded),
+              onPressed: () {
+                Get.defaultDialog(
+                    title: "Are you sure?",
+                    middleText: "This will delete the email forever",
+                    textCancel: "Cancel",
+                    textConfirm: "Delete",
+                    backgroundColor: greenMainColor,
+                    buttonColor: mainColor,
+                    confirmTextColor: Colors.white,
+                    cancelTextColor: mainColor,
+                    onConfirm: () async {
+                      await Get.find<PastEmailsController>()
+                          .deleteGeneratedEmail(
+                        id: pastEmail.id,
+                      );
+                      Get.back();
+                    });
+              },
             ),
           )
         ],

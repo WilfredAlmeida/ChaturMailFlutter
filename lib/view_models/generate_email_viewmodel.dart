@@ -40,13 +40,17 @@ class GenerateEmailController extends GetxController {
         body,
       );
       generatedEmailResponse =a.obs;
+
+      return true;
+
     }
     else if(result is Failure){
       generatingEmail.value = false;
       generatingEmailFailed.value = true;
-      // Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
+      return false;
     }
 
     return true;
   }
+
 }

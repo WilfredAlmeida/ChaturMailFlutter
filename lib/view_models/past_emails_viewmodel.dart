@@ -6,12 +6,13 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/utils/api_status.dart';
+import 'package:wilfredemail/utils/utils_controller.dart';
 
 import '../controllers/api_communicator.dart';
 import '../utils/constants.dart';
 
 class PastEmailsController extends GetxController {
-  var pastEmailsList = [].obs;
+  var pastEmailsList = <PastEmailsModel>[].obs;
 
   var pastEmailsLoading = false.obs;
   var noPastEmailsFound = false.obs;
@@ -75,4 +76,49 @@ class PastEmailsController extends GetxController {
       return false;
     }
   }
+
+  Future<bool> deleteGeneratedEmail({required id}) async{
+
+    const url = "/email/deleteGeneratedEmail";
+
+    final result = await postRequest(url: url,body: {
+      "id":id
+    });
+
+    if(result is Success){
+
+      final response = result.response as http.Response;
+      var body = json.decode(response.body);
+
+      if(body['status']==1){
+
+        pastEmailsList.removeWhere((element) => element.id==id);
+
+        for(var i=0;i<pastEmailsBox.length;i++){
+          PastEmailsModel a = pastEmailsBox.getAt(i);
+
+          if(a.id==id){
+            pastEmailsBox.deleteAt(i);
+            break;
+          }
+
+        }
+
+        print("Email Deleted Successfully");
+        return true;
+      }
+      else if(body['status']==0){
+        Get.find<UtilsController>().showErrorDialog(title: "Email Not Deleted", content: body['message'], onConfirm: null);
+        return false;
+      }
+
+    }
+    else if(result is Failure){
+      Get.find<UtilsController>().showErrorDialog(title: "Email Not Deleted", content: "Some error Occurred", onConfirm: null);
+      return false;
+    }
+
+    return true;
+  }
+
 }
