@@ -36,10 +36,13 @@ class PastEmailsController extends GetxController {
         print("BODY");
         print(body);
 
-        pastEmailsList.clear();
-        await pastEmailsBox.clear();
+        // pastEmailsList.clear();
+        // await pastEmailsBox.clear();
 
         if (body['status'] == 1) {
+
+          await pastEmailsBox.clear();
+
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PastEmailsModel.fromJson(body['payload'][i]);
             await pastEmailsBox.put(i, a);
@@ -61,6 +64,7 @@ class PastEmailsController extends GetxController {
         // noPastEmailsFound.value=true;
       }
 
+      pastEmailsList.clear();
       pastEmailsList =
           RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
 

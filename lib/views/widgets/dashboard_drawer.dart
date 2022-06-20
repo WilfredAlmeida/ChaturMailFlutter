@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wilfredemail/controllers/google_login.dart';
 import 'package:wilfredemail/utils/constants.dart';
 import 'package:wilfredemail/views/screens/login_screen.dart';
+import 'package:wilfredemail/views/screens/tutorial_screen.dart';
 
 class DashboardDrawer extends StatelessWidget {
   const DashboardDrawer({Key? key}) : super(key: key);
@@ -18,6 +19,31 @@ class DashboardDrawer extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 400,
           ),
+
+          //Tutorials
+          ListTile(
+            onTap: () {
+              Get.to(()=>TutorialsScreen());
+            },
+            tileColor: greenMainColor,
+            leading: const Icon(
+              Icons.help_outlined,
+              color: Colors.black,
+              size: 30,
+            ),
+            title: const Text(
+              "Tutorials",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
+              textAlign: TextAlign.start,
+            ),
+          ),
+
+          const Divider(),
+
+          //Logout
           ListTile(
             onTap: () {
               Get.defaultDialog(
@@ -48,7 +74,10 @@ class DashboardDrawer extends StatelessWidget {
                   color: Colors.black),
               textAlign: TextAlign.start,
             ),
-          )
+          ),
+
+
+
         ],
       ),
     );

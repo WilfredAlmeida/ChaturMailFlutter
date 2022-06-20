@@ -21,6 +21,9 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
   print("TOKEN");
   print(token);
 
+  print("API_URL");
+  print(API_URL);
+
   final uri = Uri.parse(API_URL + url);
 
   print(url);

@@ -4,6 +4,7 @@ import 'package:wilfredemail/controllers/user_controller.dart';
 import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
+import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
 import 'package:wilfredemail/views/widgets/not_found_widget.dart';
 import 'package:wilfredemail/views/widgets/past_email_widget.dart';
 
@@ -33,6 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Future.wait([
       promptController.getPrompts(),
       pastEmailsController.getPastEmails(),
+      Get.find<TutorialsController>().getTutorials()
     ]);
 
     user = userController.getLoggedInUser();
@@ -66,6 +68,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             promptController.getPrompts();
 
             pastEmailsController.getPastEmails();
+
+            Get.find<TutorialsController>().getTutorials();
           },
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
           backgroundColor: greenMainColor2,

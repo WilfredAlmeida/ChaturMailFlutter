@@ -5,6 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wilfredemail/controllers/storage_controller.dart';
 import 'package:wilfredemail/controllers/user_controller.dart';
+import 'package:wilfredemail/models/tutorials_model.dart';
+import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
 import './models/past_emails_model.dart';
 import './utils/utils_controller.dart';
 import './view_models/prompt_viewmodel.dart';
@@ -19,6 +21,8 @@ import 'utils/constants.dart';
 import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
+import 'views/widgets/tutorial_detail_widget.dart';
+import 'views/screens/tutorial_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +34,15 @@ void main() async {
 
   Hive.registerAdapter(PromptModelAdapter());
   Hive.registerAdapter(PastEmailsModelAdapter());
+  Hive.registerAdapter(TutorialsModelAdapter());
 
   final promptController = Get.put(PromptController());
 
   final pastEmailsController = Get.put(PastEmailsController());
 
   final utilsController = Get.put(UtilsController());
+
+  final tutorialsController = Get.put(TutorialsController());
 
   final sharedPreferencesController = Get.put(SharedPreferencesController());
 
@@ -54,6 +61,8 @@ void main() async {
   promptController.promptsBox = (await Hive.openBox("promptsBox"));
 
   pastEmailsController.pastEmailsBox = (await Hive.openBox("pastEmailsBox"));
+
+  tutorialsController.tutorialsBox = (await Hive.openBox("tutorialsBox"));
 
   runApp(const MyApp());
 }
@@ -84,7 +93,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: "/", page: () => const MyApp()),
         GetPage(name: "/dashboardScreen", page: () => const DashboardScreen()),
       ],
-      title: 'Wilfred Email',
+      title: 'SmartEmail',
       theme: ThemeData(
           scaffoldBackgroundColor: mainColor,
           appBarTheme: const AppBarTheme(
