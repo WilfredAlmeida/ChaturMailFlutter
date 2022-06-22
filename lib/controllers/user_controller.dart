@@ -1,18 +1,77 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wilfredemail/controllers/google_login.dart';
+import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 
+import '../models/user_model.dart';
+import '../utils/api_status.dart';
+import 'api_communicator.dart';
 import 'storage_controller.dart';
 
 class UserController extends GetxController {
   final sharedPreferencesController = Get.find<SharedPreferencesController>();
 
-  dynamic getLoggedInUser() {
-    var prefs = sharedPreferencesController.sharedPreferences.value;
 
-    var user = prefs.getString("user");
+  late var user;
 
-    return jsonDecode(user!);
+  var userLoading = false.obs;
+  var noUserFound = false.obs;
+
+  late Box<dynamic> userBox;
+
+  Future<bool> getUserData() async {
+    try {
+      userLoading.value = true;
+
+      const url = "/user/getUserData";
+
+      var result = await postRequest(url: url);
+
+      if (result is Success) {
+        final response = result.response as http.Response;
+        var body = json.decode(response.body);
+
+        if (body['status'] == 1) {
+
+          await userBox.clear();
+
+          for (var i = 0; i < body['payload'].length; i++) {
+            var a = UserModel.fromJson(body['payload'][i]);
+            print("I");
+            print(i);
+            await userBox.put(i, a);
+          }
+
+          userLoading.value = false;
+        } else {
+          userLoading.value = false;
+        }
+      } else if (result is Failure) {
+        userLoading.value = false;
+      }
+
+      user = (userBox.getAt(0) as UserModel).obs;
+
+      noUserFound.value = user.value is! UserModel;
+
+      return true;
+    } catch (e, s) {
+      print("IN USER_CONTROLLER");
+      print(e);
+      print(s);
+      userLoading.value = false;
+      return false;
+    }
   }
+
+
+
+  // dynamic getLoggedInUser() {
+  //   var prefs = sharedPreferencesController.sharedPreferences.value;
+  //
+  //   var user = prefs.getString("user");
+  //
+  //   return jsonDecode(user!);
+  // }
 }

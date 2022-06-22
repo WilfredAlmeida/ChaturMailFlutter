@@ -17,6 +17,7 @@ import 'controllers/google_login.dart';
 import 'controllers/jwt_token_obtainer.dart';
 import 'controllers/login_checker.dart';
 import 'firebase_options.dart';
+import 'models/user_model.dart';
 import 'utils/constants.dart';
 import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
@@ -35,6 +36,7 @@ void main() async {
   Hive.registerAdapter(PromptModelAdapter());
   Hive.registerAdapter(PastEmailsModelAdapter());
   Hive.registerAdapter(TutorialsModelAdapter());
+  Hive.registerAdapter(UserModelAdapter());
 
   final promptController = Get.put(PromptController());
 
@@ -48,13 +50,16 @@ void main() async {
 
   sharedPreferencesController.initializeSharedPreference();
 
+  var userController = Get.put(UserController());
+
   Get.put(GoogleLoginController());
-  Get.put(UserController());
   Get.put(JWTController());
   Get.put(GenerateEmailController());
 
   // final dir = await getApplicationDocumentsDirectory();
   // Hive.init(dir.path);
+
+  userController.userBox = (await Hive.openBox("userBox"));
 
   utilsController.initializeUtils();
 

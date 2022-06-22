@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:wilfredemail/controllers/storage_controller.dart';
+import 'package:wilfredemail/controllers/user_controller.dart';
 import '../utils/api_status.dart';
 import '../utils/constants.dart';
 
@@ -13,10 +15,12 @@ import '../utils/constants.dart';
 Future<dynamic> postRequest({required String url, Object body = ""}) async {
   // print(body);
 
-  final token = Get.find<SharedPreferencesController>()
-      .sharedPreferences
-      .value
-      .getString("jwtToken");
+  // final token = Get.find<SharedPreferencesController>()
+  //     .sharedPreferences
+  //     .value
+  //     .getString("jwtToken");
+
+  final token = Get.find<UserController>().userBox.get("jwtToken");
 
   print("TOKEN");
   print(token);

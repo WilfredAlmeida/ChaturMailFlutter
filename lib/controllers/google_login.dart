@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:wilfredemail/controllers/user_controller.dart';
 
 import 'jwt_token_obtainer.dart';
 import 'storage_controller.dart';
@@ -31,26 +32,7 @@ class GoogleLoginController extends GetxController {
 
     user = googleUser.obs;
 
-    final sharedPreferencesController = Get.find<SharedPreferencesController>();
-
-    var prefs = sharedPreferencesController.sharedPreferences.value;
-
-    prefs.clear();
-
-    prefs.setString(
-      "user",
-      jsonEncode({
-        "displayName": googleUser.displayName,
-        "email": googleUser.email,
-        "id": googleUser.id,
-        "photoUrl": googleUser.photoUrl,
-        "serverAuthCode": googleUser.serverAuthCode
-      }),
-    );
-
-    prefs.setString("loginMethod", "google");
-
-    await Get.find<JWTController>().getJWTToken();
+    await Get.find<JWTController>().getJWTToken(loginMethod: "google");
 
     return true;
   }

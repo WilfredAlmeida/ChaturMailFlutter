@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:wilfredemail/controllers/user_controller.dart';
+import 'package:wilfredemail/models/user_model.dart';
 import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
@@ -29,11 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final userController = Get.find<UserController>();
 
-  late final user;
-
-  int _currentIndex = 0;
-
-  // bool _didItOnce = false;
+  late UserModel user;
 
   @override
   void initState() {
@@ -41,13 +38,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       Future.wait([
         promptController.getPrompts(),
         pastEmailsController.getPastEmails(),
-        Get.find<TutorialsController>().getTutorials()
+        Get.find<TutorialsController>().getTutorials(),
+        Get.find<UserController>().getUserData()
       ]);
     }
 
     didItOnce = true;
 
-    user = userController.getLoggedInUser();
+    user = userController.user.value as UserModel;
 
     super.initState();
   }
@@ -63,9 +61,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(user['photoUrl']),
+                  backgroundImage: NetworkImage(user.picture),
                 ),
-                // child: const Icon(Icons.verified_user),
               ),
             )
           ],

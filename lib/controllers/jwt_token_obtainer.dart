@@ -17,14 +17,14 @@ class JWTController extends GetxController {
     return true;
   }
 
-  Future<bool> getJWTToken() async {
+  Future<bool> getJWTToken({required String loginMethod}) async {
     const url = "/auth/getJWTToken";
 
     final user = FirebaseAuth.instance.currentUser;
 
     var result = await postRequest(
         url: url,
-        body: {"email": user?.email, "idToken": await user?.getIdToken(true)});
+        body: {"email": user?.email, "idToken": await user?.getIdToken(true),loginMethod:loginMethod});
 
     if (result is Success) {
       final response = result.response as http.Response;
@@ -35,10 +35,12 @@ class JWTController extends GetxController {
         print("JWT Token");
         print(jwtToken.value);
 
-        await Get.find<SharedPreferencesController>()
-            .sharedPreferences
-            .value
-            .setString("jwtToken", jwtToken.value);
+        // await Get.find<SharedPreferencesController>()
+        //     .sharedPreferences
+        //     .value
+        //     .setString("jwtToken", jwtToken.value);
+
+        Get.find<UserController>().userBox.put("jwtToken", jwtToken.value);
 
         return true;
       } else {
