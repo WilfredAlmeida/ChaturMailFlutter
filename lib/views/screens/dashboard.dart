@@ -5,6 +5,8 @@ import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
+import 'package:wilfredemail/views/screens/tutorial_screen.dart';
+import 'package:wilfredemail/views/widgets/bottom_navbar_widget.dart';
 import 'package:wilfredemail/views/widgets/not_found_widget.dart';
 import 'package:wilfredemail/views/widgets/past_email_widget.dart';
 
@@ -29,13 +31,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   late final user;
 
+  int _currentIndex = 0;
+
+  // bool _didItOnce = false;
+
   @override
   void initState() {
-    Future.wait([
-      promptController.getPrompts(),
-      pastEmailsController.getPastEmails(),
-      Get.find<TutorialsController>().getTutorials()
-    ]);
+    if (!didItOnce) {
+      Future.wait([
+        promptController.getPrompts(),
+        pastEmailsController.getPastEmails(),
+        Get.find<TutorialsController>().getTutorials()
+      ]);
+    }
+
+    didItOnce = true;
 
     user = userController.getLoggedInUser();
 
@@ -61,6 +71,73 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
           elevation: 0,
         ),
+        bottomNavigationBar: const BottomNavBarWidget(),
+        // bottomNavigationBar: Stack(
+        //   children: [
+        //     Container(
+        //       height: 65,
+        //       color: mainColor,
+        //       child: CustomPaint(
+        //           size: Size(MediaQuery.of(context).size.width, 100),
+        //           painter: MyPainter()),
+        //     ),
+        //     Positioned(
+        //       bottom: 0,
+        //       top: 30,
+        //       width: MediaQuery.of(context).size.width,
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //         crossAxisAlignment: CrossAxisAlignment.end,
+        //         children: [
+        //           IconButton(
+        //             onPressed: () {
+        //               setState(() {
+        //                 _currentIndex = 0;
+        //               });
+        //
+        //               Get.offAll(()=>const DashboardScreen());
+        //
+        //             },
+        //             icon: Icon(
+        //               Icons.home,
+        //               size: 30,
+        //               color:
+        //                   _currentIndex == 0 ? greenMainColor2 : Colors.white,
+        //             ),
+        //           ),
+        //           IconButton(
+        //             onPressed: () {
+        //               setState(() {
+        //                 _currentIndex = 1;
+        //               });
+        //               Get.to(()=>TutorialsScreen());
+        //             },
+        //             icon: Icon(
+        //               Icons.menu_book_outlined,
+        //               size: 30,
+        //               color:
+        //                   _currentIndex == 1 ? greenMainColor2 : Colors.white,
+        //             ),
+        //           ),
+        //           IconButton(
+        //             onPressed: () {
+        //               setState(() {
+        //                 _currentIndex = 2;
+        //               });
+        //               Get.to(()=>TutorialsScreen());
+        //             },
+        //             icon: Icon(
+        //               Icons.person,
+        //               size: 30,
+        //               color:
+        //                   _currentIndex == 2 ? greenMainColor2 : Colors.white,
+        //             ),
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // ),
         body: RefreshIndicator(
           onRefresh: () async {
             Get.find<UtilsController>().initializeUtils();
@@ -109,7 +186,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: ListView.builder(
                           itemBuilder: (ctx, index) {
                             return GenerateEmailWidget(
-                              promptModel: promptController.promptsList[index],
+                              promptModel:
+                                  promptController.promptsList[index],
                             );
                           },
                           itemCount: promptController.promptsList.length,
@@ -131,11 +209,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                   //Past Emails ListView
                   Obx(() {
-                    if (pastEmailsController.pastEmailsLoading.value == true) {
+                    if (pastEmailsController.pastEmailsLoading.value ==
+                        true) {
                       return const CircularProgressIndicator();
                     }
 
-                    if (pastEmailsController.noPastEmailsFound.value == true) {
+                    if (pastEmailsController.noPastEmailsFound.value ==
+                        true) {
                       return const NotFoundWidget(
                         heading: "No Past Emails Found",
                         message: "Please generate some emails",
@@ -166,5 +246,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
     );
+  }
+}
+
+class MyPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint p = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 11.96;
+
+    Path path = Path();
+
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.quadraticBezierTo(size.width, 35, size.width - 45, 35);
+    path.lineTo(45, 35);
+    path.quadraticBezierTo(0, 35, 0, 0);
+    path.close();
+
+    canvas.drawPath(path, p);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }

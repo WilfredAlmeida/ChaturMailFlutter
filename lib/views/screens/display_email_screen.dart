@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 
 import '../../utils/constants.dart';
+import '../widgets/bottom_navbar_widget.dart';
 
 class DisplayEmailScreen extends StatelessWidget {
   final Payload generatedEmail;
@@ -26,6 +27,7 @@ class DisplayEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
           title: const Text("Announcement Email"),
           elevation: 0,

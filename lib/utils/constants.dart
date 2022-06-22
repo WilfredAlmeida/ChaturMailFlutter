@@ -20,3 +20,6 @@ const INVALID_BODY = 400;
 const mainColor = Color.fromRGBO(37, 64, 71, 1);
 const greenMainColor2 = Color.fromRGBO(37, 232, 138, 1);
 const greenMainColor = Color.fromRGBO(213, 255, 218, 1);
+
+//Needed to call api in dashboard
+var didItOnce=false;

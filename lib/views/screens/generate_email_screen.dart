@@ -9,6 +9,7 @@ import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 import '../../view_models/generate_email_viewmodel.dart';
+import '../widgets/bottom_navbar_widget.dart';
 import 'display_email_screen.dart';
 
 class GenerateEmailScreen extends StatefulWidget {
@@ -58,6 +59,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
           title: Text(
             "${widget.promptModel.title} Email",
