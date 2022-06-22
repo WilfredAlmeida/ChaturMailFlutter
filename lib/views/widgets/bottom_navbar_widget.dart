@@ -13,7 +13,6 @@ class BottomNavBarWidget extends StatefulWidget {
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-
   int _currentIndex = 0;
 
   @override
@@ -41,14 +40,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                     _currentIndex = 0;
                   });
 
-                  Get.offAll(()=>const DashboardScreen());
-
+                  Get.offAll(() => const DashboardScreen());
                 },
                 icon: Icon(
                   Icons.home,
                   size: 30,
-                  color:
-                  _currentIndex == 0 ? greenMainColor2 : Colors.white,
+                  color: _currentIndex == 0 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
@@ -56,13 +53,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   setState(() {
                     _currentIndex = 1;
                   });
-                  Get.to(()=>TutorialsScreen());
+                  Get.to(() => TutorialsScreen());
                 },
                 icon: Icon(
                   Icons.menu_book_outlined,
                   size: 30,
-                  color:
-                  _currentIndex == 1 ? greenMainColor2 : Colors.white,
+                  color: _currentIndex == 1 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
@@ -70,13 +66,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   setState(() {
                     _currentIndex = 2;
                   });
-                  Get.to(()=>TutorialsScreen());
+                  Get.to(() => TutorialsScreen());
                 },
                 icon: Icon(
                   Icons.person,
                   size: 30,
-                  color:
-                  _currentIndex == 2 ? greenMainColor2 : Colors.white,
+                  color: _currentIndex == 2 ? greenMainColor2 : Colors.white,
                 ),
               )
             ],
@@ -86,6 +81,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     );
   }
 }
+
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

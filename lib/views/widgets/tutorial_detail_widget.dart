@@ -18,8 +18,8 @@ class TutorialDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Get.to(()=>TutorialDetailScreen(title: title, htmlData: htmlData));
+      onTap: () {
+        Get.to(() => TutorialDetailScreen(title: title, htmlData: htmlData));
       },
       child: Padding(
         padding: const EdgeInsets.all(18.0),

@@ -23,7 +23,7 @@ class DashboardDrawer extends StatelessWidget {
           //Tutorials
           ListTile(
             onTap: () {
-              Get.to(()=>TutorialsScreen());
+              Get.to(() => TutorialsScreen());
             },
             tileColor: greenMainColor,
             leading: const Icon(
@@ -75,9 +75,6 @@ class DashboardDrawer extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-
-
-
         ],
       ),
     );

@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../utils/api_status.dart';
 
-class TutorialsController extends GetxController{
-
+class TutorialsController extends GetxController {
   var tutorialsList = <TutorialsModel>[].obs;
 
   var tutorialsLoading = false.obs;
@@ -17,54 +16,45 @@ class TutorialsController extends GetxController{
 
   late Box<dynamic> tutorialsBox;
 
-  Future<bool> getTutorials() async{
-
-    try{
-
+  Future<bool> getTutorials() async {
+    try {
       tutorialsLoading.value = true;
 
       const url = "/tutorials/getAllTutorials";
 
       var result = await postRequest(url: url);
 
-      if(result is Success){
-
+      if (result is Success) {
         final response = result.response as http.Response;
         var body = json.decode(response.body);
 
         print("TUTS");
         // print(body);
 
-        if(body['status']==1){
-
-          for(var i=0;i<body['payload'].length;i++){
+        if (body['status'] == 1) {
+          for (var i = 0; i < body['payload'].length; i++) {
             var a = TutorialsModel.fromJson(body['payload'][i]);
             print(body['payload'][i]);
-            await tutorialsBox.put(i,a);
+            await tutorialsBox.put(i, a);
           }
 
           tutorialsLoading.value = false;
-
-        }
-        else{
+        } else {
           tutorialsLoading.value = false;
         }
-
-      }
-      else if(result is Failure){
+      } else if (result is Failure) {
         print(result.errorResponse);
         tutorialsLoading.value = false;
       }
 
       tutorialsList.clear();
-      tutorialsList = RxList<TutorialsModel>([...tutorialsBox.toMap().values.toList()]);
+      tutorialsList =
+          RxList<TutorialsModel>([...tutorialsBox.toMap().values.toList()]);
 
       noTutorialsFound.value = tutorialsList.isEmpty;
 
       return true;
-
-    }
-    catch(e,s){
+    } catch (e, s) {
       print("IN TUTORIALS_CONTROLLER");
       print(e);
       print(s);
@@ -73,7 +63,5 @@ class TutorialsController extends GetxController{
 
       return false;
     }
-
   }
-
 }

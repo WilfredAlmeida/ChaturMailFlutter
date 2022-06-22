@@ -53,8 +53,6 @@
 //   };
 // }
 
-
-
 // To parse this JSON data, do
 //
 //     final generatedEmailResponseModel = generatedEmailResponseModelFromJson(jsonString);

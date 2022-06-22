@@ -267,9 +267,9 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                     ),
                   ),
 
-                  Obx(()=>generateEmailController.generatingEmail.value?const CircularProgressIndicator():const SizedBox()),
-
-
+                  Obx(() => generateEmailController.generatingEmail.value
+                      ? const CircularProgressIndicator()
+                      : const SizedBox()),
                 ],
               ),
             ),
@@ -294,25 +294,29 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   }
 
   void processResponse() {
-
-    if(generateEmailController.generatingEmailFailed.value){
-      Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
+    if (generateEmailController.generatingEmailFailed.value) {
+      Get.find<UtilsController>().showErrorDialog(
+          title: "Error Occurred",
+          content: "Please Try Again",
+          onConfirm: null);
 
       return;
     }
 
-
-    GeneratedEmailResponseModel generatedEmailResponse = generateEmailController
-        .generatedEmailResponse.value;
+    GeneratedEmailResponseModel generatedEmailResponse =
+        generateEmailController.generatedEmailResponse.value;
 
     if (generatedEmailResponse.status != 1) {
-      Get.find<UtilsController>().showErrorDialog(title: "Error Occurred", content: "Please Try Again", onConfirm: null);
+      Get.find<UtilsController>().showErrorDialog(
+          title: "Error Occurred",
+          content: "Please Try Again",
+          onConfirm: null);
 
       return;
     }
 
-    GeneratedEmailResponseModel responseModel = generateEmailController
-        .generatedEmailResponse.value;
+    GeneratedEmailResponseModel responseModel =
+        generateEmailController.generatedEmailResponse.value;
 
     final generatedEmail = responseModel.payload[0];
 

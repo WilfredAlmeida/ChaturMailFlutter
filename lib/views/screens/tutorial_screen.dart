@@ -48,12 +48,13 @@ class TutorialsScreen extends StatelessWidget {
 
             return ListView.builder(
               itemBuilder: (_, index) {
-
-                bool curvePosition = (index%2)==0;
+                bool curvePosition = (index % 2) == 0;
 
                 return TutorialDetailWidget(
                   title: tutorialsController.tutorialsList[index].title,
-                  htmlData: tutorialsController.tutorialsList[index].htmlContent, curvePosition: curvePosition,
+                  htmlData:
+                      tutorialsController.tutorialsList[index].htmlContent,
+                  curvePosition: curvePosition,
                 );
               },
               itemCount: tutorialsController.tutorialsList.length,

@@ -40,7 +40,6 @@ class PastEmailsController extends GetxController {
         // await pastEmailsBox.clear();
 
         if (body['status'] == 1) {
-
           await pastEmailsBox.clear();
 
           for (var i = 0; i < body['payload'].length; i++) {
@@ -81,48 +80,44 @@ class PastEmailsController extends GetxController {
     }
   }
 
-  Future<bool> deleteGeneratedEmail({required id}) async{
-
+  Future<bool> deleteGeneratedEmail({required id}) async {
     const url = "/email/deleteGeneratedEmail";
 
-    final result = await postRequest(url: url,body: {
-      "id":id
-    });
+    final result = await postRequest(url: url, body: {"id": id});
 
-    if(result is Success){
-
+    if (result is Success) {
       final response = result.response as http.Response;
       var body = json.decode(response.body);
 
-      if(body['status']==1){
+      if (body['status'] == 1) {
+        pastEmailsList.removeWhere((element) => element.id == id);
 
-        pastEmailsList.removeWhere((element) => element.id==id);
-
-        for(var i=0;i<pastEmailsBox.length;i++){
+        for (var i = 0; i < pastEmailsBox.length; i++) {
           PastEmailsModel a = pastEmailsBox.getAt(i);
 
-          if(a.id==id){
+          if (a.id == id) {
             pastEmailsBox.deleteAt(i);
             break;
           }
-
         }
 
         print("Email Deleted Successfully");
         return true;
-      }
-      else if(body['status']==0){
-        Get.find<UtilsController>().showErrorDialog(title: "Email Not Deleted", content: body['message'], onConfirm: null);
+      } else if (body['status'] == 0) {
+        Get.find<UtilsController>().showErrorDialog(
+            title: "Email Not Deleted",
+            content: body['message'],
+            onConfirm: null);
         return false;
       }
-
-    }
-    else if(result is Failure){
-      Get.find<UtilsController>().showErrorDialog(title: "Email Not Deleted", content: "Some error Occurred", onConfirm: null);
+    } else if (result is Failure) {
+      Get.find<UtilsController>().showErrorDialog(
+          title: "Email Not Deleted",
+          content: "Some error Occurred",
+          onConfirm: null);
       return false;
     }
 
     return true;
   }
-
 }

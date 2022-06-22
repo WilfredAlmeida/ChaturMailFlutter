@@ -149,11 +149,13 @@ class PastEmailWidget extends StatelessWidget {
                     confirmTextColor: Colors.white,
                     cancelTextColor: mainColor,
                     onConfirm: () async {
-
                       var utilsController = Get.find<UtilsController>();
 
-                      if(!await utilsController.hasNetwork()){
-                        utilsController.showErrorDialog(title: "No Internet", content: "Please try again", onConfirm: null);
+                      if (!await utilsController.hasNetwork()) {
+                        utilsController.showErrorDialog(
+                            title: "No Internet",
+                            content: "Please try again",
+                            onConfirm: null);
                         return;
                       }
 

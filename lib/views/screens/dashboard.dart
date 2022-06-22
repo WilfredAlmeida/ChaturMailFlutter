@@ -186,8 +186,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: ListView.builder(
                           itemBuilder: (ctx, index) {
                             return GenerateEmailWidget(
-                              promptModel:
-                                  promptController.promptsList[index],
+                              promptModel: promptController.promptsList[index],
                             );
                           },
                           itemCount: promptController.promptsList.length,
@@ -209,13 +208,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                   //Past Emails ListView
                   Obx(() {
-                    if (pastEmailsController.pastEmailsLoading.value ==
-                        true) {
+                    if (pastEmailsController.pastEmailsLoading.value == true) {
                       return const CircularProgressIndicator();
                     }
 
-                    if (pastEmailsController.noPastEmailsFound.value ==
-                        true) {
+                    if (pastEmailsController.noPastEmailsFound.value == true) {
                       return const NotFoundWidget(
                         heading: "No Past Emails Found",
                         message: "Please generate some emails",

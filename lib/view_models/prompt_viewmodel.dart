@@ -33,7 +33,6 @@ class PromptController extends GetxController {
         // await promptsBox.clear();
 
         if (body['status'] == 1) {
-
           // promptsList.clear();
           await promptsBox.clear();
 

@@ -19,7 +19,6 @@ class GenerateEmailController extends GetxController {
   var generatingEmailFailed = false.obs;
 
   Future<bool> generateEmail() async {
-
     generatingEmail.value = true;
 
     final result = await postRequest(
@@ -27,7 +26,7 @@ class GenerateEmailController extends GetxController {
       body: generateEmailRequest.toJson(),
     );
 
-    if(result is Success) {
+    if (result is Success) {
       final response = result.response as http.Response;
       var body = json.decode(response.body);
 
@@ -39,12 +38,10 @@ class GenerateEmailController extends GetxController {
       var a = GeneratedEmailResponseModel.fromJson(
         body,
       );
-      generatedEmailResponse =a.obs;
+      generatedEmailResponse = a.obs;
 
       return true;
-
-    }
-    else if(result is Failure){
+    } else if (result is Failure) {
       generatingEmail.value = false;
       generatingEmailFailed.value = true;
       return false;
@@ -52,5 +49,4 @@ class GenerateEmailController extends GetxController {
 
     return true;
   }
-
 }
