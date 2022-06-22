@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wilfredemail/utils/utils_controller.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/views/screens/display_email_screen.dart';
 import 'package:wilfredemail/views/screens/generate_email_screen.dart';
+
+import '../../models/generated_email_response_model.dart';
 import '../../models/past_emails_model.dart';
 import '../../utils/constants.dart';
 import '../../view_models/prompt_viewmodel.dart';
-import '../../models/generated_email_response_model.dart';
 
 class PastEmailWidget extends StatelessWidget {
   final PastEmailsModel pastEmail;
@@ -147,11 +149,33 @@ class PastEmailWidget extends StatelessWidget {
                     confirmTextColor: Colors.white,
                     cancelTextColor: mainColor,
                     onConfirm: () async {
+
+                      var utilsController = Get.find<UtilsController>();
+
+                      if(!await utilsController.hasNetwork()){
+                        utilsController.showErrorDialog(title: "No Internet", content: "Please try again", onConfirm: null);
+                        return;
+                      }
+
+                      Get.back();
+
+                      Get.snackbar(
+                        "Deleting Email",
+                        "Your email will be deleted",
+                        icon: const Icon(Icons.delete, color: Colors.white),
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: greenMainColor,
+                        borderRadius: 20,
+                        margin: const EdgeInsets.all(15),
+                        colorText: Colors.black,
+                        duration: const Duration(seconds: 1),
+                        isDismissible: true,
+                        dismissDirection: DismissDirection.horizontal,
+                      );
                       await Get.find<PastEmailsController>()
                           .deleteGeneratedEmail(
                         id: pastEmail.id,
                       );
-                      Get.back();
                     });
               },
             ),
