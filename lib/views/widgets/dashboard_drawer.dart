@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wilfredemail/controllers/google_login.dart';
 import 'package:wilfredemail/utils/constants.dart';
 import 'package:wilfredemail/views/screens/login_screen.dart';
 import 'package:wilfredemail/views/screens/tutorial_screen.dart';
+
+import '../../controllers/user_controller.dart';
 
 class DashboardDrawer extends StatelessWidget {
   const DashboardDrawer({Key? key}) : super(key: key);
@@ -16,10 +20,14 @@ class DashboardDrawer extends StatelessWidget {
         children: [
 
           //Banner
-          Image.asset(
-            "assets/images/banner.jpg",
+          Get.find<UserController>().bannerBase64.value.isEmpty? SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 400,
+            height: 300,
+          ):
+          Image.memory(
+            base64Decode(Get.find<UserController>().bannerBase64.value),
+            width: 300,
+            height: 300,
           ),
 
           //Tutorials

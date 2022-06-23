@@ -20,6 +20,8 @@ class UserController extends GetxController {
 
   late Box<dynamic> userBox;
 
+  var bannerBase64 = ''.obs;
+
   Future<bool> getUserData() async {
     try {
       userLoading.value = true;
@@ -38,8 +40,6 @@ class UserController extends GetxController {
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = UserModel.fromJson(body['payload'][i]);
-            print("I");
-            print(i);
             await userBox.put("user", a);
           }
 
@@ -65,7 +65,52 @@ class UserController extends GetxController {
     }
   }
 
+  Future<bool> getBannerUrl()async{
 
+
+    try {
+      userLoading.value = true;
+
+      const url = "/misc/getBannerImage";
+
+      var result = await postRequest(url: url);
+
+      if (result is Success) {
+        final response = result.response as http.Response;
+        var body = json.decode(response.body);
+
+        if (body['status'] == 1) {
+
+          await userBox.delete("bannerBase64");
+
+          for (var i = 0; i < body['payload'].length; i++) {
+            var a = body['payload'][i]['imageData'];
+            await userBox.put("bannerBase64", a);
+          }
+
+          bannerBase64.value='';
+        } else {
+          bannerBase64.value='';
+        }
+      } else if (result is Failure) {
+        bannerBase64.value='';
+      }
+
+      bannerBase64.value = userBox.get("bannerBase64");
+
+      bannerBase64.value = bannerBase64.value=="NULL"?'':bannerBase64.value;
+
+      return true;
+    } catch (e, s) {
+      print("IN USER_CONTROLLER");
+      print(e);
+      print(s);
+      return false;
+    }
+
+
+    return true;
+  }
 
   // dynamic getLoggedInUser() {
   //   var prefs = sharedPreferencesController.sharedPreferences.value;

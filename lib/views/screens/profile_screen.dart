@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,8 +56,9 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 //Banner
-                Image.asset(
-                  "assets/images/banner.jpg",
+                Get.find<UserController>().bannerBase64.value.isEmpty?const SizedBox():
+                Image.memory(
+                  base64Decode(Get.find<UserController>().bannerBase64.value),
                   width: 300,
                   height: 300,
                 ),

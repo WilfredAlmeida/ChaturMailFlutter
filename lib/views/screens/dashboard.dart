@@ -39,7 +39,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         promptController.getPrompts(),
         pastEmailsController.getPastEmails(),
         Get.find<TutorialsController>().getTutorials(),
-        Get.find<UserController>().getUserData()
+        Get.find<UserController>().getUserData(),
+        Get.find<UserController>().getBannerUrl()
       ]);
     }
 
