@@ -45,8 +45,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     didItOnce = true;
 
-    user = userController.user.value as UserModel;
-
     super.initState();
   }
 
@@ -59,10 +57,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           actions: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(user.picture),
-                ),
+              child: CircleAvatar(
+                backgroundImage: Get.find<UserController>().user.value!=null
+                    ? NetworkImage(
+                        Get.find<UserController>().user.value!.picture)
+                    : const AssetImage("assets/images/app_logo.png") as ImageProvider,
+                backgroundColor: mainColor,
               ),
             )
           ],

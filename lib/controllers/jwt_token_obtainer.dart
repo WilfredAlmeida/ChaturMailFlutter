@@ -40,7 +40,7 @@ class JWTController extends GetxController {
         //     .value
         //     .setString("jwtToken", jwtToken.value);
 
-        Get.find<UserController>().userBox.put("jwtToken", jwtToken.value);
+        await Get.find<UserController>().userBox.put("jwtToken", jwtToken.value);
 
         return true;
       } else {

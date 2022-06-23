@@ -13,7 +13,7 @@ class UserController extends GetxController {
   final sharedPreferencesController = Get.find<SharedPreferencesController>();
 
 
-  late var user;
+  var user = Rx<UserModel?>(null);
 
   var userLoading = false.obs;
   var noUserFound = false.obs;
@@ -34,13 +34,13 @@ class UserController extends GetxController {
 
         if (body['status'] == 1) {
 
-          await userBox.clear();
+          await userBox.delete("user");
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = UserModel.fromJson(body['payload'][i]);
             print("I");
             print(i);
-            await userBox.put(i, a);
+            await userBox.put("user", a);
           }
 
           userLoading.value = false;
@@ -51,7 +51,7 @@ class UserController extends GetxController {
         userLoading.value = false;
       }
 
-      user = (userBox.getAt(0) as UserModel).obs;
+      user = (userBox.get("user") as UserModel).obs;
 
       noUserFound.value = user.value is! UserModel;
 

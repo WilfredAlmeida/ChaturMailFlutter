@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wilfredemail/views/screens/profile_screen.dart';
 
 import '../../utils/constants.dart';
 import '../screens/dashboard.dart';
@@ -66,7 +67,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                   setState(() {
                     _currentIndex = 2;
                   });
-                  Get.to(() => TutorialsScreen());
+                  Get.to(() => ProfileScreen());
                 },
                 icon: Icon(
                   Icons.person,

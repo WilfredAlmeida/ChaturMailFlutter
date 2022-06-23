@@ -14,6 +14,8 @@ class DashboardDrawer extends StatelessWidget {
       backgroundColor: mainColor,
       child: Column(
         children: [
+
+          //Banner
           Image.asset(
             "assets/images/banner.jpg",
             width: MediaQuery.of(context).size.width,
