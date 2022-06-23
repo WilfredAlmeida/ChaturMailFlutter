@@ -10,8 +10,7 @@ import 'api_communicator.dart';
 import 'storage_controller.dart';
 
 class UserController extends GetxController {
-  final sharedPreferencesController = Get.find<SharedPreferencesController>();
-
+  // final sharedPreferencesController = Get.find<SharedPreferencesController>();
 
   var user = Rx<UserModel?>(null);
 
@@ -35,7 +34,6 @@ class UserController extends GetxController {
         var body = json.decode(response.body);
 
         if (body['status'] == 1) {
-
           await userBox.delete("user");
 
           for (var i = 0; i < body['payload'].length; i++) {
@@ -65,9 +63,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future<bool> getBannerUrl()async{
-
-
+  Future<bool> getBannerUrl() async {
     try {
       userLoading.value = true;
 
@@ -80,7 +76,6 @@ class UserController extends GetxController {
         var body = json.decode(response.body);
 
         if (body['status'] == 1) {
-
           await userBox.delete("bannerBase64");
 
           for (var i = 0; i < body['payload'].length; i++) {
@@ -88,17 +83,18 @@ class UserController extends GetxController {
             await userBox.put("bannerBase64", a);
           }
 
-          bannerBase64.value='';
+          bannerBase64.value = '';
         } else {
-          bannerBase64.value='';
+          bannerBase64.value = '';
         }
       } else if (result is Failure) {
-        bannerBase64.value='';
+        bannerBase64.value = '';
       }
 
       bannerBase64.value = userBox.get("bannerBase64");
 
-      bannerBase64.value = bannerBase64.value=="NULL"?'':bannerBase64.value;
+      bannerBase64.value =
+          bannerBase64.value == "NULL" ? '' : bannerBase64.value;
 
       return true;
     } catch (e, s) {
@@ -107,7 +103,6 @@ class UserController extends GetxController {
       print(s);
       return false;
     }
-
 
     return true;
   }

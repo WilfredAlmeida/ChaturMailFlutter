@@ -14,7 +14,7 @@ class BottomNavBarWidget extends StatefulWidget {
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-  int _currentIndex = 0;
+  // int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    _currentIndex = 0;
+                    currentIndex = 0;
                   });
 
                   Get.offAll(() => const DashboardScreen());
@@ -46,33 +46,33 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                 icon: Icon(
                   Icons.home,
                   size: 30,
-                  color: _currentIndex == 0 ? greenMainColor2 : Colors.white,
+                  color: currentIndex == 0 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    _currentIndex = 1;
+                    currentIndex = 1;
                   });
                   Get.to(() => TutorialsScreen());
                 },
                 icon: Icon(
                   Icons.menu_book_outlined,
                   size: 30,
-                  color: _currentIndex == 1 ? greenMainColor2 : Colors.white,
+                  color: currentIndex == 1 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    _currentIndex = 2;
+                    currentIndex = 2;
                   });
                   Get.to(() => ProfileScreen());
                 },
                 icon: Icon(
                   Icons.person,
                   size: 30,
-                  color: _currentIndex == 2 ? greenMainColor2 : Colors.white,
+                  color: currentIndex == 2 ? greenMainColor2 : Colors.white,
                 ),
               )
             ],

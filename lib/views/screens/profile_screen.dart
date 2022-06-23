@@ -25,7 +25,6 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 //Picture
                 Padding(
                   padding: const EdgeInsets.only(top: 14),
@@ -56,13 +55,14 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 //Banner
-                Get.find<UserController>().bannerBase64.value.isEmpty?const SizedBox():
-                Image.memory(
-                  base64Decode(Get.find<UserController>().bannerBase64.value),
-                  width: 300,
-                  height: 300,
-                ),
-
+                Get.find<UserController>().bannerBase64.value.isEmpty
+                    ? const SizedBox()
+                    : Image.memory(
+                        base64Decode(
+                            Get.find<UserController>().bannerBase64.value),
+                        width: 300,
+                        height: 300,
+                      ),
               ],
             ),
           ),

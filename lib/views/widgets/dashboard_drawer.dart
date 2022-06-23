@@ -18,17 +18,17 @@ class DashboardDrawer extends StatelessWidget {
       backgroundColor: mainColor,
       child: Column(
         children: [
-
           //Banner
-          Get.find<UserController>().bannerBase64.value.isEmpty? SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 300,
-          ):
-          Image.memory(
-            base64Decode(Get.find<UserController>().bannerBase64.value),
-            width: 300,
-            height: 300,
-          ),
+          Get.find<UserController>().bannerBase64.value.isEmpty
+              ? SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 300,
+                )
+              : Image.memory(
+                  base64Decode(Get.find<UserController>().bannerBase64.value),
+                  width: 300,
+                  height: 300,
+                ),
 
           //Tutorials
           ListTile(

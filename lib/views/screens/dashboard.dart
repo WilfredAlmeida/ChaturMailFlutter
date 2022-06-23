@@ -59,10 +59,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundImage: Get.find<UserController>().user.value!=null
+                backgroundImage: Get.find<UserController>().user.value != null
                     ? NetworkImage(
                         Get.find<UserController>().user.value!.picture)
-                    : const AssetImage("assets/images/app_logo.png") as ImageProvider,
+                    : const AssetImage("assets/images/app_logo.png")
+                        as ImageProvider,
                 backgroundColor: mainColor,
               ),
             )

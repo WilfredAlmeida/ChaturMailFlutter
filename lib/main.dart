@@ -46,9 +46,9 @@ void main() async {
 
   final tutorialsController = Get.put(TutorialsController());
 
-  final sharedPreferencesController = Get.put(SharedPreferencesController());
+  // final sharedPreferencesController = Get.put(SharedPreferencesController());
 
-  sharedPreferencesController.initializeSharedPreference();
+  // sharedPreferencesController.initializeSharedPreference();
 
   var userController = Get.put(UserController());
 

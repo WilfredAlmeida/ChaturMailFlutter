@@ -22,9 +22,11 @@ class JWTController extends GetxController {
 
     final user = FirebaseAuth.instance.currentUser;
 
-    var result = await postRequest(
-        url: url,
-        body: {"email": user?.email, "idToken": await user?.getIdToken(true),loginMethod:loginMethod});
+    var result = await postRequest(url: url, body: {
+      "email": user?.email,
+      "idToken": await user?.getIdToken(true),
+      loginMethod: loginMethod
+    });
 
     if (result is Success) {
       final response = result.response as http.Response;
@@ -40,7 +42,9 @@ class JWTController extends GetxController {
         //     .value
         //     .setString("jwtToken", jwtToken.value);
 
-        await Get.find<UserController>().userBox.put("jwtToken", jwtToken.value);
+        await Get.find<UserController>()
+            .userBox
+            .put("jwtToken", jwtToken.value);
 
         return true;
       } else {

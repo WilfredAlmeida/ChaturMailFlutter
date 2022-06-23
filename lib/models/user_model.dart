@@ -7,7 +7,6 @@ import 'dart:convert';
 
 part 'user_model.g.dart';
 
-
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
 String userModelToJson(UserModel data) => json.encode(data.toJson());
@@ -54,26 +53,26 @@ class UserModel {
   String uid;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    generatedEmailCount: json["generatedEmailCount"],
-    id: json["_id"],
-    usedTokens: json["usedTokens"],
-    availableTokens: json["availableTokens"],
-    name: json["name"],
-    picture: json["picture"],
-    userId: json["userId"],
-    email: json["email"],
-    uid: json["uid"],
-  );
+        generatedEmailCount: json["generatedEmailCount"],
+        id: json["_id"],
+        usedTokens: json["usedTokens"],
+        availableTokens: json["availableTokens"],
+        name: json["name"],
+        picture: json["picture"],
+        userId: json["userId"],
+        email: json["email"],
+        uid: json["uid"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "generatedEmailCount": generatedEmailCount,
-    "id": id,
-    "usedTokens": usedTokens,
-    "availableTokens": availableTokens,
-    "name": name,
-    "picture": picture,
-    "userId": userId,
-    "email": email,
-    "uid": uid,
-  };
+        "generatedEmailCount": generatedEmailCount,
+        "id": id,
+        "usedTokens": usedTokens,
+        "availableTokens": availableTokens,
+        "name": name,
+        "picture": picture,
+        "userId": userId,
+        "email": email,
+        "uid": uid,
+      };
 }
