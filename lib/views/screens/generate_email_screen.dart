@@ -59,7 +59,8 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBarWidget(),
+        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+        // bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
           title: Text(
             "${widget.promptModel.title} Email",

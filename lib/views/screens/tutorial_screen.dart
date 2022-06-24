@@ -8,6 +8,7 @@ import 'package:html/dom.dart' as dom;
 import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
 import 'package:wilfredemail/views/widgets/tutorial_detail_widget.dart';
 
+import '../../utils/utils_controller.dart';
 import '../widgets/bottom_navbar_widget.dart';
 import '../widgets/not_found_widget.dart';
 
@@ -20,7 +21,8 @@ class TutorialsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBarWidget(),
+        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+        // bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
           title: const Text(
             "Tutorials",

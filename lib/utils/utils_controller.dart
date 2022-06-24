@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:wilfredemail/views/widgets/bottom_navbar_widget.dart';
 
 import 'constants.dart';
 
@@ -35,4 +36,6 @@ class UtilsController extends GetxController {
           },
     );
   }
+
+  Widget bottomNavBarWidget = const BottomNavBarWidget();
 }

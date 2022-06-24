@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 
 import '../../utils/constants.dart';
+import '../../utils/utils_controller.dart';
 import '../widgets/bottom_navbar_widget.dart';
 
 class DisplayEmailScreen extends StatelessWidget {
@@ -27,7 +29,8 @@ class DisplayEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBarWidget(),
+        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+        // bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
           title: const Text("Announcement Email"),
           elevation: 0,

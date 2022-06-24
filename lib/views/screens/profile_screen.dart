@@ -8,6 +8,7 @@ import 'package:wilfredemail/utils/constants.dart';
 import 'package:wilfredemail/views/widgets/bottom_navbar_widget.dart';
 
 import '../../models/user_model.dart';
+import '../../utils/utils_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -18,7 +19,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBarWidget(),
+        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+        // bottomNavigationBar: const BottomNavBarWidget(),
         body: SingleChildScrollView(
           child: Center(
             child: Column(

@@ -70,7 +70,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
           elevation: 0,
         ),
-        bottomNavigationBar: const BottomNavBarWidget(),
+        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+        // bottomNavigationBar: const BottomNavBarWidget(),
         // bottomNavigationBar: Stack(
         //   children: [
         //     Container(

@@ -110,9 +110,9 @@ class _MyAppState extends State<MyApp> {
         builder: (c, r) {
           bool isLoggedIn = r.data == null ? false : r.data as bool;
 
-          if (isLoggedIn) {
-            return const DashboardScreen();
-          }
+          // if (isLoggedIn) {
+          //   return const DashboardScreen();
+          // }
           return const LoginScreen();
         },
       ),
