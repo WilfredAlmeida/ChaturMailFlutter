@@ -81,43 +81,65 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 30),
 
-                    //Login with Apple
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            ImageIcon(
-                              AssetImage("assets/images/apple_icon.png"),
-                              color: mainColor,
-                              size: 30,
+                    //Info we get tooltip
+                    Tooltip(
+                      triggerMode: TooltipTriggerMode.tap,
+                      showDuration: const Duration(seconds: 6),
+                      message: "Google shares us your Name, Email, Picture. All used for your profile",
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.info_outline,
+                            color: greenMainColor2,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "information we get",
+                            style: TextStyle(color: greenMainColor2,
                             ),
-                            SizedBox(width: 4),
-                            Text(
-                              "Login with Apple",
-                              style: TextStyle(
-                                color: mainColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              greenMainColor,
-                            ),
-                            padding: MaterialStateProperty.all(
-                              const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                            ),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50)))),
+                          ),
+                        ],
                       ),
                     ),
+
+                    //Login with Apple
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width * 0.7,
+                    //   child: ElevatedButton(
+                    //     onPressed: () {},
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       crossAxisAlignment: CrossAxisAlignment.center,
+                    //       children: const [
+                    //         ImageIcon(
+                    //           AssetImage("assets/images/apple_icon.png"),
+                    //           color: mainColor,
+                    //           size: 30,
+                    //         ),
+                    //         SizedBox(width: 4),
+                    //         Text(
+                    //           "Login with Apple",
+                    //           style: TextStyle(
+                    //             color: mainColor,
+                    //             fontWeight: FontWeight.w600,
+                    //             fontSize: 18,
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     style: ButtonStyle(
+                    //         backgroundColor: MaterialStateProperty.all(
+                    //           greenMainColor,
+                    //         ),
+                    //         padding: MaterialStateProperty.all(
+                    //           const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    //         ),
+                    //         shape: MaterialStateProperty.all(
+                    //             RoundedRectangleBorder(
+                    //                 borderRadius: BorderRadius.circular(50)))),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
