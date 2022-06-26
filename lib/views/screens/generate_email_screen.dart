@@ -175,7 +175,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 12),
                     child: Text(
-                      "Tokens: ${widget.promptModel.maxTokens}",
+                      "Coins: ${widget.promptModel.maxTokens}",
                       style: const TextStyle(
                         color: greenMainColor2,
                       ),

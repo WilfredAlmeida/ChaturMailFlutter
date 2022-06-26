@@ -63,7 +63,7 @@ class GenerateEmailWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Align(
-                      child: Text("Tokens: ${promptModel.maxTokens}"),
+                      child: Text("Coins: ${promptModel.maxTokens}"),
                       alignment: Alignment.bottomRight,
                     ),
                   )

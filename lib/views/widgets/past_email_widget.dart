@@ -85,7 +85,7 @@ class PastEmailWidget extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.only(right: 8.0),
                       child: Align(
-                        child: Text("Tokens: 250"),
+                        child: Text("Coins: 250"),
                         alignment: Alignment.bottomRight,
                       ),
                     ),

@@ -31,7 +31,7 @@ class GenerateEmailController extends GetxController {
       var body = json.decode(response.body);
 
       print("GENERATED EMAILS");
-      print(body['payload']);
+      print(body);
 
       generatingEmail.value = false;
 
@@ -39,6 +39,7 @@ class GenerateEmailController extends GetxController {
         body,
       );
       generatedEmailResponse = a.obs;
+      generatingEmail.value = false;
 
       return true;
     } else if (result is Failure) {
