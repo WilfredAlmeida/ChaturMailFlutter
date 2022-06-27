@@ -37,7 +37,7 @@ class TutorialsScreen extends StatelessWidget {
           backgroundColor: greenMainColor2,
           child: Obx(() {
             if (tutorialsController.tutorialsLoading.value == true) {
-              return const CircularProgressIndicator();
+              return const CircularProgressIndicator(color: greenMainColor2);
             }
 
             if (tutorialsController.noTutorialsFound.value == true) {
