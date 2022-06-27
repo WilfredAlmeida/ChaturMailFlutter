@@ -38,9 +38,12 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   final _keywordsInput = TextEditingController();
 
   var _toEmailValid = true;
+
   // var _fromEmailValid = true;
   var _subjectValid = true;
   var _keywordsValid = true;
+
+  var _buttonClicked = false;
 
   final generateEmailController = Get.find<GenerateEmailController>();
 
@@ -193,13 +196,23 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                           borderRadius: BorderRadius.circular(22)),
                       child: ElevatedButton(
                         onPressed: () async {
+                          print("CLICK");
+                          print(_buttonClicked);
+
+                          if (_buttonClicked) {
+                            print(_buttonClicked);
+                            return;
+                          }
+
+                          _buttonClicked = true;
+
                           _toEmailValid = _validateEmail(_toEmailInput.text);
                           // _fromEmailValid =
                           // _validateEmail(_fromEmailInput.text);
                           _keywordsValid = _keywordsInput.text.isNotEmpty;
                           _subjectValid = _subjectInput.text.isNotEmpty;
 
-                          setState(() {});
+                          // setState(() {});
 
                           if (!_toEmailValid ||
                               // !_fromEmailValid ||
@@ -243,6 +256,8 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                               generateEmailRequestModel;
 
                           await generateEmailController.generateEmail();
+
+                          _buttonClicked = false;
 
                           processResponse();
                         },
