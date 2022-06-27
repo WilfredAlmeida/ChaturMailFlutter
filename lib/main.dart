@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,6 +10,7 @@ import 'package:wilfredemail/models/tutorials_model.dart';
 import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:wilfredemail/views/screens/splash_screen.dart';
 import './models/past_emails_model.dart';
 import './utils/utils_controller.dart';
 import './view_models/prompt_viewmodel.dart';
@@ -29,6 +31,7 @@ import 'views/widgets/tutorial_detail_widget.dart';
 import 'views/screens/tutorial_screen.dart';
 
 
+
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -44,7 +47,20 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+
+  await _initialize();
+
+  FlutterNativeSplash.remove();
+
+
+
+  runApp(const MyApp());
+}
+
+Future<void> _initialize() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -101,8 +117,6 @@ Future<void> main() async {
   pastEmailsController.pastEmailsBox = (await Hive.openBox("pastEmailsBox"));
 
   tutorialsController.tutorialsBox = (await Hive.openBox("tutorialsBox"));
-
-  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -170,7 +184,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: RoutesClass.dashboardRoute,
+      // initialRoute: RoutesClass.dashboardRoute,
       getPages: RoutesClass.routes,
       title: 'SmartEmail',
       theme: ThemeData(
@@ -183,6 +197,8 @@ class _MyAppState extends State<MyApp> {
         future: userLoggedInFuture,
         builder: (c, r) {
           bool isLoggedIn = r.data == null ? false : r.data as bool;
+
+          // return const SplashScreen();
 
           if (isLoggedIn) {
             return const DashboardScreen();
