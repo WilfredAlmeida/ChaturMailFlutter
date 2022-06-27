@@ -7,18 +7,20 @@ import '../screens/dashboard.dart';
 import '../screens/tutorial_screen.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
-  const BottomNavBarWidget({Key? key}) : super(key: key);
+  BottomNavBarWidget({Key? key}) : super(key: key);
 
-  @override
+   final RxInt currentIndex = 0.obs;
+
+   @override
   _BottomNavBarWidgetState createState() => _BottomNavBarWidgetState();
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-  // int currentIndex = 0;
+  
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Obx(()=>Stack(
       children: [
         Container(
           height: 65,
@@ -38,7 +40,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    currentIndex = 0;
+                    widget.currentIndex.value = 0;
                   });
 
                   Get.offAll(() => const DashboardScreen());
@@ -46,40 +48,40 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                 icon: Icon(
                   Icons.home,
                   size: 30,
-                  color: currentIndex == 0 ? greenMainColor2 : Colors.white,
+                  color: widget.currentIndex.value == 0 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    currentIndex = 1;
+                    widget.currentIndex.value = 1;
                   });
                   Get.to(() => TutorialsScreen());
                 },
                 icon: Icon(
                   Icons.menu_book_outlined,
                   size: 30,
-                  color: currentIndex == 1 ? greenMainColor2 : Colors.white,
+                  color: widget.currentIndex.value == 1 ? greenMainColor2 : Colors.white,
                 ),
               ),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    currentIndex = 2;
+                    widget.currentIndex.value = 2;
                   });
                   Get.to(() => ProfileScreen());
                 },
                 icon: Icon(
                   Icons.person,
                   size: 30,
-                  color: currentIndex == 2 ? greenMainColor2 : Colors.white,
+                  color: widget.currentIndex.value == 2 ? greenMainColor2 : Colors.white,
                 ),
               )
             ],
           ),
         ),
       ],
-    );
+    ));
   }
 }
 

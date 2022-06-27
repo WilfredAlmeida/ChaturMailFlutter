@@ -37,5 +37,6 @@ class UtilsController extends GetxController {
     );
   }
 
-  Widget bottomNavBarWidget = const BottomNavBarWidget();
+  Widget bottomNavBarWidget = BottomNavBarWidget();
+
 }

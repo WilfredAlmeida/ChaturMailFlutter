@@ -26,4 +26,4 @@ const greenMainColor = Color.fromRGBO(213, 255, 218, 1);
 var didItOnce = false;
 
 //Needed for bottom nav bar selected item
-var currentIndex = 0;
+// var currentIndex = 0;

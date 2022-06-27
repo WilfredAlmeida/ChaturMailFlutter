@@ -19,6 +19,7 @@ import 'controllers/login_checker.dart';
 import 'firebase_options.dart';
 import 'models/user_model.dart';
 import 'utils/constants.dart';
+import 'utils/routes_class.dart';
 import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
@@ -93,11 +94,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: "/",
-      getPages: [
-        GetPage(name: "/", page: () => const MyApp()),
-        GetPage(name: "/dashboardScreen", page: () => const DashboardScreen()),
-      ],
+      initialRoute: RoutesClass.dashboardRoute,
+      getPages: RoutesClass.routes,
       title: 'SmartEmail',
       theme: ThemeData(
           scaffoldBackgroundColor: mainColor,
