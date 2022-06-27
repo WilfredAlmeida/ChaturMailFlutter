@@ -43,8 +43,6 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   var _subjectValid = true;
   var _keywordsValid = true;
 
-  var _buttonClicked = false;
-
   final generateEmailController = Get.find<GenerateEmailController>();
 
   @override
@@ -187,105 +185,101 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
                   const SizedBox(height: 20),
 
-                  //Submit Button
-                  Center(
-                    child: Container(
-                      width: 200,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22)),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          print("CLICK");
-                          print(_buttonClicked);
+                  Obx(
+                    () => generateEmailController.generatingEmail.value
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: greenMainColor2,
+                            ),
+                          )
+                        : //Submit Button
+                        Center(
+                            child: Container(
+                              width: 200,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(22)),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  _toEmailValid =
+                                      _validateEmail(_toEmailInput.text);
+                                  // _fromEmailValid =
+                                  // _validateEmail(_fromEmailInput.text);
+                                  _keywordsValid =
+                                      _keywordsInput.text.isNotEmpty;
+                                  _subjectValid = _subjectInput.text.isNotEmpty;
 
-                          if (_buttonClicked) {
-                            print(_buttonClicked);
-                            return;
-                          }
+                                  setState(() {});
 
-                          _buttonClicked = true;
+                                  if (!_toEmailValid ||
+                                      // !_fromEmailValid ||
+                                      !_keywordsValid ||
+                                      !_subjectValid) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            "Please Enter correct details"),
+                                      ),
+                                    );
+                                    return;
+                                  }
 
-                          _toEmailValid = _validateEmail(_toEmailInput.text);
-                          // _fromEmailValid =
-                          // _validateEmail(_fromEmailInput.text);
-                          _keywordsValid = _keywordsInput.text.isNotEmpty;
-                          _subjectValid = _subjectInput.text.isNotEmpty;
+                                  if (_subjectInput.text.length < 10) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Enter a bigger subject"),
+                                      ),
+                                    );
+                                    return;
+                                  }
 
-                          // setState(() {});
+                                  if (_keywordsInput.text.split(",").length <
+                                      4) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Enter more keywords"),
+                                      ),
+                                    );
+                                    return;
+                                  }
 
-                          if (!_toEmailValid ||
-                              // !_fromEmailValid ||
-                              !_keywordsValid ||
-                              !_subjectValid) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please Enter correct details"),
+                                  final generateEmailRequestModel =
+                                      GenerateEmailRequestModel(
+                                    subject: _subjectInput.text,
+                                    keywords: _keywordsInput.text,
+                                    promptId: widget.promptModel.id,
+                                    toEmail: _toEmailInput.text,
+                                  );
+
+                                  generateEmailController.generateEmailRequest
+                                      .value = generateEmailRequestModel;
+
+                                  await generateEmailController.generateEmail();
+
+                                  processResponse();
+                                },
+                                child: const Text(
+                                  "Generate",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    color: mainColor,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    const Color.fromRGBO(213, 225, 218, 1),
+                                  ),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            );
-                            return;
-                          }
-
-                          if (_subjectInput.text.length < 10) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Enter a bigger subject"),
-                              ),
-                            );
-                            return;
-                          }
-
-                          if (_keywordsInput.text.split(",").length < 4) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Enter more keywords"),
-                              ),
-                            );
-                            return;
-                          }
-
-                          final generateEmailRequestModel =
-                              GenerateEmailRequestModel(
-                            subject: _subjectInput.text,
-                            keywords: _keywordsInput.text,
-                            promptId: widget.promptModel.id,
-                            toEmail: _toEmailInput.text,
-                          );
-
-                          generateEmailController.generateEmailRequest.value =
-                              generateEmailRequestModel;
-
-                          await generateEmailController.generateEmail();
-
-                          _buttonClicked = false;
-
-                          processResponse();
-                        },
-                        child: const Text(
-                          "Generate",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: mainColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            const Color.fromRGBO(213, 225, 218, 1),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
                   ),
-
-                  Obx(() => generateEmailController.generatingEmail.value
-                      ? const CircularProgressIndicator()
-                      : const SizedBox()),
                 ],
               ),
             ),
