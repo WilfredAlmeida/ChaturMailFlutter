@@ -13,7 +13,9 @@ import '../../utils/utils_controller.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
-  final UserModel user = Get.find<UserController>().user.value as UserModel;
+  final user = Get.find<UserController>().user.value == null
+      ? null
+      : Get.find<UserController>().user.value as UserModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,52 +23,65 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
         // bottomNavigationBar: const BottomNavBarWidget(),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //Picture
-                Padding(
-                  padding: const EdgeInsets.only(top: 14),
-                  child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.picture),
-                    radius: 50,
-                  ),
-                ),
-
-                const SizedBox(height: 20),
-
-                //Name
-                MText(txt: user.name),
-
-                //email
-                MText(txt: user.email),
-
-                //coins used
-                MText(
-                  txt: 'Coins Used: ${user.usedTokens.toString()}',
-                ),
-
-                //coins available
-                MText(
-                  txt: 'Coins Available: ${user.availableTokens.toString()}',
-                ),
-
-                const SizedBox(height: 30),
-
-                //Banner
-                Get.find<UserController>().bannerBase64.value.isEmpty
-                    ? const SizedBox()
-                    : Image.memory(
-                        base64Decode(
-                            Get.find<UserController>().bannerBase64.value),
-                        width: 300,
-                        height: 300,
+        body: Center(
+          child: SingleChildScrollView(
+            child: user == null
+                ? const Text(
+                    "Something Went Wrong 😀🙂😐☹",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: greenMainColor2,
+                      fontSize: 17,
+                    ),
+              textAlign: TextAlign.center,
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //Picture
+                      Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              CachedNetworkImageProvider(user!.picture),
+                          radius: 50,
+                        ),
                       ),
-              ],
-            ),
+
+                      const SizedBox(height: 20),
+
+                      //Name
+                      MText(txt: user!.name),
+
+                      //email
+                      MText(txt: user!.email),
+
+                      //coins used
+                      MText(
+                        txt: 'Coins Used: ${user!.usedTokens.toString()}',
+                      ),
+
+                      //coins available
+                      MText(
+                        txt:
+                            'Coins Available: ${user!.availableTokens.toString()}',
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      //Banner
+                      Get.find<UserController>().bannerBase64.value.isEmpty
+                          ? const SizedBox()
+                          : Image.memory(
+                              base64Decode(Get.find<UserController>()
+                                  .bannerBase64
+                                  .value),
+                              width: 300,
+                              height: 300,
+                            ),
+                    ],
+                  ),
           ),
         ),
       ),

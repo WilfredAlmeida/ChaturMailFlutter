@@ -83,12 +83,13 @@ class UserController extends GetxController {
             await userBox.put("bannerBase64", a);
           }
 
-          bannerBase64.value = '';
+          bannerBase64.value = 'NULL';
         } else {
-          bannerBase64.value = '';
+          bannerBase64.value = 'NULL';
         }
       } else if (result is Failure) {
-        bannerBase64.value = '';
+        bannerBase64.value = 'NULL';
+        await userBox.put("bannerBase64", 'NULL');
       }
 
       bannerBase64.value = userBox.get("bannerBase64");
