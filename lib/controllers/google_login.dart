@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wilfredemail/controllers/user_controller.dart';
+import 'package:wilfredemail/main.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
@@ -43,13 +44,15 @@ class GoogleLoginController extends GetxController {
   }
 
   Future<bool> googleLogout() async {
-    var usr = googleSignIn.value.signOut();
-    FirebaseAuth.instance.signOut();
+
 
     await Get.find<UserController>().userBox.clear();
-    await Get.find<PromptController>().promptsBox.clear();
+    // await Get.find<PromptController>().promptsBox.clear();
     await Get.find<PastEmailsController>().pastEmailsBox.clear();
-    await Get.find<TutorialsController>().tutorialsBox.clear();
+    // await Get.find<TutorialsController>().tutorialsBox.clear();
+
+    var usr = googleSignIn.value.signOut();
+    FirebaseAuth.instance.signOut();
 
     if (usr == null) {
       return true;
