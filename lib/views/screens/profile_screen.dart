@@ -10,12 +10,25 @@ import 'package:wilfredemail/views/widgets/bottom_navbar_widget.dart';
 import '../../models/user_model.dart';
 import '../../utils/utils_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final user = Get.find<UserController>().user.value == null
       ? null
       : Get.find<UserController>().user.value as UserModel;
+
+  @override
+  void initState() {
+
+    Get.find<UserController>().getUserData();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

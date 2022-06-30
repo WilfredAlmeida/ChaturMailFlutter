@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
+import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
@@ -10,8 +11,11 @@ import '../widgets/bottom_navbar_widget.dart';
 class DisplayEmailScreen extends StatelessWidget {
   final Payload generatedEmail;
 
-  const DisplayEmailScreen({Key? key, required this.generatedEmail})
-      : super(key: key);
+  late final String _promptName;
+
+  DisplayEmailScreen({Key? key, required this.generatedEmail}){
+    _promptName=Get.find<PromptController>().getPromptById(generatedEmail.promptId).title;
+  }
 
   static const _headingStyle = TextStyle(
     fontSize: 16,
@@ -32,7 +36,7 @@ class DisplayEmailScreen extends StatelessWidget {
         bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
         // bottomNavigationBar: const BottomNavBarWidget(),
         appBar: AppBar(
-          title: const Text("Announcement Email"),
+          title: Text(_promptName),
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(

@@ -46,10 +46,10 @@ class GoogleLoginController extends GetxController {
     var usr = googleSignIn.value.signOut();
     FirebaseAuth.instance.signOut();
 
-    Get.find<UserController>().userBox.clear();
-    Get.find<PromptController>().promptsBox.clear();
-    Get.find<PastEmailsController>().pastEmailsBox.clear();
-    Get.find<TutorialsController>().tutorialsBox.clear();
+    await Get.find<UserController>().userBox.clear();
+    await Get.find<PromptController>().promptsBox.clear();
+    await Get.find<PastEmailsController>().pastEmailsBox.clear();
+    await Get.find<TutorialsController>().tutorialsBox.clear();
 
     if (usr == null) {
       return true;
