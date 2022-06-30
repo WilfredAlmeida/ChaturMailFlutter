@@ -28,9 +28,7 @@ class TutorialsController extends GetxController {
         final response = result.response as http.Response;
         var body = json.decode(response.body);
 
-
         if (body['status'] == 1) {
-
           await tutorialsBox.clear();
 
           for (var i = 0; i < body['payload'].length; i++) {

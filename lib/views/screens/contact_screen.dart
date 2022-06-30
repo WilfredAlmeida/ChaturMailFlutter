@@ -25,7 +25,6 @@ class ContactScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               //Subject
               Container(
                 decoration: const BoxDecoration(
@@ -62,8 +61,7 @@ class ContactScreen extends StatelessWidget {
                   autocorrect: false,
                   maxLines: 7,
                   decoration: InputDecoration(
-                    hintText:
-                    "Enter your Message",
+                    hintText: "Enter your Message",
                     border: InputBorder.none,
                     suffixIcon: _bodyValid
                         ? const SizedBox()
@@ -74,56 +72,57 @@ class ContactScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-
               Obx(
-                    () => utilsController.submittingFeedback.value
+                () => utilsController.submittingFeedback.value
                     ? const Center(
-                  child: CircularProgressIndicator(
-                    color: greenMainColor2,
-                  ),
-                )
+                        child: CircularProgressIndicator(
+                          color: greenMainColor2,
+                        ),
+                      )
                     : //Submit Button
-                Center(
-                  child: Container(
-                    width: 200,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(22)),
-                    child: ElevatedButton(
-                      onPressed: () async {
+                    Center(
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(22)),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_subjectInput.text.isEmpty ||
+                                  _bodyInput.text.isEmpty ||
+                                  _subjectInput.text.length < 10 ||
+                                  _bodyInput.text.length < 10) {
+                                showSnackbar("Invalid Values",
+                                    "Enter more than 10 characters in all fields");
+                                return;
+                              }
 
-
-                        if(_subjectInput.text.isEmpty||_bodyInput.text.isEmpty||_subjectInput.text.length<10||_bodyInput.text.length<10){
-                          showSnackbar("Invalid Values","Enter more than 10 characters in all fields");
-                          return;
-                        }
-
-
-                       utilsController.submitFeedback(subject: _subjectInput.text, message: _bodyInput.text);
-                      },
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: mainColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          const Color.fromRGBO(213, 225, 218, 1),
-                        ),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                              utilsController.submitFeedback(
+                                  subject: _subjectInput.text,
+                                  message: _bodyInput.text);
+                            },
+                            child: const Text(
+                              "Submit",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: mainColor,
+                                fontSize: 16,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                const Color.fromRGBO(213, 225, 218, 1),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
               ),
-
             ],
           ),
         ),
@@ -131,7 +130,7 @@ class ContactScreen extends StatelessWidget {
     );
   }
 
-  void showSnackbar(String title, String message){
+  void showSnackbar(String title, String message) {
     Get.snackbar(
       title,
       message,
@@ -146,5 +145,4 @@ class ContactScreen extends StatelessWidget {
       dismissDirection: DismissDirection.horizontal,
     );
   }
-
 }

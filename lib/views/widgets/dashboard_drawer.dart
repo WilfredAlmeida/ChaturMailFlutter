@@ -52,7 +52,6 @@ class DashboardDrawer extends StatelessWidget {
             ),
           ),
 
-
           const Divider(),
 
           //Contact
@@ -69,15 +68,13 @@ class DashboardDrawer extends StatelessWidget {
             title: const Text(
               "Contact Us",
               style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
               ),
               textAlign: TextAlign.start,
             ),
           ),
-
-
 
           const Divider(),
 
@@ -113,7 +110,6 @@ class DashboardDrawer extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-
         ],
       ),
     );

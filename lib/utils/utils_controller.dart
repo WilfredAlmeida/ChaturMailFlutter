@@ -43,25 +43,29 @@ class UtilsController extends GetxController {
 
   Widget bottomNavBarWidget = BottomNavBarWidget();
 
-  Future<bool> submitFeedback({required String subject,required String message})async{
+  Future<bool> submitFeedback(
+      {required String subject, required String message}) async {
+    submittingFeedback.value = true;
 
-    submittingFeedback.value=true;
-
-    var response = await postRequest(url: "/misc/submitFeedback",body: {
-      "subject":subject,
-      "message":message,
+    var response = await postRequest(url: "/misc/submitFeedback", body: {
+      "subject": subject,
+      "message": message,
     });
 
-    if(response is Success){
-      showErrorDialog(title: "Message Submitted", content: "Thank You for Contacting Us!", onConfirm: null);
-    }
-    else if(response is Failure){
-      showErrorDialog(title: "Message Submitted", content: "Thank You for Contacting Us!", onConfirm: null);
+    if (response is Success) {
+      showErrorDialog(
+          title: "Message Submitted",
+          content: "Thank You for Contacting Us!",
+          onConfirm: null);
+    } else if (response is Failure) {
+      showErrorDialog(
+          title: "Message Submitted",
+          content: "Thank You for Contacting Us!",
+          onConfirm: null);
     }
 
-    submittingFeedback.value=false;
+    submittingFeedback.value = false;
 
     return true;
   }
-
 }

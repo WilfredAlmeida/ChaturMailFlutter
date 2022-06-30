@@ -13,8 +13,10 @@ class DisplayEmailScreen extends StatelessWidget {
 
   late final String _promptName;
 
-  DisplayEmailScreen({Key? key, required this.generatedEmail}){
-    _promptName=Get.find<PromptController>().getPromptById(generatedEmail.promptId).title;
+  DisplayEmailScreen({Key? key, required this.generatedEmail}) {
+    _promptName = Get.find<PromptController>()
+        .getPromptById(generatedEmail.promptId)
+        .title;
   }
 
   static const _headingStyle = TextStyle(

@@ -9,79 +9,83 @@ import '../screens/tutorial_screen.dart';
 class BottomNavBarWidget extends StatefulWidget {
   BottomNavBarWidget({Key? key}) : super(key: key);
 
-   final RxInt currentIndex = 0.obs;
+  final RxInt currentIndex = 0.obs;
 
-   @override
+  @override
   _BottomNavBarWidgetState createState() => _BottomNavBarWidgetState();
 }
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-  
-
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>Stack(
-      children: [
-        Container(
-          height: 65,
-          color: mainColor,
-          child: CustomPaint(
-              size: Size(MediaQuery.of(context).size.width, 100),
-              painter: MyPainter()),
-        ),
-        Positioned(
-          bottom: 0,
-          top: 30,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    widget.currentIndex.value = 0;
-                  });
+    return Obx(() => Stack(
+          children: [
+            Container(
+              height: 65,
+              color: mainColor,
+              child: CustomPaint(
+                  size: Size(MediaQuery.of(context).size.width, 100),
+                  painter: MyPainter()),
+            ),
+            Positioned(
+              bottom: 0,
+              top: 30,
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        widget.currentIndex.value = 0;
+                      });
 
-                  Get.offAll(() => const DashboardScreen());
-                },
-                icon: Icon(
-                  Icons.home,
-                  size: 30,
-                  color: widget.currentIndex.value == 0 ? greenMainColor2 : Colors.white,
-                ),
+                      Get.offAll(() => const DashboardScreen());
+                    },
+                    icon: Icon(
+                      Icons.home,
+                      size: 30,
+                      color: widget.currentIndex.value == 0
+                          ? greenMainColor2
+                          : Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        widget.currentIndex.value = 1;
+                      });
+                      Get.to(() => TutorialsScreen());
+                    },
+                    icon: Icon(
+                      Icons.menu_book_outlined,
+                      size: 30,
+                      color: widget.currentIndex.value == 1
+                          ? greenMainColor2
+                          : Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        widget.currentIndex.value = 2;
+                      });
+                      Get.to(() => ProfileScreen());
+                    },
+                    icon: Icon(
+                      Icons.person,
+                      size: 30,
+                      color: widget.currentIndex.value == 2
+                          ? greenMainColor2
+                          : Colors.white,
+                    ),
+                  )
+                ],
               ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    widget.currentIndex.value = 1;
-                  });
-                  Get.to(() => TutorialsScreen());
-                },
-                icon: Icon(
-                  Icons.menu_book_outlined,
-                  size: 30,
-                  color: widget.currentIndex.value == 1 ? greenMainColor2 : Colors.white,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    widget.currentIndex.value = 2;
-                  });
-                  Get.to(() => ProfileScreen());
-                },
-                icon: Icon(
-                  Icons.person,
-                  size: 30,
-                  color: widget.currentIndex.value == 2 ? greenMainColor2 : Colors.white,
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
-    ));
+            ),
+          ],
+        ));
   }
 }
 

@@ -24,7 +24,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-
     Get.find<UserController>().getUserData();
 
     super.initState();
@@ -46,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: greenMainColor2,
                       fontSize: 17,
                     ),
-              textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                   )
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,

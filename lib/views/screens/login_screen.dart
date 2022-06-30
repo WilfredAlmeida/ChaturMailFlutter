@@ -85,7 +85,8 @@ class LoginScreen extends StatelessWidget {
                     Tooltip(
                       triggerMode: TooltipTriggerMode.tap,
                       showDuration: const Duration(seconds: 6),
-                      message: "Google shares us your Name, Email, Picture. All used for your profile",
+                      message:
+                          "Google shares us your Name, Email, Picture. All used for your profile",
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
@@ -96,7 +97,8 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(width: 10),
                           Text(
                             "information we get",
-                            style: TextStyle(color: greenMainColor2,
+                            style: TextStyle(
+                              color: greenMainColor2,
                             ),
                           ),
                         ],

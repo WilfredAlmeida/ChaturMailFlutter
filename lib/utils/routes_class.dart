@@ -4,7 +4,7 @@ import 'package:wilfredemail/views/screens/login_screen.dart';
 import 'package:wilfredemail/views/screens/profile_screen.dart';
 import 'package:wilfredemail/views/screens/tutorial_screen.dart';
 
-class RoutesClass{
+class RoutesClass {
   static const String _dashboardRoute = "/dashboardScreen";
   static const String _displayGeneratedEmailRoute =
       "/displayGeneratedEmailScreen";
@@ -28,13 +28,10 @@ class RoutesClass{
 
   static String get tutorialRoute => _tutorialRoute;
 
-
-  static List<GetPage> routes=[
-    GetPage(name: _dashboardRoute, page: ()=>const DashboardScreen()),
-    GetPage(name: _loginRoute, page: ()=>const LoginScreen()),
-    GetPage(name: _profileRoute, page: ()=>ProfileScreen()),
-    GetPage(name: _tutorialRoute, page: ()=>TutorialsScreen()),
+  static List<GetPage> routes = [
+    GetPage(name: _dashboardRoute, page: () => const DashboardScreen()),
+    GetPage(name: _loginRoute, page: () => const LoginScreen()),
+    GetPage(name: _profileRoute, page: () => ProfileScreen()),
+    GetPage(name: _tutorialRoute, page: () => TutorialsScreen()),
   ];
-
-
 }

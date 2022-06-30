@@ -49,7 +49,9 @@ class UserController extends GetxController {
         userLoading.value = false;
       }
 
-      user.value = (userBox.get("user")==null?null:(userBox.get("user") as UserModel));
+      user.value = (userBox.get("user") == null
+          ? null
+          : (userBox.get("user") as UserModel));
 
       noUserFound.value = user.value is! UserModel;
 

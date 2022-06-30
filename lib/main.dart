@@ -30,8 +30,6 @@ import 'views/screens/dashboard.dart';
 import 'views/widgets/tutorial_detail_widget.dart';
 import 'views/screens/tutorial_screen.dart';
 
-
-
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -39,7 +37,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
     playSound: true);
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -50,26 +48,23 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-
   await _initialize();
 
   FlutterNativeSplash.remove();
 
-
-
   runApp(const MyApp());
 }
 
-Future<void> _initialize() async{
+Future<void> _initialize() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -77,8 +72,6 @@ Future<void> _initialize() async{
     badge: true,
     sound: true,
   );
-
-
 
   await Hive.initFlutter();
 
@@ -133,7 +126,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     userLoggedInFuture = isUserLoggedIn();
 
-
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification!;
       AndroidNotification android = message.notification!.android!;
@@ -174,8 +166,6 @@ class _MyAppState extends State<MyApp> {
         //     });
       }
     });
-
-
 
     super.initState();
   }

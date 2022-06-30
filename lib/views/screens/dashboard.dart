@@ -170,7 +170,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   //Generate Emails Listview
                   Obx(() {
                     if (promptController.promptsLoading.value == true) {
-                      return const CircularProgressIndicator(color: greenMainColor2);
+                      return const CircularProgressIndicator(
+                          color: greenMainColor2);
                     }
 
                     if (promptController.noPromptsFound.value == true) {
@@ -209,7 +210,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   //Past Emails ListView
                   Obx(() {
                     if (pastEmailsController.pastEmailsLoading.value == true) {
-                      return const CircularProgressIndicator(color: greenMainColor2);
+                      return const CircularProgressIndicator(
+                          color: greenMainColor2);
                     }
 
                     if (pastEmailsController.noPastEmailsFound.value == true) {
