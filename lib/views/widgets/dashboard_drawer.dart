@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wilfredemail/controllers/google_login.dart';
 import 'package:wilfredemail/utils/constants.dart';
+import 'package:wilfredemail/views/screens/contact_screen.dart';
 import 'package:wilfredemail/views/screens/login_screen.dart';
 import 'package:wilfredemail/views/screens/tutorial_screen.dart';
 
@@ -51,6 +52,33 @@ class DashboardDrawer extends StatelessWidget {
             ),
           ),
 
+
+          const Divider(),
+
+          //Contact
+          ListTile(
+            onTap: () {
+              Get.to(ContactScreen());
+            },
+            tileColor: greenMainColor,
+            leading: const Icon(
+              Icons.contact_page_outlined,
+              color: Colors.black,
+              size: 30,
+            ),
+            title: const Text(
+              "Contact Us",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+              ),
+              textAlign: TextAlign.start,
+            ),
+          ),
+
+
+
           const Divider(),
 
           //Logout
@@ -85,6 +113,7 @@ class DashboardDrawer extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
+
         ],
       ),
     );
