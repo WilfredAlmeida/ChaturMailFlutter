@@ -51,6 +51,9 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
   BannerAd? bannerAdBottom;
 
+  InterstitialAd? intersitialAd;
+
+  Function? _gotoNextScreen;
 
   @override
   void initState() {
@@ -70,16 +73,37 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
     adsController.initialization.value.then((value) {
       setState(() {
         bannerAdBottom = BannerAd(
-            adUnitId: adsController.generateEmailBannerUnitId,
-            size: AdSize.banner,
-            request: const AdRequest(),
-            listener: adsController.bannerAdListener,
-        )
-          ..load();
+          adUnitId: adsController.generateEmailBannerUnitId,
+          size: AdSize.banner,
+          request: const AdRequest(),
+          listener: adsController.bannerAdListener,
+        )..load();
+
+        InterstitialAd.load(
+          adUnitId: InterstitialAd.testAdUnitId,
+          request: const AdRequest(),
+          adLoadCallback: InterstitialAdLoadCallback(
+              onAdLoaded: (ad) {
+                intersitialAd = ad;
+
+                intersitialAd!.fullScreenContentCallback =
+                    FullScreenContentCallback(
+                  onAdDismissedFullScreenContent: (ad) {
+                    //Ad shown and closed, going to next screen
+                    _gotoNextScreen!();
+                  },
+                  onAdFailedToShowFullScreenContent: (ad, e) {
+                    print(e);
+                    //Ad showing failed, going to next screen
+                    _gotoNextScreen!();
+                  },
+                );
+              },
+              onAdFailedToLoad: (e) => print(e)),
+        );
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,28 +127,6 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // //From Email
-                  // Container(
-                  //   decoration: const BoxDecoration(
-                  //     borderRadius: BorderRadius.all(Radius.circular(32)),
-                  //     color: Color.fromRGBO(213, 225, 218, 1),
-                  //   ),
-                  //   padding: const EdgeInsets.only(left: 8),
-                  //   child: TextFormField(
-                  //     controller: _fromEmailInput,
-                  //     keyboardType: TextInputType.emailAddress,
-                  //     autocorrect: false,
-                  //     decoration: InputDecoration(
-                  //       hintText: "From: abc@example.com",
-                  //       border: InputBorder.none,
-                  //       suffixIcon: _fromEmailValid
-                  //           ? const SizedBox()
-                  //           : const Icon(Icons.error, color: Colors.red),
-                  //     ),
-                  //   ),
-                  // ),
-                  //
-                  // const SizedBox(height: 20),
 
                   //To Email
                   Container(
@@ -306,8 +308,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                           ),
                   ),
 
-                  const SizedBox(height:
-                    50),
+                  const SizedBox(height: 50),
 
                   //Ad
                   if (bannerAdBottom == null)
@@ -369,6 +370,16 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
     Get.find<PastEmailsController>().getPastEmails();
 
-    Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
+    //Function to go on next screen. Done like this cuz after intersitital ad is closed. And defined up here cuz below it'll throw undefined error. This function is written here cuz the next screen needs data that is only present here in this function.
+    _gotoNextScreen=(){
+      Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
+    };
+
+    if (intersitialAd == null) {
+      _gotoNextScreen!();
+    } else {
+      intersitialAd!.show();
+    }
+
   }
 }
