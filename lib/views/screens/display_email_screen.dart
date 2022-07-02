@@ -9,6 +9,7 @@ import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 import '../widgets/bottom_navbar_widget.dart';
+import 'package:flutter/services.dart';
 
 class DisplayEmailScreen extends StatefulWidget {
   final Payload generatedEmail;
@@ -38,7 +39,6 @@ class DisplayEmailScreen extends StatefulWidget {
 }
 
 class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
-
   final adsController = Get.find<AdsController>();
 
   BannerAd? bannerAdBottom;
@@ -54,8 +54,7 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
           size: AdSize.banner,
           request: const AdRequest(),
           listener: adsController.bannerAdListener,
-        )
-          ..load();
+        )..load();
       });
     });
   }
@@ -93,15 +92,8 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
                 const Text("To:", style: DisplayEmailScreen._headingStyle),
 
                 //To Email Content
-                Text(widget.generatedEmail.toEmailId, style: DisplayEmailScreen._contentStyle),
-
-                // const SizedBox(height: 15),
-
-                // //From Email Heading
-                // const Text("From:", style: _headingStyle),
-                //
-                // //From Email Content
-                // const Text("xyz@example.com", style: _contentStyle),
+                Text(widget.generatedEmail.toEmailId,
+                    style: DisplayEmailScreen._contentStyle),
 
                 const SizedBox(height: 15),
 
@@ -109,23 +101,55 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
                 const Text("Subject:", style: DisplayEmailScreen._headingStyle),
 
                 //Subject Content
-                Text(widget.generatedEmail.subject, style: DisplayEmailScreen._contentStyle),
+                Text(widget.generatedEmail.subject,
+                    style: DisplayEmailScreen._contentStyle),
 
                 const SizedBox(height: 15),
 
                 //Keywords Heading
-                const Text("Keywords:", style: DisplayEmailScreen._headingStyle),
+                const Text("Keywords:",
+                    style: DisplayEmailScreen._headingStyle),
 
                 //Keywords Content
-                Text(widget.generatedEmail.keywords, style: DisplayEmailScreen._contentStyle),
+                Text(widget.generatedEmail.keywords,
+                    style: DisplayEmailScreen._contentStyle),
 
                 const SizedBox(height: 15),
 
                 //Generated Email Heading
-                const Text("Generated Email:", style: DisplayEmailScreen._headingStyle),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Generated Email:",
+                        style: DisplayEmailScreen._headingStyle),
+                    IconButton(
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: widget.generatedEmail.generatedEmail));
+                        Get.snackbar(
+                          "Copied",
+                          "Copied to Clipboard",
+                          icon: const Icon(Icons.delete, color: Colors.white),
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: greenMainColor,
+                          borderRadius: 20,
+                          margin: const EdgeInsets.all(15),
+                          colorText: Colors.black,
+                          duration: const Duration(seconds: 1),
+                          isDismissible: true,
+                          dismissDirection: DismissDirection.horizontal,
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.copy,
+                        color: greenMainColor2,
+                      ),
+                    )
+                  ],
+                ),
 
                 //Generated Email Content
-                Text(widget.generatedEmail.generatedEmail, style: DisplayEmailScreen._contentStyle),
+                Text(widget.generatedEmail.generatedEmail,
+                    style: DisplayEmailScreen._contentStyle),
 
                 const SizedBox(height: 15),
 
