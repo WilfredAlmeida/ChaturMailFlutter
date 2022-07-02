@@ -53,6 +53,9 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Contact Us"),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(

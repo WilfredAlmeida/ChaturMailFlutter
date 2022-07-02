@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:wilfredemail/controllers/storage_controller.dart';
@@ -25,7 +26,8 @@ class JWTController extends GetxController {
     var result = await postRequest(url: url, body: {
       "email": user?.email,
       "idToken": await user?.getIdToken(true),
-      loginMethod: loginMethod
+      "loginMethod": loginMethod,
+      "fcmToken":await FirebaseMessaging.instance.getToken(),
     });
 
     if (result is Success) {
