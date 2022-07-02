@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wilfredemail/controllers/ads_controller.dart';
 import 'package:wilfredemail/controllers/storage_controller.dart';
 import 'package:wilfredemail/controllers/user_controller.dart';
 import 'package:wilfredemail/models/tutorials_model.dart';
@@ -87,6 +89,12 @@ Future<void> _initialize() async {
   final utilsController = Get.put(UtilsController());
 
   final tutorialsController = Get.put(TutorialsController());
+
+  final adsController = Get.put(AdsController());
+
+  final initFuture= MobileAds.instance.initialize();
+  adsController.initialization = initFuture.obs;
+
 
   // final sharedPreferencesController = Get.put(SharedPreferencesController());
 

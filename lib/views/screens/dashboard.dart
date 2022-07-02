@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:wilfredemail/controllers/ads_controller.dart';
 import 'package:wilfredemail/controllers/user_controller.dart';
 import 'package:wilfredemail/models/user_model.dart';
 import 'package:wilfredemail/utils/utils_controller.dart';
@@ -30,7 +32,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final userController = Get.find<UserController>();
 
+  final adsController = Get.find<AdsController>();
+
   late UserModel user;
+
+  BannerAd? bannerAdMiddle;
+  BannerAd? bannerAdBottom;
 
   @override
   void initState() {
@@ -47,6 +54,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
     didItOnce = true;
 
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    adsController.initialization.value.then((value) {
+      setState(() {
+        bannerAdMiddle = BannerAd(
+            adUnitId: adsController.dashboardMiddleBannerUnitId,
+            size: AdSize.banner,
+            request: const AdRequest(),
+            listener: adsController.bannerAdListener)
+          ..load();
+        bannerAdBottom = BannerAd(
+            adUnitId: adsController.dashboardBottomBannerUnitId,
+            size: AdSize.banner,
+            request: const AdRequest(),
+            listener: adsController.bannerAdListener)
+          ..load();
+      });
+    });
   }
 
   @override
@@ -71,73 +100,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           elevation: 0,
         ),
         bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
-        // bottomNavigationBar: const BottomNavBarWidget(),
-        // bottomNavigationBar: Stack(
-        //   children: [
-        //     Container(
-        //       height: 65,
-        //       color: mainColor,
-        //       child: CustomPaint(
-        //           size: Size(MediaQuery.of(context).size.width, 100),
-        //           painter: MyPainter()),
-        //     ),
-        //     Positioned(
-        //       bottom: 0,
-        //       top: 30,
-        //       width: MediaQuery.of(context).size.width,
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //         crossAxisAlignment: CrossAxisAlignment.end,
-        //         children: [
-        //           IconButton(
-        //             onPressed: () {
-        //               setState(() {
-        //                 _currentIndex = 0;
-        //               });
-        //
-        //               Get.offAll(()=>const DashboardScreen());
-        //
-        //             },
-        //             icon: Icon(
-        //               Icons.home,
-        //               size: 30,
-        //               color:
-        //                   _currentIndex == 0 ? greenMainColor2 : Colors.white,
-        //             ),
-        //           ),
-        //           IconButton(
-        //             onPressed: () {
-        //               setState(() {
-        //                 _currentIndex = 1;
-        //               });
-        //               Get.to(()=>TutorialsScreen());
-        //             },
-        //             icon: Icon(
-        //               Icons.menu_book_outlined,
-        //               size: 30,
-        //               color:
-        //                   _currentIndex == 1 ? greenMainColor2 : Colors.white,
-        //             ),
-        //           ),
-        //           IconButton(
-        //             onPressed: () {
-        //               setState(() {
-        //                 _currentIndex = 2;
-        //               });
-        //               Get.to(()=>TutorialsScreen());
-        //             },
-        //             icon: Icon(
-        //               Icons.person,
-        //               size: 30,
-        //               color:
-        //                   _currentIndex == 2 ? greenMainColor2 : Colors.white,
-        //             ),
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
         body: RefreshIndicator(
           onRefresh: () async {
             Get.find<UtilsController>().initializeUtils();
@@ -196,7 +158,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   }),
 
                   //Gap
-                  const SizedBox(height: 100),
+                  if (bannerAdBottom == null)
+                    const SizedBox(height: 100)
+                  else
+                    SizedBox(
+                      height: 100,
+                      child: AdWidget(ad: bannerAdBottom!),
+                    ),
 
                   //Past Emails Heading
                   const Text(
@@ -238,6 +206,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     );
                   }),
+
+                  //Ad
+                  if (bannerAdMiddle == null)
+                    const SizedBox(height: 50)
+                  else
+                    SizedBox(
+                      height: 50,
+                      child: AdWidget(ad: bannerAdMiddle!),
+                    ),
                 ],
               ),
             ),

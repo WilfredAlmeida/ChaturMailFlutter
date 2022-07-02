@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:wilfredemail/utils/constants.dart';
 
 import 'package:html/parser.dart' as htmlparser;
@@ -8,14 +9,38 @@ import 'package:html/dom.dart' as dom;
 import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
 import 'package:wilfredemail/views/widgets/tutorial_detail_widget.dart';
 
+import '../../controllers/ads_controller.dart';
 import '../../utils/utils_controller.dart';
 import '../widgets/bottom_navbar_widget.dart';
 import '../widgets/not_found_widget.dart';
 
-class TutorialsScreen extends StatelessWidget {
+class TutorialsScreen extends StatefulWidget {
   TutorialsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<TutorialsScreen> createState() => _TutorialsScreenState();
+}
+
+class _TutorialsScreenState extends State<TutorialsScreen> {
   final tutorialsController = Get.find<TutorialsController>();
+
+  final adsController = Get.find<AdsController>();
+
+  BannerAd? bottomAdBanner;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    setState(() {
+      bottomAdBanner = BannerAd(
+          adUnitId: adsController.tutorialsBottomBannerUnitId,
+          size: AdSize.banner,
+          request: const AdRequest(),
+          listener: adsController.bannerAdListener)
+        ..load();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,34 +60,56 @@ class TutorialsScreen extends StatelessWidget {
           },
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
           backgroundColor: greenMainColor2,
-          child: Obx(() {
-            if (tutorialsController.tutorialsLoading.value == true) {
-              return const CircularProgressIndicator(color: greenMainColor2);
-            }
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Obx(() {
+                  if (tutorialsController.tutorialsLoading.value == true) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                          color: greenMainColor2,
+                      ),
+                    );
+                  }
 
-            if (tutorialsController.noTutorialsFound.value == true) {
-              return const NotFoundWidget(
-                heading: "No Tutorials Found",
-                message: "Please try again later",
-                tooltip: "So Sad...",
-              );
-            }
+                  if (tutorialsController.noTutorialsFound.value == true) {
+                    return const NotFoundWidget(
+                      heading: "No Tutorials Found",
+                      message: "Please try again later",
+                      tooltip: "So Sad...",
+                    );
+                  }
 
-            return ListView.builder(
-              itemBuilder: (_, index) {
-                bool curvePosition = (index % 2) == 0;
+                  return ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      bool curvePosition = (index % 2) == 0;
 
-                return TutorialDetailWidget(
-                  title: tutorialsController.tutorialsList[index].title,
-                  htmlData:
-                      tutorialsController.tutorialsList[index].htmlContent,
-                  curvePosition: curvePosition,
-                );
-              },
-              itemCount: tutorialsController.tutorialsList.length,
-              scrollDirection: Axis.vertical,
-            );
-          }),
+                      return TutorialDetailWidget(
+                        title: tutorialsController.tutorialsList[index].title,
+                        htmlData:
+                            tutorialsController.tutorialsList[index].htmlContent,
+                        curvePosition: curvePosition,
+                      );
+                    },
+                    itemCount: tutorialsController.tutorialsList.length,
+                    scrollDirection: Axis.vertical,
+                  );
+                }),
+              ),
+
+              //Ad
+              Positioned(
+                bottom: -10,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: 50,
+                  child: bottomAdBanner==null?const SizedBox(): AdWidget(ad: bottomAdBanner!),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

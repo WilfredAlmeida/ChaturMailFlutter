@@ -58,6 +58,7 @@ class TutorialDetailWidget extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

@@ -1,19 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:wilfredemail/utils/utils_controller.dart';
 
+import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
 
-class ContactScreen extends StatelessWidget {
+class ContactScreen extends StatefulWidget {
   ContactScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ContactScreen> createState() => _ContactScreenState();
+}
+
+class _ContactScreenState extends State<ContactScreen> {
   final _subjectInput = TextEditingController();
+
   final _bodyInput = TextEditingController();
 
   final _subjectValid = true;
+
   final _bodyValid = true;
 
   final utilsController = Get.find<UtilsController>();
+
+  final adsController = Get.find<AdsController>();
+
+  BannerAd? bannerAdBottom;
+  BannerAd? bannerAdTop;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    setState(() {
+      bannerAdBottom = BannerAd(
+        adUnitId: adsController.contactUsBottomBannerUnitId,
+        size: AdSize.mediumRectangle,
+        request: const AdRequest(),
+        listener: adsController.bannerAdListener,
+      )..load();
+      bannerAdTop = BannerAd(
+        adUnitId: adsController.contactUsTopEmailBannerUnitId,
+        size: AdSize.mediumRectangle,
+        request: const AdRequest(),
+        listener: adsController.bannerAdListener,
+      )..load();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +59,18 @@ class ContactScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+
+              //Ad
+              if (bannerAdTop == null)
+                const SizedBox(height: 50)
+              else
+                SizedBox(
+                  height: 50,
+                  child: AdWidget(ad: bannerAdTop!),
+                ),
+
+              const SizedBox(height: 40),
+
               //Subject
               Container(
                 decoration: const BoxDecoration(
@@ -123,6 +169,17 @@ class ContactScreen extends StatelessWidget {
                         ),
                       ),
               ),
+
+              const SizedBox(height: 30),
+
+              //Ad
+              if (bannerAdBottom == null)
+                const SizedBox(height: 50)
+              else
+                SizedBox(
+                  height: 50,
+                  child: AdWidget(ad: bannerAdBottom!),
+                ),
             ],
           ),
         ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:wilfredemail/models/generate_email_request_model.dart';
 import 'package:wilfredemail/models/generated_email_response_model.dart';
 import 'package:wilfredemail/models/past_emails_model.dart';
 import 'package:wilfredemail/models/prompts_model.dart';
 import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
 
+import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 import '../../view_models/generate_email_viewmodel.dart';
@@ -45,6 +47,11 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
   final generateEmailController = Get.find<GenerateEmailController>();
 
+  final adsController = Get.find<AdsController>();
+
+  BannerAd? bannerAdBottom;
+
+
   @override
   void initState() {
     if (widget.pastEmail != null) {
@@ -55,6 +62,24 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
     super.initState();
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    adsController.initialization.value.then((value) {
+      setState(() {
+        bannerAdBottom = BannerAd(
+            adUnitId: adsController.generateEmailBannerUnitId,
+            size: AdSize.banner,
+            request: const AdRequest(),
+            listener: adsController.bannerAdListener,
+        )
+          ..load();
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -280,6 +305,18 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                             ),
                           ),
                   ),
+
+                  const SizedBox(height:
+                    50),
+
+                  //Ad
+                  if (bannerAdBottom == null)
+                    const SizedBox(height: 50)
+                  else
+                    SizedBox(
+                      height: 50,
+                      child: AdWidget(ad: bannerAdBottom!),
+                    ),
                 ],
               ),
             ),
