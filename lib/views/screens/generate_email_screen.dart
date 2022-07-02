@@ -80,7 +80,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
         )..load();
 
         InterstitialAd.load(
-          adUnitId: InterstitialAd.testAdUnitId,
+          adUnitId: adsController.intersitialAdUnitId,
           request: const AdRequest(),
           adLoadCallback: InterstitialAdLoadCallback(
               onAdLoaded: (ad) {
