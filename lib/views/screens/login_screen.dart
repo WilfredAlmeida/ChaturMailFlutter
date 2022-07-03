@@ -36,6 +36,17 @@ class LoginScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: ElevatedButton(
                         onPressed: () async {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) {
+                                return const Center(
+                                    child: CircularProgressIndicator(
+                                  color: greenMainColor2,
+                                ),
+                                );
+                              });
+
                           final googleLoginController =
                               Get.find<GoogleLoginController>();
 

@@ -26,7 +26,7 @@ class AdsController extends GetxController{
 
   String get contactUsBottomBannerUnitId => Platform.isAndroid?'ca-app-pub-6079539654362873/8420832107':'';
 
-  String get intersitialAdUnitId => Platform.isAndroid?'ca-app-pub-3940256099942544/6300978111':'';
+  String get intersitialAdUnitId => Platform.isAndroid?'ca-app-pub-6079539654362873/7604512254':'';
 
   BannerAdListener get bannerAdListener => const BannerAdListener();
 
