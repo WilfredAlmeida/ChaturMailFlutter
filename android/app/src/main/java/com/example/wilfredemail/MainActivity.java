@@ -1,4 +1,4 @@
-package com.wilfredalmeida.emailgenerator;
+package com.wilfredalmeida.chaturmail;
 
 import io.flutter.embedding.android.FlutterActivity;
 
