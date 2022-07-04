@@ -1,15 +1,14 @@
+import 'package:chaturmail/models/generated_email_response_model.dart';
+import 'package:chaturmail/view_models/prompt_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:chaturmail/models/generated_email_response_model.dart';
-import 'package:chaturmail/view_models/prompt_viewmodel.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
-import '../widgets/bottom_navbar_widget.dart';
-import 'package:flutter/services.dart';
 
 class DisplayEmailScreen extends StatefulWidget {
   final Payload generatedEmail;
@@ -124,7 +123,8 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
                         style: DisplayEmailScreen._headingStyle),
                     IconButton(
                       onPressed: () {
-                        Clipboard.setData(ClipboardData(text: widget.generatedEmail.generatedEmail));
+                        Clipboard.setData(ClipboardData(
+                            text: widget.generatedEmail.generatedEmail));
                         Get.snackbar(
                           "Copied",
                           "Copied to Clipboard",

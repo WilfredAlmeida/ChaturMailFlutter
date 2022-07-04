@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
-import '../utils/api_status.dart';
+import 'package:http/http.dart' as http;
+
 import '../controllers/api_communicator.dart';
 import '../models/prompts_model.dart';
-import 'package:http/http.dart' as http;
+import '../utils/api_status.dart';
 
 class PromptController extends GetxController {
   var promptsList = <PromptModel>[].obs;

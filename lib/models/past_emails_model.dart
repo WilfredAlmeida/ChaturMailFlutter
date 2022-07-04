@@ -2,9 +2,9 @@
 //
 //     final pastEmailsModel = pastEmailsModelFromJson(jsonString);
 
-import 'package:hive/hive.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
+
+import 'package:hive/hive.dart';
 
 part 'past_emails_model.g.dart';
 

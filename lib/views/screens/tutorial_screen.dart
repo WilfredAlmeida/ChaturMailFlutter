@@ -1,17 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:chaturmail/utils/constants.dart';
-
-import 'package:html/parser.dart' as htmlparser;
-import 'package:html/dom.dart' as dom;
 import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
 import 'package:chaturmail/views/widgets/tutorial_detail_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/utils_controller.dart';
-import '../widgets/bottom_navbar_widget.dart';
 import '../widgets/not_found_widget.dart';
 
 class TutorialsScreen extends StatefulWidget {
@@ -67,7 +62,7 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                   if (tutorialsController.tutorialsLoading.value == true) {
                     return const Center(
                       child: CircularProgressIndicator(
-                          color: greenMainColor2,
+                        color: greenMainColor2,
                       ),
                     );
                   }
@@ -87,8 +82,8 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
 
                       return TutorialDetailWidget(
                         title: tutorialsController.tutorialsList[index].title,
-                        htmlData:
-                            tutorialsController.tutorialsList[index].htmlContent,
+                        htmlData: tutorialsController
+                            .tutorialsList[index].htmlContent,
                         curvePosition: curvePosition,
                       );
                     },
@@ -105,7 +100,9 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
                 right: 0,
                 child: SizedBox(
                   height: 50,
-                  child: bottomAdBanner==null?const SizedBox(): AdWidget(ad: bottomAdBanner!),
+                  child: bottomAdBanner == null
+                      ? const SizedBox()
+                      : AdWidget(ad: bottomAdBanner!),
                 ),
               )
             ],

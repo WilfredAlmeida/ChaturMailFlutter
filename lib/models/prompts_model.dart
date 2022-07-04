@@ -2,9 +2,9 @@
 //
 //     final promptModel = promptModelFromJson(jsonString);
 
-import 'package:hive/hive.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
+
+import 'package:hive/hive.dart';
 
 part 'prompts_model.g.dart';
 

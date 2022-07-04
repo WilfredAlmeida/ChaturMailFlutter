@@ -1,16 +1,15 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:chaturmail/controllers/google_login.dart';
 import 'package:chaturmail/utils/constants.dart';
 import 'package:chaturmail/views/screens/contact_screen.dart';
 import 'package:chaturmail/views/screens/login_screen.dart';
 import 'package:chaturmail/views/screens/tutorial_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../../controllers/user_controller.dart';
-import '../../main.dart';
 
 class DashboardDrawer extends StatelessWidget {
   const DashboardDrawer({Key? key}) : super(key: key);
@@ -85,7 +84,8 @@ class DashboardDrawer extends StatelessWidget {
             onTap: () {
               Get.defaultDialog(
                   title: "Are you sure?",
-                  middleText: "This will log you out of the application and close the app",
+                  middleText:
+                      "This will log you out of the application and close the app",
                   textCancel: "Cancel",
                   textConfirm: "Logout",
                   backgroundColor: greenMainColor,
@@ -121,7 +121,8 @@ class DashboardDrawer extends StatelessWidget {
             onTap: () {
               Get.defaultDialog(
                   title: "Are you sure?",
-                  middleText: "This will delete your profile and emails and close the app",
+                  middleText:
+                      "This will delete your profile and emails and close the app",
                   textCancel: "Cancel",
                   textConfirm: "Delete",
                   backgroundColor: greenMainColor,

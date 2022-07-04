@@ -1,17 +1,10 @@
-import 'dart:convert';
-
+import 'package:chaturmail/controllers/user_controller.dart';
+import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:chaturmail/controllers/user_controller.dart';
-import 'package:chaturmail/main.dart';
-import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
-import 'package:chaturmail/view_models/prompt_viewmodel.dart';
-import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
 
 import 'jwt_token_obtainer.dart';
-import 'storage_controller.dart';
 
 class GoogleLoginController extends GetxController {
   Rx<GoogleSignIn> googleSignIn = GoogleSignIn().obs;
@@ -44,8 +37,6 @@ class GoogleLoginController extends GetxController {
   }
 
   Future<bool> googleLogout() async {
-
-
     await Get.find<UserController>().userBox.clear();
     // await Get.find<PromptController>().promptsBox.clear();
     await Get.find<PastEmailsController>().pastEmailsBox.clear();

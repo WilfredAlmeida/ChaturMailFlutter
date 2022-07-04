@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:chaturmail/controllers/api_communicator.dart';
 import 'package:chaturmail/utils/api_status.dart';
 import 'package:chaturmail/views/widgets/bottom_navbar_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'constants.dart';
 

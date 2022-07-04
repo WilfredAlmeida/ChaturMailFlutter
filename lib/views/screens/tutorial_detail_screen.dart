@@ -5,7 +5,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/utils_controller.dart';
-import '../widgets/bottom_navbar_widget.dart';
 
 class TutorialDetailScreen extends StatefulWidget {
   const TutorialDetailScreen(
@@ -62,7 +61,9 @@ class _TutorialDetailScreenState extends State<TutorialDetailScreen> {
               right: 0,
               child: SizedBox(
                 height: 100,
-                child: bottomBanner==null?const SizedBox(): AdWidget(ad: bottomBanner!),
+                child: bottomBanner == null
+                    ? const SizedBox()
+                    : AdWidget(ad: bottomBanner!),
               ),
             )
           ],

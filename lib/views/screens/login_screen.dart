@@ -41,9 +41,9 @@ class LoginScreen extends StatelessWidget {
                               barrierDismissible: false,
                               builder: (_) {
                                 return const Center(
-                                    child: CircularProgressIndicator(
-                                  color: greenMainColor2,
-                                ),
+                                  child: CircularProgressIndicator(
+                                    color: greenMainColor2,
+                                  ),
                                 );
                               });
 

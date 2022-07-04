@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:chaturmail/models/generate_email_request_model.dart';
 import 'package:chaturmail/models/generated_email_response_model.dart';
 import 'package:chaturmail/models/past_emails_model.dart';
 import 'package:chaturmail/models/prompts_model.dart';
 import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 import '../../view_models/generate_email_viewmodel.dart';
-import '../widgets/bottom_navbar_widget.dart';
 import 'display_email_screen.dart';
 
 class GenerateEmailScreen extends StatefulWidget {
@@ -127,7 +126,6 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   //To Email
                   Container(
                     decoration: const BoxDecoration(
@@ -371,7 +369,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
     Get.find<PastEmailsController>().getPastEmails();
 
     //Function to go on next screen. Done like this cuz after intersitital ad is closed. And defined up here cuz below it'll throw undefined error. This function is written here cuz the next screen needs data that is only present here in this function.
-    _gotoNextScreen=(){
+    _gotoNextScreen = () {
       Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
     };
 
@@ -380,6 +378,5 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
     } else {
       intersitialAd!.show();
     }
-
   }
 }

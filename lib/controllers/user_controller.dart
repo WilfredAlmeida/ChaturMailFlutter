@@ -1,16 +1,14 @@
 import 'dart:convert';
 
+import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../models/user_model.dart';
 import '../utils/api_status.dart';
-import '../views/screens/login_screen.dart';
 import 'api_communicator.dart';
 import 'google_login.dart';
-import 'storage_controller.dart';
 
 class UserController extends GetxController {
   // final sharedPreferencesController = Get.find<SharedPreferencesController>();
@@ -115,25 +113,25 @@ class UserController extends GetxController {
     return true;
   }
 
-  Future<bool> deleteUser() async{
-
-    deletingUser.value=true;
+  Future<bool> deleteUser() async {
+    deletingUser.value = true;
 
     var response = postRequest(url: "/user/deleteUser");
 
-    if(response is Success){
+    if (response is Success) {
       await Get.find<GoogleLoginController>().googleLogout();
 
-      deletingUser.value=true;
-    }
-    else if(response is Failure){
-      Get.find<UtilsController>().showErrorDialog(title: "Deleting Failed", content: "Please Try Again Later", onConfirm: null);
-      deletingUser.value=false;
+      deletingUser.value = true;
+    } else if (response is Failure) {
+      Get.find<UtilsController>().showErrorDialog(
+          title: "Deleting Failed",
+          content: "Please Try Again Later",
+          onConfirm: null);
+      deletingUser.value = false;
     }
 
     return true;
   }
-
 
   // dynamic getLoggedInUser() {
   //   var prefs = sharedPreferencesController.sharedPreferences.value;

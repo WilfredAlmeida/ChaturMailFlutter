@@ -62,7 +62,6 @@ class _ContactScreenState extends State<ContactScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               //Ad
               if (bannerAdTop == null)
                 const SizedBox(height: 50)

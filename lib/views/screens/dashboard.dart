@@ -1,6 +1,3 @@
-import "package:flutter/material.dart";
-import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:chaturmail/controllers/ads_controller.dart';
 import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:chaturmail/models/user_model.dart';
@@ -8,12 +5,12 @@ import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
 import 'package:chaturmail/view_models/prompt_viewmodel.dart';
 import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
-import 'package:chaturmail/views/screens/tutorial_screen.dart';
-import 'package:chaturmail/views/widgets/bottom_navbar_widget.dart';
 import 'package:chaturmail/views/widgets/not_found_widget.dart';
 import 'package:chaturmail/views/widgets/past_email_widget.dart';
+import "package:flutter/material.dart";
+import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../controllers/google_login.dart';
 import '../../utils/constants.dart';
 import '../widgets/dashboard_drawer.dart';
 import '../widgets/generateEmailWidget.dart';

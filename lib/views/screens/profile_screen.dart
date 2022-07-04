@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chaturmail/controllers/user_controller.dart';
+import 'package:chaturmail/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:chaturmail/controllers/user_controller.dart';
-import 'package:chaturmail/utils/constants.dart';
-import 'package:chaturmail/views/widgets/bottom_navbar_widget.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../models/user_model.dart';
@@ -131,7 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               right: 0,
               child: SizedBox(
                 height: 100,
-                child: bannerAdBottom==null?const SizedBox(): AdWidget(ad: bannerAdBottom!),
+                child: bannerAdBottom == null
+                    ? const SizedBox()
+                    : AdWidget(ad: bannerAdBottom!),
               ),
             )
           ],

@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:chaturmail/controllers/storage_controller.dart';
-import 'package:chaturmail/controllers/user_controller.dart';
+
 import '../utils/api_status.dart';
 import '../utils/constants.dart';
 

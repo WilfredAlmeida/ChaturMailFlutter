@@ -2,7 +2,6 @@
 //
 //     final generateEmailRequestModel = generateEmailRequestModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 GenerateEmailRequestModel generateEmailRequestModelFromJson(String str) =>
