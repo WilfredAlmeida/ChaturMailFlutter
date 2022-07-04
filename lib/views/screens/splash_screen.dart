@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wilfredemail/utils/constants.dart';
+import 'package:chaturmail/utils/constants.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

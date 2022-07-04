@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wilfredemail/controllers/google_login.dart';
+import 'package:chaturmail/controllers/google_login.dart';
 
 Future<bool> isUserLoggedIn() async {
   final googleLoginController = Get.find<GoogleLoginController>();

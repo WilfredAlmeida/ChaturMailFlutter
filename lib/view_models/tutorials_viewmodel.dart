@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:wilfredemail/controllers/api_communicator.dart';
-import 'package:wilfredemail/models/tutorials_model.dart';
+import 'package:chaturmail/controllers/api_communicator.dart';
+import 'package:chaturmail/models/tutorials_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../utils/api_status.dart';

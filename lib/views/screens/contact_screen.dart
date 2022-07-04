@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';

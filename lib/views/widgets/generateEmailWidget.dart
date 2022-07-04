@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
-import 'package:wilfredemail/views/screens/generate_email_screen.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
+import 'package:chaturmail/views/screens/generate_email_screen.dart';
 
 import '../../models/prompts_model.dart';
 import '../../utils/constants.dart';

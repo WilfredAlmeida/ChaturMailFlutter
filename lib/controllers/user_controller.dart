@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../models/user_model.dart';
 import '../utils/api_status.dart';

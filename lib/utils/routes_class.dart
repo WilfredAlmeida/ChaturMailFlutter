@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:wilfredemail/views/screens/dashboard.dart';
-import 'package:wilfredemail/views/screens/login_screen.dart';
-import 'package:wilfredemail/views/screens/profile_screen.dart';
-import 'package:wilfredemail/views/screens/tutorial_screen.dart';
+import 'package:chaturmail/views/screens/dashboard.dart';
+import 'package:chaturmail/views/screens/login_screen.dart';
+import 'package:chaturmail/views/screens/profile_screen.dart';
+import 'package:chaturmail/views/screens/tutorial_screen.dart';
 
 class RoutesClass {
   static const String _dashboardRoute = "/dashboardScreen";

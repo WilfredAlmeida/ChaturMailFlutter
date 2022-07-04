@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:wilfredemail/controllers/api_communicator.dart';
-import 'package:wilfredemail/utils/api_status.dart';
-import 'package:wilfredemail/views/widgets/bottom_navbar_widget.dart';
+import 'package:chaturmail/controllers/api_communicator.dart';
+import 'package:chaturmail/utils/api_status.dart';
+import 'package:chaturmail/views/widgets/bottom_navbar_widget.dart';
 
 import 'constants.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wilfredemail/models/generated_email_response_model.dart';
-import 'package:wilfredemail/view_models/prompt_viewmodel.dart';
+import 'package:chaturmail/models/generated_email_response_model.dart';
+import 'package:chaturmail/view_models/prompt_viewmodel.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';

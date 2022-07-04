@@ -1,24 +1,21 @@
+import 'package:chaturmail/controllers/ads_controller.dart';
+import 'package:chaturmail/controllers/user_controller.dart';
+import 'package:chaturmail/models/tutorials_model.dart';
+import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:wilfredemail/controllers/ads_controller.dart';
-import 'package:wilfredemail/controllers/storage_controller.dart';
-import 'package:wilfredemail/controllers/user_controller.dart';
-import 'package:wilfredemail/models/tutorials_model.dart';
-import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:wilfredemail/views/screens/splash_screen.dart';
+
 import './models/past_emails_model.dart';
+import './models/prompts_model.dart';
 import './utils/utils_controller.dart';
 import './view_models/prompt_viewmodel.dart';
 import './views/screens/login_screen.dart';
-import './models/prompts_model.dart';
-
 import 'controllers/google_login.dart';
 import 'controllers/jwt_token_obtainer.dart';
 import 'controllers/login_checker.dart';
@@ -29,8 +26,6 @@ import 'utils/routes_class.dart';
 import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
-import 'views/widgets/tutorial_detail_widget.dart';
-import 'views/screens/tutorial_screen.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -92,9 +87,8 @@ Future<void> _initialize() async {
 
   final adsController = Get.put(AdsController());
 
-  final initFuture= MobileAds.instance.initialize();
+  final initFuture = MobileAds.instance.initialize();
   adsController.initialization = initFuture.obs;
-
 
   // final sharedPreferencesController = Get.put(SharedPreferencesController());
 
@@ -184,7 +178,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       // initialRoute: RoutesClass.dashboardRoute,
       getPages: RoutesClass.routes,
-      title: 'SmartEmail',
+      title: 'ChaturMail',
       theme: ThemeData(
           scaffoldBackgroundColor: mainColor,
           appBarTheme: const AppBarTheme(

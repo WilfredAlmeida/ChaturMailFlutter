@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:wilfredemail/controllers/storage_controller.dart';
-import 'package:wilfredemail/controllers/user_controller.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:chaturmail/controllers/storage_controller.dart';
+import 'package:chaturmail/controllers/user_controller.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../utils/api_status.dart';
 import 'api_communicator.dart';

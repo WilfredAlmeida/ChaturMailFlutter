@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wilfredemail/controllers/api_communicator.dart';
-import 'package:wilfredemail/models/generated_email_response_model.dart';
+import 'package:chaturmail/controllers/api_communicator.dart';
+import 'package:chaturmail/models/generated_email_response_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
 import '../models/generate_email_request_model.dart';
 import '../utils/api_status.dart';
 

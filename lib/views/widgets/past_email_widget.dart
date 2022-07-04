@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
-import 'package:wilfredemail/view_models/past_emails_viewmodel.dart';
-import 'package:wilfredemail/views/screens/display_email_screen.dart';
-import 'package:wilfredemail/views/screens/generate_email_screen.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
+import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
+import 'package:chaturmail/views/screens/display_email_screen.dart';
+import 'package:chaturmail/views/screens/generate_email_screen.dart';
 
 import '../../models/generated_email_response_model.dart';
 import '../../models/past_emails_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wilfredemail/utils/constants.dart';
-import 'package:wilfredemail/views/screens/tutorial_detail_screen.dart';
+import 'package:chaturmail/utils/constants.dart';
+import 'package:chaturmail/views/screens/tutorial_detail_screen.dart';
 
 class TutorialDetailWidget extends StatelessWidget {
   final String htmlData;

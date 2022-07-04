@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:wilfredemail/utils/constants.dart';
+import 'package:chaturmail/utils/constants.dart';
 
 import 'package:html/parser.dart' as htmlparser;
 import 'package:html/dom.dart' as dom;
-import 'package:wilfredemail/view_models/tutorials_viewmodel.dart';
-import 'package:wilfredemail/views/widgets/tutorial_detail_widget.dart';
+import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
+import 'package:chaturmail/views/widgets/tutorial_detail_widget.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/utils_controller.dart';

@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:wilfredemail/controllers/google_login.dart';
-import 'package:wilfredemail/utils/constants.dart';
-import 'package:wilfredemail/views/screens/contact_screen.dart';
-import 'package:wilfredemail/views/screens/login_screen.dart';
-import 'package:wilfredemail/views/screens/tutorial_screen.dart';
+import 'package:chaturmail/controllers/google_login.dart';
+import 'package:chaturmail/utils/constants.dart';
+import 'package:chaturmail/views/screens/contact_screen.dart';
+import 'package:chaturmail/views/screens/login_screen.dart';
+import 'package:chaturmail/views/screens/tutorial_screen.dart';
 
 import '../../controllers/user_controller.dart';
 import '../../main.dart';

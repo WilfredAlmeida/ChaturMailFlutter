@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:wilfredemail/models/past_emails_model.dart';
-import 'package:wilfredemail/utils/api_status.dart';
-import 'package:wilfredemail/utils/utils_controller.dart';
+import 'package:chaturmail/models/past_emails_model.dart';
+import 'package:chaturmail/utils/api_status.dart';
+import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../controllers/api_communicator.dart';
 import '../utils/constants.dart';
