@@ -8,6 +8,7 @@ import 'package:chaturmail/views/screens/tutorial_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/user_controller.dart';
 
@@ -137,12 +138,36 @@ class DashboardDrawer extends StatelessWidget {
             },
             tileColor: greenMainColor,
             leading: const Icon(
-              Icons.logout,
+              Icons.delete_forever,
               color: Colors.black,
               size: 30,
             ),
             title: const Text(
               "Delete",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
+              textAlign: TextAlign.start,
+            ),
+          ),
+
+          const Divider(),
+
+          //Privacy Policy
+          ListTile(
+            onTap: () {
+              launchUrl(Uri.parse(
+                  "https://wilfredalmeida.github.io/ChaturMail-Privacy-Policy/"));
+            },
+            tileColor: greenMainColor,
+            leading: const Icon(
+              Icons.privacy_tip,
+              color: Colors.black,
+              size: 30,
+            ),
+            title: const Text(
+              "Privacy Policy",
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/google_login.dart';
 import '../../utils/constants.dart';
@@ -113,6 +114,27 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    //Privacy Policy
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              "https://wilfredalmeida.github.io/ChaturMail-Privacy-Policy/"));
+                        },
+                        child: const Text(
+                          "By continuing I accept the Privacy Policy. Tap to Read",
+                          style: TextStyle(
+                              color: greenMainColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
 
