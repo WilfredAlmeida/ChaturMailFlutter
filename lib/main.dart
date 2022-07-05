@@ -179,6 +179,7 @@ class _MyAppState extends State<MyApp> {
       // initialRoute: RoutesClass.dashboardRoute,
       getPages: RoutesClass.routes,
       title: 'ChaturMail',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           scaffoldBackgroundColor: mainColor,
           appBarTheme: const AppBarTheme(

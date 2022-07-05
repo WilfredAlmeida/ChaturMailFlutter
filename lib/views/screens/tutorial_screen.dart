@@ -95,7 +95,7 @@ class _TutorialsScreenState extends State<TutorialsScreen> {
 
               //Ad
               Positioned(
-                bottom: -10,
+                bottom: 1,
                 left: 0,
                 right: 0,
                 child: SizedBox(
