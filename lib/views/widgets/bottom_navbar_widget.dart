@@ -1,6 +1,8 @@
+import 'dart:io';
+
+import 'package:chaturmail/views/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:chaturmail/views/screens/profile_screen.dart';
 
 import '../../utils/constants.dart';
 import '../screens/dashboard.dart';
@@ -18,74 +20,96 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Stack(
-          children: [
-            Container(
-              height: 65,
-              color: mainColor,
-              child: CustomPaint(
-                  size: Size(MediaQuery.of(context).size.width, 100),
-                  painter: MyPainter()),
-            ),
-            Positioned(
-              bottom: 0,
-              top: 30,
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.currentIndex.value = 0;
-                      });
+    return WillPopScope(
+      onWillPop: () async {
+        Get.defaultDialog(
+            title: "Do you want to Exit?",
+            content: const Text("The app will be exited"),
+            textConfirm: "No",
+            textCancel: "Yes",
+            buttonColor: mainColor.withOpacity(0.6),
+            confirmTextColor: greenMainColor2,
+            cancelTextColor: Colors.black,
+            onConfirm: () {
+              print("CONFIRMED");
+              Get.back();
+            },
+            onCancel: () {
+              print("CANCELLED");
+              exit(0);
+            });
 
-                      Get.offAll(() => const DashboardScreen());
-                    },
-                    icon: Icon(
-                      Icons.home,
-                      size: 30,
-                      color: widget.currentIndex.value == 0
-                          ? greenMainColor2
-                          : Colors.white,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.currentIndex.value = 1;
-                      });
-                      Get.to(() => TutorialsScreen());
-                    },
-                    icon: Icon(
-                      Icons.menu_book_outlined,
-                      size: 30,
-                      color: widget.currentIndex.value == 1
-                          ? greenMainColor2
-                          : Colors.white,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.currentIndex.value = 2;
-                      });
-                      Get.to(() => ProfileScreen());
-                    },
-                    icon: Icon(
-                      Icons.person,
-                      size: 30,
-                      color: widget.currentIndex.value == 2
-                          ? greenMainColor2
-                          : Colors.white,
-                    ),
-                  )
-                ],
+        return true;
+      },
+      child: Obx(() => Stack(
+            children: [
+              Container(
+                height: 65,
+                color: mainColor,
+                child: CustomPaint(
+                    size: Size(MediaQuery.of(context).size.width, 100),
+                    painter: MyPainter()),
               ),
-            ),
-          ],
-        ));
+              Positioned(
+                bottom: 0,
+                top: 30,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.currentIndex.value = 0;
+                        });
+
+                        Get.offAll(() => const DashboardScreen());
+                      },
+                      icon: Icon(
+                        Icons.home,
+                        size: 30,
+                        color: widget.currentIndex.value == 0
+                            ? greenMainColor2
+                            : Colors.white,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.currentIndex.value = 1;
+                        });
+                        Get.off(() => TutorialsScreen());
+                      },
+                      icon: Icon(
+                        Icons.menu_book_outlined,
+                        size: 30,
+                        color: widget.currentIndex.value == 1
+                            ? greenMainColor2
+                            : Colors.white,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.currentIndex.value = 2;
+                        });
+                        Get.off(() => ProfileScreen());
+                      },
+                      icon: Icon(
+                        Icons.person,
+                        size: 30,
+                        color: widget.currentIndex.value == 2
+                            ? greenMainColor2
+                            : Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }
 
