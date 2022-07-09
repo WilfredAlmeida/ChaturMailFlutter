@@ -1,4 +1,6 @@
 # Miscellaneous
+*.jks
+key.properties
 *.class
 *.log
 *.pyc

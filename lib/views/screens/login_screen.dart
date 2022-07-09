@@ -1,3 +1,4 @@
+import 'package:chaturmail/views/screens/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,10 +42,9 @@ class LoginScreen extends StatelessWidget {
                               context: context,
                               barrierDismissible: false,
                               builder: (_) {
-                                return const Center(
-                                  child: CircularProgressIndicator(
-                                    color: greenMainColor2,
-                                  ),
+                                return Center(
+                                  child:
+                                      Image.asset("assets/images/loading.gif"),
                                 );
                               });
 
@@ -55,7 +55,8 @@ class LoginScreen extends StatelessWidget {
                               await googleLoginController.googleLogin();
 
                           if (loginSuccessful) {
-                            Get.toNamed("/dashboardScreen");
+                            // Get.toNamed("/dashboardScreen");
+                            Get.offAll(const DashboardScreen());
                           }
                         },
                         child: Row(
