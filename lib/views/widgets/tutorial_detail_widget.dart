@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:chaturmail/utils/constants.dart';
 import 'package:chaturmail/views/screens/tutorial_detail_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TutorialDetailWidget extends StatelessWidget {
   final String htmlData;
@@ -19,7 +19,10 @@ class TutorialDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => TutorialDetailScreen(title: title, htmlData: htmlData));
+        Get.to(
+          () => TutorialDetailScreen(title: title, htmlData: htmlData),
+          transition: Transition.fade,
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(18.0),

@@ -57,6 +57,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 0;
+
     adsController.initialization.value.then((value) {
       setState(() {
         bannerAdMiddle = BannerAd(
@@ -129,8 +131,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   //Generate Emails Listview
                   Obx(() {
                     if (promptController.promptsLoading.value == true) {
-                      return const CircularProgressIndicator(
-                          color: greenMainColor2);
+                      return const Center(
+                          child: Center(child: LoadingWidget()));
+                      // return const CircularProgressIndicator(
+                      //     color: greenMainColor2);
                     }
 
                     if (promptController.noPromptsFound.value == true) {
@@ -175,8 +179,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   //Past Emails ListView
                   Obx(() {
                     if (pastEmailsController.pastEmailsLoading.value == true) {
-                      return const CircularProgressIndicator(
-                          color: greenMainColor2);
+                      return const Center(child: LoadingWidget());
+
+                      // return const CircularProgressIndicator(
+                      //     color: greenMainColor2);
                     }
 
                     if (pastEmailsController.noPastEmailsFound.value == true) {
@@ -246,5 +252,18 @@ class MyPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      "assets/images/loading2.gif",
+      width: 200,
+      height: 200,
+    );
   }
 }

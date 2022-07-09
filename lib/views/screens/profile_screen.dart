@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:chaturmail/utils/constants.dart';
@@ -38,6 +36,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 2;
+
     setState(() {
       bannerAdBottom = BannerAd(
         adUnitId: adsController.profileBottomBannerUnitId,
@@ -57,6 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Stack(
           children: [
             Positioned.fill(
+              top: 0,
+              bottom: 150,
               child: Center(
                 child: SingleChildScrollView(
                   child: user == null
@@ -105,18 +107,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // const SizedBox(height: 10),
 
                             //Banner
-                            Get.find<UserController>()
-                                    .bannerBase64
-                                    .value
-                                    .isEmpty
-                                ? const SizedBox()
-                                : Image.memory(
-                                    base64Decode(Get.find<UserController>()
-                                        .bannerBase64
-                                        .value),
-                                    width: 200,
-                                    height: 180,
-                                  ),
+                            // Get.find<UserController>()
+                            //         .bannerBase64
+                            //         .value
+                            //         .isEmpty
+                            //     ? const SizedBox()
+                            //     : Image.memory(
+                            //         base64Decode(Get.find<UserController>()
+                            //             .bannerBase64
+                            //             .value),
+                            //         width: 200,
+                            //         height: 180,
+                            //       ),
                           ],
                         ),
                 ),
@@ -127,9 +129,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Positioned(
               bottom: 0,
               left: 0,
+              // top: 0,
               right: 0,
               child: SizedBox(
-                height: 100,
+                height: 250,
                 child: bannerAdBottom == null
                     ? const SizedBox()
                     : AdWidget(ad: bannerAdBottom!),

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/views/screens/generate_email_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../models/prompts_model.dart';
 import '../../utils/constants.dart';
@@ -22,7 +22,10 @@ class GenerateEmailWidget extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Get.to(GenerateEmailScreen(promptModel: promptModel));
+              Get.to(
+                GenerateEmailScreen(promptModel: promptModel),
+                transition: Transition.fade,
+              );
             },
             child: Container(
               width: 200,

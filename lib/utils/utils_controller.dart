@@ -12,6 +12,8 @@ class UtilsController extends GetxController {
   var isInternetConnected = false.obs;
   var submittingFeedback = false.obs;
 
+  Rx<int> bottomNavBarIndex = 0.obs;
+
   Future<void> initializeUtils() async {
     isInternetConnected.value = await hasNetwork();
   }

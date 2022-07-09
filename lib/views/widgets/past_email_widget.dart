@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
 import 'package:chaturmail/views/screens/display_email_screen.dart';
 import 'package:chaturmail/views/screens/generate_email_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../models/generated_email_response_model.dart';
 import '../../models/past_emails_model.dart';
@@ -38,7 +38,10 @@ class PastEmailWidget extends StatelessWidget {
                 createdOn: pastEmail.createdOn,
               );
 
-              Get.to(() => DisplayEmailScreen(generatedEmail: email));
+              Get.to(
+                () => DisplayEmailScreen(generatedEmail: email),
+                transition: Transition.fade,
+              );
             },
             child: Container(
               width: 200,
@@ -104,11 +107,14 @@ class PastEmailWidget extends StatelessWidget {
               onLongPress: () {
                 final promptController = Get.find<PromptController>();
 
-                Get.to(() => GenerateEmailScreen(
-                      promptModel:
-                          promptController.getPromptById(pastEmail.promptId),
-                      pastEmail: pastEmail,
-                    ));
+                Get.to(
+                  () => GenerateEmailScreen(
+                    promptModel:
+                        promptController.getPromptById(pastEmail.promptId),
+                    pastEmail: pastEmail,
+                  ),
+                  transition: Transition.fade,
+                );
               },
               child: Container(
                 width: 50,
