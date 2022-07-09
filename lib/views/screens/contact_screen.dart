@@ -1,7 +1,7 @@
+import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:chaturmail/utils/utils_controller.dart';
 
 import '../../controllers/ads_controller.dart';
 import '../../utils/constants.dart';
@@ -36,7 +36,7 @@ class _ContactScreenState extends State<ContactScreen> {
     setState(() {
       bannerAdBottom = BannerAd(
         adUnitId: adsController.contactUsBottomBannerUnitId,
-        size: AdSize.mediumRectangle,
+        size: AdSize.banner,
         request: const AdRequest(),
         listener: adsController.bannerAdListener,
       )..load();
@@ -67,11 +67,12 @@ class _ContactScreenState extends State<ContactScreen> {
                 const SizedBox(height: 50)
               else
                 SizedBox(
-                  height: 50,
+                  width: 300,
+                  height: 250,
                   child: AdWidget(ad: bannerAdTop!),
                 ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
 
               //Subject
               Container(
@@ -94,7 +95,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               //Body
               Container(
@@ -172,7 +173,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 3),
 
               //Ad
               if (bannerAdBottom == null)

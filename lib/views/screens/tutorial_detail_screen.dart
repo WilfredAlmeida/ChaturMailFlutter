@@ -27,6 +27,8 @@ class _TutorialDetailScreenState extends State<TutorialDetailScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 1;
+
     setState(() {
       bottomBanner = BannerAd(
         adUnitId: adsController.tutorialsDetailBottomBannerUnitId,

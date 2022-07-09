@@ -69,6 +69,8 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 0;
+
     adsController.initialization.value.then((value) {
       setState(() {
         bannerAdBottom = BannerAd(

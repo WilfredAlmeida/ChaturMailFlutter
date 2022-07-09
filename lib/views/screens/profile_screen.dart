@@ -36,6 +36,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 2;
+
     setState(() {
       bannerAdBottom = BannerAd(
         adUnitId: adsController.profileBottomBannerUnitId,

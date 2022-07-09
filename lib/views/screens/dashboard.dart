@@ -57,6 +57,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    Get.find<UtilsController>().bottomNavBarIndex.value = 0;
+
     adsController.initialization.value.then((value) {
       setState(() {
         bannerAdMiddle = BannerAd(
