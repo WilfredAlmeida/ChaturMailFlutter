@@ -370,7 +370,10 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
 
     //Function to go on next screen. Done like this cuz after intersitital ad is closed. And defined up here cuz below it'll throw undefined error. This function is written here cuz the next screen needs data that is only present here in this function.
     _gotoNextScreen = () {
-      Get.to(() => DisplayEmailScreen(generatedEmail: generatedEmail));
+      Get.to(
+        () => DisplayEmailScreen(generatedEmail: generatedEmail),
+        transition: Transition.fade,
+      );
     };
 
     if (intersitialAd == null) {

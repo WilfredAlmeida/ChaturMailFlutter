@@ -56,7 +56,10 @@ class LoginScreen extends StatelessWidget {
 
                           if (loginSuccessful) {
                             // Get.toNamed("/dashboardScreen");
-                            Get.offAll(const DashboardScreen());
+                            Get.offAll(
+                              const DashboardScreen(),
+                              transition: Transition.fade,
+                            );
                           }
                         },
                         child: Row(

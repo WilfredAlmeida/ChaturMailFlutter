@@ -36,7 +36,10 @@ class DashboardDrawer extends StatelessWidget {
           //Tutorials
           ListTile(
             onTap: () {
-              Get.to(() => TutorialsScreen());
+              Get.to(
+                () => TutorialsScreen(),
+                transition: Transition.fade,
+              );
             },
             tileColor: greenMainColor,
             leading: const Icon(
@@ -59,7 +62,10 @@ class DashboardDrawer extends StatelessWidget {
           //Contact
           ListTile(
             onTap: () {
-              Get.to(ContactScreen());
+              Get.to(
+                ContactScreen(),
+                transition: Transition.fade,
+              );
             },
             tileColor: greenMainColor,
             leading: const Icon(
@@ -95,7 +101,10 @@ class DashboardDrawer extends StatelessWidget {
                   cancelTextColor: mainColor,
                   onConfirm: () async {
                     await Get.find<GoogleLoginController>().googleLogout();
-                    Get.offAll(() => const LoginScreen());
+                    Get.offAll(
+                      () => const LoginScreen(),
+                      transition: Transition.fade,
+                    );
                     SystemNavigator.pop();
                   });
             },
@@ -132,7 +141,10 @@ class DashboardDrawer extends StatelessWidget {
                   cancelTextColor: mainColor,
                   onConfirm: () async {
                     await Get.find<UserController>().deleteUser();
-                    Get.offAll(() => const LoginScreen());
+                    Get.offAll(
+                      () => const LoginScreen(),
+                      transition: Transition.fade,
+                    );
                     SystemNavigator.pop();
                   });
             },

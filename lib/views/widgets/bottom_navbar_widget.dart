@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chaturmail/views/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,22 +20,27 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.defaultDialog(
-            title: "Do you want to Exit?",
-            content: const Text("The app will be exited"),
-            textConfirm: "No",
-            textCancel: "Yes",
-            buttonColor: mainColor.withOpacity(0.6),
-            confirmTextColor: greenMainColor2,
-            cancelTextColor: Colors.black,
-            onConfirm: () {
-              print("CONFIRMED");
-              Get.back();
-            },
-            onCancel: () {
-              print("CANCELLED");
-              exit(0);
-            });
+        // Get.defaultDialog(
+        //     title: "Do you want to Exit?",
+        //     content: const Text("The app will be exited"),
+        //     textConfirm: "No",
+        //     textCancel: "Yes",
+        //     buttonColor: mainColor.withOpacity(0.6),
+        //     confirmTextColor: greenMainColor2,
+        //     cancelTextColor: Colors.black,
+        //     onConfirm: () {
+        //       print("CONFIRMED");
+        //       Get.back();
+        //     },
+        //     onCancel: () {
+        //       print("CANCELLED");
+        //       exit(0);
+        //     });
+
+        Get.offAll(
+          const DashboardScreen(),
+          transition: Transition.fade,
+        );
 
         return true;
       },
@@ -64,7 +67,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                           widget.currentIndex.value = 0;
                         });
 
-                        Get.offAll(() => const DashboardScreen());
+                        Get.offAll(
+                          () => const DashboardScreen(),
+                          transition: Transition.fade,
+                        );
                       },
                       icon: Icon(
                         Icons.home,
@@ -79,7 +85,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                         setState(() {
                           widget.currentIndex.value = 1;
                         });
-                        Get.off(() => TutorialsScreen());
+                        Get.off(
+                          () => TutorialsScreen(),
+                          transition: Transition.fade,
+                        );
                       },
                       icon: Icon(
                         Icons.menu_book_outlined,
@@ -94,7 +103,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                         setState(() {
                           widget.currentIndex.value = 2;
                         });
-                        Get.off(() => ProfileScreen());
+                        Get.off(
+                          () => ProfileScreen(),
+                          transition: Transition.fade,
+                        );
                       },
                       icon: Icon(
                         Icons.person,
