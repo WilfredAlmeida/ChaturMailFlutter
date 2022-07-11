@@ -1,3 +1,4 @@
+//This file handles past emails. It fetches from API and sends delete request
 import 'dart:convert';
 
 import 'package:chaturmail/models/past_emails_model.dart';
@@ -26,7 +27,6 @@ class PastEmailsController extends GetxController {
       const url = "/email/getGeneratedEmails";
 
       var result = await postRequest(url: url);
-      // print(result.response.body);
 
       if (result is Success) {
         final response = result.response as http.Response;
@@ -34,31 +34,22 @@ class PastEmailsController extends GetxController {
         print("BODY");
         print(body);
 
-        // pastEmailsList.clear();
-        // await pastEmailsBox.clear();
-
         if (body['status'] == 1) {
           await pastEmailsBox.clear();
 
           for (var i = 0; i < body['payload'].length; i++) {
             var a = PastEmailsModel.fromJson(body['payload'][i]);
             await pastEmailsBox.put(i, a);
-            // pastEmailsList.add(a);
-
           }
-
-          // pastEmailsList = RxList<PastEmailsModel>([...pastEmailsBox.toMap().values.toList()]);
 
           pastEmailsLoading.value = false;
         } else {
-          // noPastEmailsFound.value = true;
           pastEmailsLoading.value = false;
         }
       } else if (result is Failure) {
         print(result.errorResponse);
 
         pastEmailsLoading.value = false;
-        // noPastEmailsFound.value=true;
       }
 
       pastEmailsList.clear();
@@ -73,7 +64,6 @@ class PastEmailsController extends GetxController {
       print(e);
       print(s);
       pastEmailsLoading.value = false;
-      // noPastEmailsFound.value=true;
       return false;
     }
   }

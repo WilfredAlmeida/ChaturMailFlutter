@@ -1,3 +1,4 @@
+//Shown when no prompts/generated emails exist
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

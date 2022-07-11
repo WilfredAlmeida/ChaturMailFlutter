@@ -1,3 +1,4 @@
+//Shows the tutorial detail. Renders HTML received from server. Sending HTML makes tutorials customized. Otherwise having different formats for tutorials in flutter would be a pain
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,8 @@ class TutorialDetailScreen extends StatefulWidget {
       : super(key: key);
 
   final String title;
+
+  //HTML in form of String that'll be parsed and rendered
   final String htmlData;
 
   @override

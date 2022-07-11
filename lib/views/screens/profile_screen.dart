@@ -1,3 +1,4 @@
+//This screen shows profile info of user
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:chaturmail/utils/constants.dart';
@@ -145,6 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+//Texts shown, rather than repeating code, made a widget
 class MText extends StatelessWidget {
   const MText({Key? key, required this.txt}) : super(key: key);
 

@@ -1,3 +1,5 @@
+//This file has utility functions like internet connection check, showing error dialog,sending feedback, providing bottom navigation bar object
+
 import 'dart:io';
 
 import 'package:chaturmail/controllers/api_communicator.dart';
@@ -18,6 +20,7 @@ class UtilsController extends GetxController {
     isInternetConnected.value = await hasNetwork();
   }
 
+  //Checks Internet
   Future<bool> hasNetwork() async {
     try {
       final result = await InternetAddress.lookup('example.com');
@@ -27,6 +30,7 @@ class UtilsController extends GetxController {
     }
   }
 
+  //Shows Error Dialog
   void showErrorDialog(
       {required title, required content, required Function()? onConfirm}) {
     Get.defaultDialog(
@@ -42,8 +46,10 @@ class UtilsController extends GetxController {
     );
   }
 
+  //Bottom Navigation Bar Object. Done here cuz should be initialized only once. In screens, each screens initializes it multiple times
   Widget bottomNavBarWidget = BottomNavBarWidget();
 
+  //Calls API ans submits user feedback
   Future<bool> submitFeedback(
       {required String subject, required String message}) async {
     submittingFeedback.value = true;

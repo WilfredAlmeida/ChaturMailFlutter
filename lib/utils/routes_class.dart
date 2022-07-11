@@ -1,8 +1,10 @@
-import 'package:get/get.dart';
+//GetXRoutes. Not used. Are TODO
+
 import 'package:chaturmail/views/screens/dashboard.dart';
 import 'package:chaturmail/views/screens/login_screen.dart';
 import 'package:chaturmail/views/screens/profile_screen.dart';
 import 'package:chaturmail/views/screens/tutorial_screen.dart';
+import 'package:get/get.dart';
 
 class RoutesClass {
   static const String _dashboardRoute = "/dashboardScreen";

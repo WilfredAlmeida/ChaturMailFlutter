@@ -27,15 +27,18 @@ import 'view_models/generate_email_viewmodel.dart';
 import 'view_models/past_emails_viewmodel.dart';
 import 'views/screens/dashboard.dart';
 
+//Notification Channel
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
     importance: Importance.high,
     playSound: true);
 
+//For issuing local notifications
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+//Handles notification when app is in background
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('A bg message just showed up :  ${message.messageId}');
@@ -43,10 +46,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //Start showing splash screen and begin initializations
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await _initialize();
 
+  //Initializations done, remove splash screen
   FlutterNativeSplash.remove();
 
   runApp(const MyApp());
@@ -57,8 +62,10 @@ Future<void> _initialize() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  //Handles notification when app is in background
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  //Initialize notification plugin
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
@@ -70,12 +77,16 @@ Future<void> _initialize() async {
     sound: true,
   );
 
+  //Hive initialization
   await Hive.initFlutter();
 
+  //Registering hive adapters
   Hive.registerAdapter(PromptModelAdapter());
   Hive.registerAdapter(PastEmailsModelAdapter());
   Hive.registerAdapter(TutorialsModelAdapter());
   Hive.registerAdapter(UserModelAdapter());
+
+  //Below are all hive boxes and GetX Controller initializations
 
   final promptController = Get.put(PromptController());
 
@@ -87,21 +98,15 @@ Future<void> _initialize() async {
 
   final adsController = Get.put(AdsController());
 
+  //Ads instance initialization
   final initFuture = MobileAds.instance.initialize();
   adsController.initialization = initFuture.obs;
-
-  // final sharedPreferencesController = Get.put(SharedPreferencesController());
-
-  // sharedPreferencesController.initializeSharedPreference();
 
   var userController = Get.put(UserController());
 
   Get.put(GoogleLoginController());
   Get.put(JWTController());
   Get.put(GenerateEmailController());
-
-  // final dir = await getApplicationDocumentsDirectory();
-  // Hive.init(dir.path);
 
   userController.userBox = (await Hive.openBox("userBox"));
 

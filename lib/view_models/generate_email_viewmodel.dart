@@ -1,3 +1,4 @@
+//This file is handles getting email generation
 import 'dart:convert';
 
 import 'package:chaturmail/controllers/api_communicator.dart';
@@ -10,8 +11,10 @@ import '../utils/api_status.dart';
 class GenerateEmailController extends GetxController {
   // static GenerateEmailController get to => Get.find();
 
+  //The request object is set via state management. Just use it's value
   var generateEmailRequest = Object().obs;
 
+  //Response is provided via state management. Nothing is saved
   late Rx<GeneratedEmailResponseModel> generatedEmailResponse;
 
   var generatingEmail = false.obs;

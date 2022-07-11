@@ -1,3 +1,5 @@
+//This is the generate email widget on DashboardScreen. Data comes flow if API -> Hive DB -> List in View Model -> Listview.builder -> This widget
+
 import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/views/screens/generate_email_screen.dart';
 import 'package:flutter/material.dart';

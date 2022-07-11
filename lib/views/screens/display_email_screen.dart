@@ -1,3 +1,4 @@
+//This screen displays generated email
 import 'package:chaturmail/models/generated_email_response_model.dart';
 import 'package:chaturmail/view_models/prompt_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../utils/constants.dart';
 import '../../utils/utils_controller.dart';
 
 class DisplayEmailScreen extends StatefulWidget {
+  //Generated email object
   final Payload generatedEmail;
 
   late final String _promptName;
@@ -70,6 +72,8 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
           title: Text(widget._promptName),
           elevation: 0,
         ),
+
+        //Launches email app like gmail
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             launchEmailApp(
@@ -117,7 +121,7 @@ class _DisplayEmailScreenState extends State<DisplayEmailScreen> {
 
                 const SizedBox(height: 15),
 
-                //Generated Email Heading
+                //Generated Email Heading & Copy to Clipboard button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

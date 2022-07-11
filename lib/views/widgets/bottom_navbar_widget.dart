@@ -1,3 +1,4 @@
+//Bottom navigation bar widget. Is a stack placed at bottom of all screens
 import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/views/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -128,6 +129,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   }
 }
 
+//The curves at top left and top right
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

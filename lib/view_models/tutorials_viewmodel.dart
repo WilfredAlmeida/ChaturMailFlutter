@@ -1,9 +1,10 @@
+//This file handles tutorials. It gets tutorials from server and stores them
 import 'dart:convert';
 
-import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:chaturmail/controllers/api_communicator.dart';
 import 'package:chaturmail/models/tutorials_model.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 import '../utils/api_status.dart';

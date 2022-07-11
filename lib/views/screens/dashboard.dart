@@ -38,6 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
+    //Initial API calls. Should be done only once so done like this
     if (!didItOnce) {
       Future.wait([
         promptController.getPrompts(),
@@ -57,8 +58,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    //For BottomNavigationBarWidget, whichever screen is visible on screen sets this value and accordingly the widget highlights icon.
     Get.find<UtilsController>().bottomNavBarIndex.value = 0;
 
+    //Initial initialization of Ads Controller Object and Ad Units for the screen
     adsController.initialization.value.then((value) {
       setState(() {
         bannerAdMiddle = BannerAd(
@@ -255,6 +258,7 @@ class MyPainter extends CustomPainter {
   }
 }
 
+//Loading widget, shows book turning gif
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
 

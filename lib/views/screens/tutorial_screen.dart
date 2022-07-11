@@ -1,3 +1,5 @@
+//Shows a scrolling list of tutorials
+
 import 'package:chaturmail/utils/constants.dart';
 import 'package:chaturmail/view_models/tutorials_viewmodel.dart';
 import 'package:chaturmail/views/widgets/tutorial_detail_widget.dart';

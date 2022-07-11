@@ -1,3 +1,5 @@
+//This file manages user data
+
 import 'dart:convert';
 
 import 'package:chaturmail/utils/utils_controller.dart';
@@ -13,13 +15,16 @@ import 'google_login.dart';
 class UserController extends GetxController {
   // final sharedPreferencesController = Get.find<SharedPreferencesController>();
 
+  //User Object
   var user = Rx<UserModel?>(null);
 
   var userLoading = false.obs;
   var noUserFound = false.obs;
 
+  //User Hive Box, initialized in main.dart. Provided by state management
   late Box<dynamic> userBox;
 
+  //Banner Image. Comes in as base64
   var bannerBase64 = ''.obs;
 
   var deletingUser = false.obs;
@@ -32,6 +37,7 @@ class UserController extends GetxController {
 
       var result = await postRequest(url: url);
 
+      //Get value from API and store in Hive
       if (result is Success) {
         final response = result.response as http.Response;
         var body = json.decode(response.body);
@@ -52,6 +58,7 @@ class UserController extends GetxController {
         userLoading.value = false;
       }
 
+      //Read data only from hive, if not found assign null
       user.value = (userBox.get("user") == null
           ? null
           : (userBox.get("user") as UserModel));
@@ -68,6 +75,7 @@ class UserController extends GetxController {
     }
   }
 
+  //Get banner image
   Future<bool> getBannerUrl() async {
     try {
       userLoading.value = true;
@@ -113,6 +121,7 @@ class UserController extends GetxController {
     return true;
   }
 
+  //Logs out and deleted user
   Future<bool> deleteUser() async {
     deletingUser.value = true;
 
@@ -132,12 +141,4 @@ class UserController extends GetxController {
 
     return true;
   }
-
-  // dynamic getLoggedInUser() {
-  //   var prefs = sharedPreferencesController.sharedPreferences.value;
-  //
-  //   var user = prefs.getString("user");
-  //
-  //   return jsonDecode(user!);
-  // }
 }

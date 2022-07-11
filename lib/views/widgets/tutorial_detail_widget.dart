@@ -1,3 +1,4 @@
+//This is the tutorial widget on TutorialScreen. Data comes flow if API -> Hive DB -> List in View Model -> Listview.builder -> This widget
 import 'package:chaturmail/utils/constants.dart';
 import 'package:chaturmail/views/screens/tutorial_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:get/get.dart';
 class TutorialDetailWidget extends StatelessWidget {
   final String htmlData;
   final String title;
+
+  //Decides curve position left or right
   final bool curvePosition;
 
   const TutorialDetailWidget(

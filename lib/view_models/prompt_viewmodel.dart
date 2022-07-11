@@ -1,3 +1,4 @@
+//This file fetches and provides the email prompts
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -70,6 +71,7 @@ class PromptController extends GetxController {
     }
   }
 
+  //This is needed to get prompt data while displaying past emails because it works on promptId while talking to server
   PromptModel getPromptById(String id) {
     var prs = promptsList.where((e) => e.id == id);
     return prs.first;

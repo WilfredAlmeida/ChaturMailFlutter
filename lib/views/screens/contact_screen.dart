@@ -33,6 +33,7 @@ class _ContactScreenState extends State<ContactScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    //Ads Initialization
     setState(() {
       bannerAdBottom = BannerAd(
         adUnitId: adsController.contactUsBottomBannerUnitId,

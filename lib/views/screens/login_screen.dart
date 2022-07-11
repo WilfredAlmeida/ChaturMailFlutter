@@ -16,6 +16,7 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
+            //Above the curve
             Expanded(
               flex: 2,
               child: ClipPath(
@@ -25,6 +26,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+
+            //Below the curve
             Expanded(
               flex: 2,
               child: Container(
@@ -190,6 +193,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+//Curve on login screen. It's all math, do on paper and then try. It's a bezier curve
 class MyClipper1 extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

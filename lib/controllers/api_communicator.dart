@@ -1,6 +1,12 @@
+/*
+This file has code to communicate with API's. All communication is done via POST requests.
+
+Initially was done with dart:Isolates, however due to Flutter web not supporting it, was replaced with async calls.
+
+*/
+
 import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:get/get.dart';
@@ -9,16 +15,8 @@ import 'package:http/http.dart' as http;
 import '../utils/api_status.dart';
 import '../utils/constants.dart';
 
-// var url = Uri.parse(API_URL+"/prompt/getAllPrompts");
-
 Future<dynamic> postRequest({required String url, Object body = ""}) async {
-  // print(body);
-
-  // final token = Get.find<SharedPreferencesController>()
-  //     .sharedPreferences
-  //     .value
-  //     .getString("jwtToken");
-
+  //JWT Token
   final token = Get.find<UserController>().userBox.get("jwtToken");
 
   print("TOKEN");
@@ -49,6 +47,8 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
       },
     );
 
+    //API Responses are sent out as objects of Success, Failure
+
     if (response.statusCode == SUCCESS) {
       return Success(response: response, code: SUCCESS);
     }
@@ -63,39 +63,4 @@ Future<dynamic> postRequest({required String url, Object body = ""}) async {
   } catch (e) {
     return Failure(code: UNKNOWN_ERROR, errorResponse: 'Unknown Error');
   }
-
-  // final receivePort = ReceivePort();
-  //
-  //
-  //   await Isolate.spawn(_postRequest, [
-  //     receivePort.sendPort,
-  //     uri,
-  //     body,
-  //   ]);
-  //
-  //   return receivePort.first;
-}
-
-void _postRequest(List<Object?> arguments) async {
-  var body;
-
-  if (arguments[2] == "") {
-    body = jsonEncode({});
-  } else {
-    body = jsonEncode(arguments[2]);
-  }
-
-  print(body);
-
-  var response = await http.post(
-    arguments[1] as Uri,
-    body: body,
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-  );
-
-  SendPort sendPort = arguments[0] as SendPort;
-
-  sendPort.send(response);
 }

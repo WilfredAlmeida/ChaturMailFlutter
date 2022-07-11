@@ -1,3 +1,5 @@
+//This file controls Google Login and Logout. Each Login provider has their files
+
 import 'package:chaturmail/controllers/user_controller.dart';
 import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,10 +29,16 @@ class GoogleLoginController extends GetxController {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
 
+    //Refer Flutter docs to understand above code
+
+    //After login, user data is provided throughout the app via state management.
+
     user = googleUser.obs;
 
+    //The JWTController gets and stores the JWT Token
     await Get.find<JWTController>().getJWTToken(loginMethod: "google");
 
+    //Get and store user's profile data
     Get.find<UserController>().getUserData();
 
     return true;

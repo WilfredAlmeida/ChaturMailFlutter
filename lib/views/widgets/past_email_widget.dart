@@ -1,3 +1,4 @@
+///This is the past email widget on DashboardScreen. Data comes flow if API -> Hive DB -> List in View Model -> Listview.builder -> This widget
 import 'package:chaturmail/utils/utils_controller.dart';
 import 'package:chaturmail/view_models/past_emails_viewmodel.dart';
 import 'package:chaturmail/views/screens/display_email_screen.dart';

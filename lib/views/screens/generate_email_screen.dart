@@ -27,20 +27,13 @@ class GenerateEmailScreen extends StatefulWidget {
 }
 
 class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
-  // const GenerateEmailScreen({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
-  // final _fromEmailInput = TextEditingController();
-
   final _toEmailInput = TextEditingController();
-
   final _subjectInput = TextEditingController();
-
   final _keywordsInput = TextEditingController();
 
   var _toEmailValid = true;
-
-  // var _fromEmailValid = true;
   var _subjectValid = true;
   var _keywordsValid = true;
 
@@ -341,6 +334,7 @@ class _GenerateEmailScreenState extends State<GenerateEmailScreen> {
     return true;
   }
 
+  //Processes response from /generateEmail API and handles success,failure
   void processResponse() {
     if (generateEmailController.generatingEmailFailed.value) {
       Get.find<UtilsController>().showErrorDialog(

@@ -1,3 +1,4 @@
+//This file has API status's
 class Success {
   int code;
   Object response;

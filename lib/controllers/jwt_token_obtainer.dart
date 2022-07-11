@@ -1,3 +1,5 @@
+//This file has code to get JWT Token from the server
+
 import 'dart:convert';
 
 import 'package:chaturmail/controllers/user_controller.dart';
@@ -13,6 +15,7 @@ import 'api_communicator.dart';
 class JWTController extends GetxController {
   var jwtToken = "".obs;
 
+  //ToDo: Implement this
   Future<bool> refreshToken() async {
     return true;
   }
@@ -22,6 +25,7 @@ class JWTController extends GetxController {
 
     final user = FirebaseAuth.instance.currentUser;
 
+    //API Call
     var result = await postRequest(url: url, body: {
       "email": user?.email,
       "idToken": await user?.getIdToken(true),
@@ -29,26 +33,27 @@ class JWTController extends GetxController {
       "fcmToken": await FirebaseMessaging.instance.getToken(),
     });
 
+    //Response Handling.
     if (result is Success) {
       final response = result.response as http.Response;
       var body = json.decode(response.body);
 
       if (body['status'] == 1) {
+        //Provide token via state management
         jwtToken.value = body['payload'][0]['token'];
+
         print("JWT Token");
         print(jwtToken.value);
 
-        // await Get.find<SharedPreferencesController>()
-        //     .sharedPreferences
-        //     .value
-        //     .setString("jwtToken", jwtToken.value);
-
+        //Store token in Hive for future use
         await Get.find<UserController>()
             .userBox
             .put("jwtToken", jwtToken.value);
 
         return true;
       } else {
+        //Error Handling
+
         Get.find<UtilsController>().showErrorDialog(
           title: "Cannot Obtain Token",
           content: body['message'],
@@ -57,6 +62,8 @@ class JWTController extends GetxController {
         return false;
       }
     } else if (result is Failure) {
+      //Error Handling
+
       print(result.errorResponse);
 
       Get.find<UtilsController>().showErrorDialog(

@@ -1,3 +1,4 @@
+//This file provides Google AdMob Ad Unit ID's via state management
 import 'dart:io';
 
 import 'package:get/get.dart';
