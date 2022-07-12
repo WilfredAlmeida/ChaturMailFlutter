@@ -140,7 +140,7 @@ The API calls are done from the `lib/controllers/api_communicator.dart` file. It
 The responses are encapsulated as objects of `Success` and `Failure` defined in the `lib/utils/api_status.dart` file
 
 API Responses have a fixed format as follows:  
-`status`: `0`: Failure, `1`: Success -. Indicate success in operation.  
+`status`: `0`: Failure, `1`: Success -> Indicate success in operation.  
 `message`: String message regarding the operation performed.  
 `payload`: Is a list `[]` of objects. Any data being sent by the server will be in form of objects in the list. `null` if no payload is returned.  
 
