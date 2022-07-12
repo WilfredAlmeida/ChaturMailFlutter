@@ -44,34 +44,41 @@ class _TutorialDetailScreenState extends State<TutorialDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
-        // bottomNavigationBar: const BottomNavBarWidget(),
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: Html(
-                data: widget.htmlData,
+    return WillPopScope(
+      onWillPop: () async {
+        //To get back on TutorialsScreen, if not done here it takes to DashboardScreen, that logic in onWillPop in BottomNavbarWidget
+        Get.back();
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar: Get.find<UtilsController>().bottomNavBarWidget,
+          // bottomNavigationBar: const BottomNavBarWidget(),
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: Html(
+                  data: widget.htmlData,
+                ),
               ),
-            ),
 
-            //Ad
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: SizedBox(
-                height: 100,
-                child: bottomBanner == null
-                    ? const SizedBox()
-                    : AdWidget(ad: bottomBanner!),
-              ),
-            )
-          ],
+              //Ad
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: 100,
+                  child: bottomBanner == null
+                      ? const SizedBox()
+                      : AdWidget(ad: bottomBanner!),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

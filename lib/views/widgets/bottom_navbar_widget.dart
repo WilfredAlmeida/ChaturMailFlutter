@@ -22,29 +22,14 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Get.defaultDialog(
-        //     title: "Do you want to Exit?",
-        //     content: const Text("The app will be exited"),
-        //     textConfirm: "No",
-        //     textCancel: "Yes",
-        //     buttonColor: mainColor.withOpacity(0.6),
-        //     confirmTextColor: greenMainColor2,
-        //     cancelTextColor: Colors.black,
-        //     onConfirm: () {
-        //       print("CONFIRMED");
-        //       Get.back();
-        //     },
-        //     onCancel: () {
-        //       print("CANCELLED");
-        //       exit(0);
-        //     });
-        //
-        // Get.offAll(
-        //   const DashboardScreen(),
-        //   transition: Transition.fade,
-        // );
-
-        Get.snackbar("Press back to exit", "");
+        //If not on DashboardScreen, get there. Else exit the app.
+        if (utilsController.bottomNavBarIndex.value != 0) {
+          Get.offAll(
+            const DashboardScreen(),
+            transition: Transition.fade,
+          );
+          return false;
+        }
 
         return true;
       },
