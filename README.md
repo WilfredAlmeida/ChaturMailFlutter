@@ -1,6 +1,14 @@
-
-![Logo](https://firebasestorage.googleapis.com/v0/b/email-generator-5305c.appspot.com/o/playstoreicon.png?alt=media&token=50e527e7-94b2-4218-a352-e2b74f4216c1)
-
+ [1. Introduction](#chaturmail-ai-email-generator-flutter-code)  
+ [2. Architecture](#architecture)  
+ [3. Directories](#directories)  
+ [4. App Flow](#app-flow)  
+ [5. APIs](#app-flow)  
+ [6. In-App Notifications](#in-app-notifications)  
+ [7. Coins](#coins)  
+ [8. Static Assets](#static-assets)  
+ [9. Ads](#ads)  
+ [10. Tech Stack](#tech-stack)  
+ [11. Authors](#authors)  
 
 # ChaturMail: AI Email Generator Flutter Code
 
