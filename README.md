@@ -1,5 +1,5 @@
- [1. Introduction](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#chaturmail-ai-email-generator-flutter-code)  
- [2. Architecture](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#architecture)  
+ [1. Introduction](https://github.com/WilfredAlmeida/email-generator-flutter/README.md#chaturmail-ai-email-generator-flutter-code)  
+ [2. Architecture](https://github.com/WilfredAlmeida/email-generator-flutter/README.md#architecture)  
  [3. Directories](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#directories)  
  [4. App Flow](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#app-flow)  
  [5. APIs](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#app-flow)  
