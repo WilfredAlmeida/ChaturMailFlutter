@@ -1,6 +1,14 @@
-
-![Logo](https://firebasestorage.googleapis.com/v0/b/email-generator-5305c.appspot.com/o/playstoreicon.png?alt=media&token=50e527e7-94b2-4218-a352-e2b74f4216c1)
-
+ [1. Introduction](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#chaturmail-ai-email-generator-flutter-code)  
+ [2. Architecture](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#architecture)  
+ [3. Directories](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#directories)  
+ [4. App Flow](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#app-flow)  
+ [5. APIs](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#app-flow)  
+ [6. In-App Notifications](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#in-app-notifications)  
+ [7. Coins](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#coins)  
+ [8. Static Assets](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#static-assets)  
+ [9. Ads](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#ads)  
+ [10. Tech Stack](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#tech-stack)  
+ [11. Authors](https://github.com/WilfredAlmeida/email-generator-flutter/edit/master/README.md#authors)  
 
 # ChaturMail: AI Email Generator Flutter Code
 
@@ -138,6 +146,13 @@ To identify users, the server relies on the JWT token which is passed as `Bearer
 The API calls are done from the `lib/controllers/api_communicator.dart` file. It fetches JWT token from Hive storage and adds to every call.
 
 The responses are encapsulated as objects of `Success` and `Failure` defined in the `lib/utils/api_status.dart` file
+
+API Responses have a fixed format as follows:  
+`status`: `0`: Failure, `1`: Success -> Indicate success in operation.  
+`message`: String message regarding the operation performed.  
+`payload`: Is a list `[]` of objects. Any data being sent by the server will be in form of objects in the list. `null` if no payload is returned.  
+
+**Note**: `payload` will never be empty list `[]`, handle it on basis of `null`.
 
 ## In-App Notifications
 
